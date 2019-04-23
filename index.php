@@ -15,6 +15,6 @@
 	}
 	else
 	{
-		echo "Mail cannot send.lll";
+		echo "Mail cannot sendlll";
 	}
 ?>
