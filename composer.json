@@ -1,0 +1,12 @@
+{
+    "name": "popnaphat/debtor-r4",
+    "authors": [
+        {
+            "name": "GAD4 PEA",
+            "email": "dgop4.gad@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.1"
+    }
+}
