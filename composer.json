@@ -3,11 +3,10 @@
     "authors": [
         {
             "name": "GAD4 PEA",
-            "email": "dgop4.gad@gmail.com"
+            "email": "naphat.ana@gmail.com"
         }
     ],
        "require": {
         "php": ">=5.3.3"
     }
-    
 }
