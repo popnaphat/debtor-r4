@@ -1,5 +1,12 @@
 {
-    "require": {
+    "name": "popnaphat/debtor-r4",
+    "authors": [
+        {
+            "name": "GAD4 PEA",
+            "email": "naphat.ana@gmail.com"
+        }
+    ],
+       "require": {
         "php": ">=5.3.3"
     }
 }
