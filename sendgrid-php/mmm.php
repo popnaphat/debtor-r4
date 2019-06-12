@@ -10,7 +10,7 @@ $request_body = json_decode('{
     {
       "to": [
         {
-          "email": "naphat.ana@gmail.com"
+          "email": "naphat.ana@pea.co.th"
         }
       ],
       "subject": "Hello World from the SendGrid PHP Library!"
