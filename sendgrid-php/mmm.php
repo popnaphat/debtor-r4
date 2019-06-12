@@ -10,19 +10,19 @@ $request_body = json_decode('{
     {
       "to": [
         {
-          "email": "naphat.ana@pea.co.th"
+          "email": "aanongnart.non@pea.co.th"
         }
       ],
-      "subject": "Hello World from the SendGrid PHP Library!"
+      "subject": "ดีจ้าส่งผ่านapp heroku sendgrid"
     }
   ],
   "from": {
-    "email": "test@example.com"
+    "email": "dgop4.gad@gmail.com"
   },
   "content": [
     {
       "type": "text/plain",
-      "value": "Hello, Email!"
+      "value": "Hello, แขกกี้เด้อ"
     }
   ]
 }');
