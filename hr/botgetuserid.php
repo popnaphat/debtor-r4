@@ -6,7 +6,7 @@
    $content = file_get_contents('php://input');  //อ่าน json เป็น string
    $arrayJson = json_decode($content, true); //แปลง json string เป็น php array
 
-   function make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1')
+  /* function make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1')
    {
 	//create the URL
 	$bitly = 'http://api.bit.ly/shorten?version='.$version.'&longUrl='.urlencode($url).'&login='.$login.'&apiKey='.$appkey.'&format='.$format;
@@ -25,7 +25,7 @@
          $xml = simplexml_load_string($response);
          return 'https://bit.ly/'.$xml->results->nodeKeyVal->hash;
       }
-   }
+   }*/
 
    #ตัวอย่าง Message Type "Text + Sticker"
    if (!is_null($arrayJson['events'])) {
@@ -87,7 +87,7 @@
          
             if($nums == 1 AND $s1 == "" AND $count_existing == 0){
                $shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
-               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
+               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = 'https://southpea.herokuapp.com/hr/activation.php?code=$activation' WHERE empID = '".$message."'";
                mysqli_query($conn, $sql_regis);
                $txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
             }
@@ -98,7 +98,7 @@
                $shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
                $sql_del = "UPDATE peaemp SET user_id ='', activation ='', bitly = '', pea_email = '' WHERE user_id = '$id'";
                mysqli_query($conn, $sql_del);
-               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
+               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = 'https://southpea.herokuapp.com/hr/activation.php?code=$activation' WHERE empID = '".$message."'";
                mysqli_query($conn, $sql_regis);
                $txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
             }         
