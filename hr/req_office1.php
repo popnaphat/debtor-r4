@@ -42,11 +42,12 @@
 					//echo '<div data-role="content">';
 					//echo '<u><b>ด้าน'.$result_type["complaint_type"].'</b></u>';
 					//echo '</div>';
+					$aa = 1;
 					while($result = mysqli_fetch_array($query)){
 						//if($result["complaint_type"] == $result_type["complaint_type"]){
 							echo '<div data-role="content">'; 
 							echo '<ul data-role="listview">';
-							echo "<li><a>".$result["emp_prename"]."".$result["emp_name"]." ".$result["emp_surname"]."  ".$result["emp_position"]."  สังกัด:".$result["short_name"]." ระยะเวลาครองตำแหน่ง:".$result["_year"]." ปี ".$result["_month"]." เดือน ".$result["_day"]." วัน</a></li>";
+							echo "<li><a>".$aa.".".$result["emp_prename"]."".$result["emp_name"]." ".$result["emp_surname"]."  ".$result["emp_position"]."  สังกัด:".$result["short_name"]." ระยะเวลาครองตำแหน่ง:".$result["_year"]." ปี ".$result["_month"]." เดือน ".$result["_day"]." วัน</a></li>";
 							echo '</ul>';
 							echo '</div>';
 						//}
