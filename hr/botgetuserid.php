@@ -161,10 +161,11 @@ if($event['type'] == 'postback') {
       $p4 = $empinfo['bitly'];
       $p5 = substr($p4,7);
       $p6 = $empinfo['send_status'];
+	$p7 = $empinfo['activation'];
          if($postbackstatus == 'confirm' AND $p6 == ""){
 		 	
 	$from = new SendGrid\Email(null, "HRrg4@pea.co.th");
-	$content = new SendGrid\Content("text/html", "https://google.com");
+	$content = new SendGrid\Content("text/html", "https://southpea.herokuapp.com/hr/activation.php?code=".$p7);
 	$subject = "To K.$p1 please confirm LINE bot";
 	$to = new SendGrid\Email(null, "$p3");
 	//$content = "confirm register click: https://$p5";
