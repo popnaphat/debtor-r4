@@ -1,6 +1,7 @@
 <?php
    require('conn.php');
    require('./libs/utils/messages1.php');
+   require('../sendgrid-php/vendor/autoload.php');
    $accessToken = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";//copy ข้อความ Channel access token ตอนที่ตั้งค่า
    $content = file_get_contents('php://input');  //อ่าน json เป็น string
    $arrayJson = json_decode($content, true); //แปลง json string เป็น php array
@@ -161,13 +162,23 @@ if($event['type'] == 'postback') {
       $p5 = substr($p4,7);
       $p6 = $empinfo['send_status'];
          if($postbackstatus == 'confirm' AND $p6 == ""){
-            $to = "$p3";
-            $subject = "To K.$p1 please confirm LINE bot";
-            $header = "From: HRrg4@pea.co.th";
-            $body = "confirm register click: https://$p5";
-            mail($to,$subject,$body,$header);
-               $send_update = "UPDATE peaemp SET send_status = 'A' WHERE empID = '$postbackid'";   
-               mysqli_query($conn, $send_update);
+		 	
+	$from = new SendGrid\Email(null, "HRrg4@pea.co.th");
+	$subject = "To K.$p1 please confirm LINE bot";
+	$to = new SendGrid\Email(null, "$p3");
+	$content = new SendGrid\Content("text/plain", "confirm register click: https://$p5");
+	$mail = new SendGrid\Mail($from, $subject, $to, $content);
+	$apiKey = getenv('SENDGRID_API_KEY');
+	$sg = new \SendGrid($apiKey);
+	$response = $sg->client->mail()->send()->post($mail);
+		 
+	echo $response->statusCode();
+	echo $response->headers();
+	echo $response->body();	 
+		 
+		 
+        $send_update = "UPDATE peaemp SET send_status = 'A' WHERE empID = '$postbackid'";   
+        mysqli_query($conn, $send_update);
          }
             //$sendmail = mail($to,$subject,$body,$header);
                /*if($sendmail){
