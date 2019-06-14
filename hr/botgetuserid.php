@@ -1,6 +1,6 @@
 <?php
    require('conn.php');
-   require('./libs/utils/messages1.php');
+   require('messages1.php');
    $accessToken = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";//copy ข้อความ Channel access token ตอนที่ตั้งค่า
    $content = file_get_contents('php://input');  //อ่าน json เป็น string
    $arrayJson = json_decode($content, true); //แปลง json string เป็น php array
