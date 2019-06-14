@@ -161,7 +161,7 @@ if($event['type'] == 'postback') {
       $p4 = $empinfo['bitly'];
       $p5 = substr($p4,7);
       $p6 = $empinfo['send_status'];
-         if($postbackstatus == 'confirm' /*AND $p6 == ""*/){
+         if($postbackstatus == 'confirm' AND $p6 == ""){
 		 	
 	$from = new SendGrid\Email(null, "HRrg4@pea.co.th");
 	$content = new SendGrid\Content("text/plain", "confirm register click-->https://".$p5);
