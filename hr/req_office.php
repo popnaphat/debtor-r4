@@ -10,7 +10,7 @@
 	</head> 
 	<body> 
 	<?php
-		require('./libs/database/connect-db.php');
+		require('conn.php');
 		$NUMBER = $_GET['REQ'];
 		//$NUMBER2 = $_GET['REQ2'];
 		$sql = "SELECT region, left(DEPT_CHANGE_CODE,11) as dcc, dept_cover, dept_name, count(dept_cover) as deptNum from emplist join pea_office on emplist.DEPT_CHANGE_CODE = pea_office.unit_code WHERE region2 LIKE '$NUMBER' GROUP BY left(DEPT_CHANGE_CODE,11) ORDER BY dept_class ASC ,left(DEPT_CHANGE_CODE,11) ASC";
