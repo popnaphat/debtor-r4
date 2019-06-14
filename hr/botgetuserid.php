@@ -176,33 +176,7 @@ if($event['type'] == 'postback') {
         $send_update = "UPDATE peaemp SET send_status = 'A' WHERE empID = '$postbackid'";   
         mysqli_query($conn, $send_update);
          }
-            //$sendmail = mail($to,$subject,$body,$header);
-               /*if($sendmail){
-                  $txtans = "รับคำขอลงทะเบียน PEA HR LINE bot แล้ว กรุณายืนยันการลงทะเบียนทางอีเมล $p3";
-               }else{
-                  $txtans = "ไม่สามารถส่ง email ยืนยันการลงทะเบียนได้ กรุณาลงทะเบียนใหม่ในภายหลัง";
-               }
-         }
-         else if($postbackstatus == 'cancel'){
-            $txtans = "ยกเลิกคำขอลงทะเบียน $postbackid";
-         }
-   $messages = [ 'type' => 'text', 'text' => $txtans];
-	$url = 'https://api.line.me/v2/bot/message/reply';
-	$data = [
-				'replyToken' => $p0,
-				'messages' => [$messages]
-			];
-	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	$result = curl_exec($ch);
-   curl_close($ch);
-   return;*/
+            
 }
 }}
 ?>
