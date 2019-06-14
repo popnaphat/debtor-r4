@@ -4,8 +4,8 @@ require 'vendor/autoload.php';
 
 // If you are not using Composer
 // require("path/to/sendgrid-php/sendgrid-php.php");
-
-$from = new SendGrid\Email(null, "test@example.com");
+$q1 = "test@example.com";
+$from = new SendGrid\Email(null, "$q1");
 $subject = "เอ่อหวัดดี";
 $to = new SendGrid\Email(null, "naphat.ana@pea.co.th");
 $content = new SendGrid\Content("text/plain", "ส่งแบบ mail helper class");
