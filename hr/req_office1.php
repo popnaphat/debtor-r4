@@ -51,8 +51,11 @@
 							echo '</ul>';
 							echo '</div>';
 						//}
+						$aa = $aa+1;
 					}
 					mysqli_data_seek($query,0);
+					$aa = 0;
+					mysqli_close($conn);
 				//}
 			?>
 			<div data-role="content">
