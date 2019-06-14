@@ -46,9 +46,9 @@
 					while($result = mysqli_fetch_array($query)){
 						//if($result["complaint_type"] == $result_type["complaint_type"]){
 							echo '<div data-role="content">'; 
-							echo '<ul data-role="listview">';
+							//echo '<ul data-role="listview">';
 							echo "<li><a>".$aa.".".$result["emp_prename"]."".$result["emp_name"]." ".$result["emp_surname"]."  ".$result["emp_position"]."  สังกัด:".$result["short_name"]." ระยะเวลาครองตำแหน่ง:".$result["_year"]." ปี ".$result["_month"]." เดือน ".$result["_day"]." วัน</a></li>";
-							echo '</ul>';
+							//echo '</ul>';
 							echo '</div>';
 						//}
 						$aa = $aa+1;
