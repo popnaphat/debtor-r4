@@ -164,7 +164,7 @@ if($event['type'] == 'postback') {
          if($postbackstatus == 'confirm' AND $p6 == ""){
 		 	
 	$from = new SendGrid\Email(null, "HRrg4@pea.co.th");
-	$content = new SendGrid\Content("text/plain", "confirm register click https://".$p5);
+	$content = new SendGrid\Content("text/plain", "confirm register click ".$p4);
 	$subject = "To K.$p1 please confirm LINE bot";
 	$to = new SendGrid\Email(null, "$p3");
 	//$content = "confirm register click: https://$p5";
