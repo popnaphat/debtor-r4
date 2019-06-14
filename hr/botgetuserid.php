@@ -85,7 +85,7 @@
             $activation=md5($email.time());
          
             if($nums == 1 AND $s1 == "" AND $count_existing == 0){
-               $shorturl = make_bitly_url("https://allbackoffice.000webhostapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
+               $shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
                $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
                mysqli_query($conn, $sql_regis);
                $txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
@@ -94,7 +94,7 @@
                $txtans = "ไม่มีรหัสพนักงานนี้ในสายงานการไฟฟ้า ภาค 4";
             }
             else if($nums == 1 AND $s1 == "" AND $count_existing == 1){
-               $shorturl = make_bitly_url("https://allbackoffice.000webhostapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
+               $shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
                $sql_del = "UPDATE peaemp SET user_id ='', activation ='', bitly = '', pea_email = '' WHERE user_id = '$id'";
                mysqli_query($conn, $sql_del);
                $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
