@@ -1,5 +1,5 @@
 <?php 
-    require('./libs/database/connect-db.php');
+    require('conn.php');
     
     function DateThai($strDate){
         $strYear = date("Y",strtotime($strDate))+543;
@@ -35,7 +35,7 @@
 	</head> 
 	<body> 
 		<?php
-			require('./libs/database/connect-db.php');
+			require('conn.php');
 			/*$NUMBER = $_GET['NUMBER'];
 			$addpos = strpos($NUMBER,"@");
 			$lengh = strlen($NUMBER);
