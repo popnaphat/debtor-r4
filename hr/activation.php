@@ -1,5 +1,5 @@
 <?php
-require('./libs/database/connect-db.php');
+require('conn.php');
 	$code = $_GET['code'];
 ?>
 <!doctype html>
