@@ -167,7 +167,7 @@ if($event['type'] == 'postback') {
 	//$content = new SendGrid\Content("text/plain", "confirm register click: ");
 	$subject = "To K.$p1 please confirm LINE bot";
 	$to = new SendGrid\Email(null, "$p3");
-	$content = new SendGrid\Content(null, "confirm register click: https://$p5");
+	$content = "confirm register click: https://$p5";
 	$mail = new SendGrid\Mail($from, $subject, $to, $content);
 	$apiKey = getenv('SENDGRID_API_KEY');
 	$sg = new \SendGrid($apiKey);
