@@ -19,7 +19,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false">
 		<meta charset="utf-8" >
 		<title>รายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรก</title>
-		<link rel="manifest" href="/manifest.json">
+		<link rel="manifest" href="./images/manifest.json">
 		<meta name="theme-color" content="#710E82">
 
 		<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
