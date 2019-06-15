@@ -165,7 +165,7 @@ if($event['type'] == 'postback') {
          if($postbackstatus == 'confirm' AND $p6 == ""){
 		 	
 	$from = new SendGrid\Email(null, "HRrg4@pea.co.th");
-	$content = new SendGrid\Content("html", "https://southpea.herokuapp.com/hr/activation.php?code=".$p7);
+	$content = new SendGrid\Content("html", "<a href = 'https://southpea.herokuapp.com/hr/activation.php?code='.$p7>confirm</a>");
 	$subject = "To K.$p1 please confirm LINE bot";
 	$to = new SendGrid\Email(null, "$p3");
 	//$content = "confirm register click: https://$p5";
