@@ -9,12 +9,12 @@ require('conn.php');
 <title>Confirm register PEA HR LINE bot</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- css -->
-        <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="./dist/css/bootstrap.css" />
         <!-- js -->
-        <script src="./assets/jquery/jquery-3.3.1.min.js"></script>
-        <script src="./assets/bootstrap/js/bootstrap.js"></script>
-        <script src="./assets/blockUI/jquery.blockUI.js"></script>
-        <script src="./assets/jqueryScrollTableBody/jqueryScrollTableBody.js"></script>
+        <script src="./dist/js/jquery-3.3.1.min.js"></script>
+        <script src="./dist/js/bootstrap.js"></script>
+        <script src="./dist/js/jquery.blockUI.js"></script>
+        <script src="./dist/js/jqueryScrollTableBody.js"></script>
 </head>
 <body>
 	<?php 
