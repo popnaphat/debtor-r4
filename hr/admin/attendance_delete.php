@@ -10,7 +10,7 @@
 		else{
 			$_SESSION['error'] = $conn->error;
 		}
-		$sql2 = "UPDATE peaemp SET user_id ='', active_status ='', activation ='', bitly = '', pea_email ='' WHERE empID = '$id'";
+		$sql2 = "UPDATE peaemp SET user_id ='', active_status ='', activation ='', bitly = '', pea_email ='', send_status = '' WHERE empID = '$id'";
 		mysqli_query($conn,$sql2);
 	}
 	else{
