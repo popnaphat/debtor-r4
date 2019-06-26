@@ -58,6 +58,11 @@
       'info'        : true,
       'autoWidth'   : false
     })
+    $('#example3').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "server_processing.php"
+    } );
   })
 </script>
 <script>
