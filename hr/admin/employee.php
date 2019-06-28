@@ -57,7 +57,7 @@
             <div class="box-body">
               <table id="employee-grid" class="table table-bordered table-hover">
                 <thead>
-                  <th class="hidden">รหัสสังกัด</th> 
+                  <!--th class="hidden">รหัสสังกัด</th--> 
                   <th>รหัสพนักงาน</th>
                   <th>ชื่อ - สกุล</th>
                   <th>ตำแหน่ง</th>
