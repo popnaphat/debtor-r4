@@ -20,10 +20,12 @@ $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 
-$sql = "SELECT empID, surname, position, dept_short ";
+$sql = "SELECT empID, pre_name, name, surname, position, dept_short ";
 $sql.=" FROM peaemp WHERE 1=1";
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
-	$sql.=" AND ( surname LIKE '".$requestData['search']['value']."%' ";    
+	$sql.=" AND ( surname LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR pre_name LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR name LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR empID LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR dept_short LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR position LIKE '".$requestData['search']['value']."%' )";
@@ -39,7 +41,7 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
 	$nestedData[] = $row["empID"];
-	$nestedData[] = $row["surname"];
+	$nestedData[] = $row['pre_name'].''.$row['name'].' '.$row['surname'];
 	$nestedData[] = $row["position"];
 	$nestedData[] = $row["dept_short"];
 	
