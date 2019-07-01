@@ -50,6 +50,7 @@
 							echo "<li><a>".$a.".".$result["emp_prename"]."".$result["emp_name"]." ".$result["emp_surname"]."  ".$result["emp_position"]."  สังกัด:".$result["short_name"]." ระยะเวลาครองตำแหน่ง:".$result["_year"]." ปี ".$result["_month"]." เดือน ".$result["_day"]." วัน</a></li>";
 							//echo '</ul>';
 							echo '</div>';
+						$a++;
 						//}
 					}
 					mysqli_data_seek($query,0);
