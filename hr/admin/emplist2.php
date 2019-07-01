@@ -38,11 +38,12 @@
 					//echo '<div data-role="content">';
 					//echo '<u><b>ด้าน'.$result_type["complaint_type"].'</b></u>';
 					//echo '</div>';
+					$a = 1;
 					while($result = mysqli_fetch_array($query)){
 						//if($result["complaint_type"] == $result_type["complaint_type"]){
 							echo '<div data-role="content">'; 
 							//echo '<ul data-role="listview">';
-							echo "<li><a>".$result["pre_name"]."".$result["name"]." ".$result["surname"]."  ".$result["position"]."  สังกัด:".$result["dept_short"]."</a></li>";
+							echo "<li><a>".$a.".".$result["pre_name"]."".$result["name"]." ".$result["surname"]."  ".$result["position"]."  สังกัด:".$result["dept_short"]."</a></li>";
 							//echo '</ul>';
 							echo '</div>';
 						//}
