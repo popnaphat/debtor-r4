@@ -47,6 +47,7 @@
 							//echo '</ul>';
 							echo '</div>';
 						//}
+						$a++;
 					}
 					mysqli_data_seek($query,0);
 				//}
