@@ -47,9 +47,10 @@
 							//echo '</ul>';
 							echo '</div>';
 						//}
-						$a++;
+						$a = $a +1;
 					}
-					mysqli_data_seek($query,0);
+					$a = 0;
+					mysqli_close($conn);
 				//}
 			?>
 			<!--div data-role="content">
