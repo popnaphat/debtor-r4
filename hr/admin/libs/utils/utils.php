@@ -96,6 +96,19 @@
         mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$sql]");    
         return $target_path;
     }
+    function uploadXLSXFile3($conn, $file){
+        $filename = $file['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $target_path = "../uploads-files3/".basename(date('d-m-').(date("Y")+543)).".".$ext;
+        $uploaded_result = @move_uploaded_file($file['tmp_name'], $target_path);
+        if(!$uploaded_result) {
+            die(error_get_last());
+        }
+        $current_timestamp = date("Y-m-d H:i:s");
+        $insert_log_file = "INSERT INTO tbl_log_file3(file_path, file_upload_timestamp) VALUES('$target_path', '$current_timestamp')";
+        mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$sql]");    
+        return $target_path;
+    }
 
     function clearEmplistData($conn){
         $sql = "DELETE FROM emplist";
@@ -103,6 +116,10 @@
     }
     function clearPeaempData($conn){
         $sql = "DELETE FROM peaemp";
+        mysqli_query($conn, $sql);
+    }
+    function clearPeaofficeData($conn){
+        $sql = "DELETE FROM pea_office";
         mysqli_query($conn, $sql);
     }
 
@@ -148,6 +165,29 @@
             $emp_name = $row['ชื่อ'];
             $emp_surname = $row['นามสกุล'];
             $emp_position = $row['ตำแหน่ง'];
+            $DEPT_SHORT = $row['DEPT_SHORT'];
+            $DEPT_CHANGE_CODE = $row['DEPT_CHANGE_CODE'];
+            // check null
+            // $emp_surname = isset($emp_surname) ? $emp_surname->format("Y-m-d"):NULL;
+            // $emp_position = isset($emp_position) ? $emp_position->format("Y-m-d"):NULL;
+            // $appointdate = isset($appointdate) ? $appointdate->format("Y-m-d"):NULL;
+
+            $sql = "INSERT INTO peaemp(empID, pre_name, name, surname, position, dept_short, dept_change_code) ".
+                    "VALUES(?,?,?,?,?,?,?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssssss", 
+                    $empID,$emp_prename,$emp_name,
+                    $emp_surname,$emp_position,
+                    $DEPT_SHORT,$DEPT_CHANGE_CODE);
+            $stmt->execute();
+        }
+    }
+    function insertPeaofficeData($conn, $namedDataArray){
+        foreach($namedDataArray as $row){
+            $unit_code = $row['UnitCode'];
+            $dept_class = $row['DEPT_CLASS'];
+            $emp_surname = $row['DEPT_FULL'];
+            $emp_position = $row['Expr1'];
             $DEPT_SHORT = $row['DEPT_SHORT'];
             $DEPT_CHANGE_CODE = $row['DEPT_CHANGE_CODE'];
             // check null
