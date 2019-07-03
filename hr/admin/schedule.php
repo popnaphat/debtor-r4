@@ -58,6 +58,7 @@
                   <th>ชั้น</th>
                   <th>ชื่อย่อ</th>
                   <th>เขต</th>
+                  <th>แก้ไข/ลบ</th>
                 </thead>
                 <tbody>
                   <?php
