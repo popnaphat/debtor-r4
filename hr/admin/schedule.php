@@ -11,11 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        ปลายทาง
+        Schedules
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">ปลายทาง</li>
+        <li>Employees</li>
+        <li class="active">Schedules</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -42,35 +43,31 @@
           unset($_SESSION['success']);
         }
       ?>
-      
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <!--div class="box-header with-border">
+            <div class="box-header with-border">
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
-            </div-->
+            </div>
             <div class="box-body">
-              <table id='example1' class="table table-bordered table-hover">
+              <table id="example1" class="table table-bordered">
                 <thead>
-                  <th class="hidden"></th>
-                  <th>ฝ่าย/กอง/กฟฟ</th>
-                  <th>เขต</th>
-                  <th>จำนวน(คน)</th>
-                  <th>รายชื่อผู้รับ</th>
+                  <th>Time In</th>
+                  <th>Time Out</th>
+                  <th>Tools</th>
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT region, left(DEPT_CHANGE_CODE,11) as dcc, dept_name, count(dept_name) as empnum from emplist join pea_office on emplist.DEPT_CHANGE_CODE = pea_office.unit_code  GROUP BY left(DEPT_CHANGE_CODE,11) ORDER BY DEPT_CHANGE_CODE ASC, region ASC";
+                    $sql = "SELECT * FROM schedules";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
                         <tr>
-                          <td class='hidden'></td>
-                          <td>".$row['dept_name']."</td>
-                          <td>".$row['region']."</td>
-                          <td>".$row['empnum']."</td>                          
-                          <td>                            
-                            <button type='button' class='btn btn-success' onclick='editTopic(".$row['dcc'].");'><span class='fa fa-paper-plane-o'></span> View list</button>
+                          <td>".date('h:i A', strtotime($row['time_in']))."</td>
+                          <td>".date('h:i A', strtotime($row['time_out']))."</td>
+                          <td>
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
                         </tr>
                       ";
@@ -81,14 +78,12 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </section>   
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/cashadvance_modal.php'; ?>
+  <?php include 'includes/schedule_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
@@ -111,26 +106,18 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'cashadvance_row.php',
+    url: 'schedule_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      console.log(response);
-      $('.date').html(response.date_advance);
-      $('.employee_name').html(response.firstname+' '+response.lastname);
-      $('.caid').val(response.caid);
-      $('#edit_amount').val(response.amount);
+      $('#timeid').val(response.id);
+      $('#edit_time_in').val(response.time_in);
+      $('#edit_time_out').val(response.time_out);
+      $('#del_timeid').val(response.id);
+      $('#del_schedule').html(response.time_in+' - '+response.time_out);
     }
   });
 }
-            function editTopic(topicId){
-                var newwindow = window.open("req_office1.php?REQ="+topicId, "", "width=500,height=650,left=10,top=10,titlebar=no,toolbar=no,menubar=no,location=no,directories=no,status=no");
-                if (window.focus) {
-                    newwindow.focus();
-                }
-                return false;
-            }
-            
 </script>
 </body>
 </html>
