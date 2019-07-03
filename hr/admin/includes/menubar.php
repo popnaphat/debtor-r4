@@ -29,6 +29,7 @@
           <ul class="treeview-menu">
             <li><a href="employee.php"><i class="fa fa-id-badge"></i><span>พนักงานสายงาน ภาค 4</span></a></li>
             <li><a href="overtime.php"><i class="fa fa-user-o"></i><span>พนักงานที่ยังไม่ปรับระดับ</span></a></li>
+            <li><a href="overtime.php"><i class="fa fa-building-o"></i><span>การไฟฟ้าทั้งหมด</span></a></li>
             <!--li><a href="cashadvance.php"><i class="fa fa-circle-o"></i> Cash Advance</a></li>
             <li><a href="schedule.php"><i class="fa fa-circle-o"></i> Schedules</a></li-->
           </ul>
