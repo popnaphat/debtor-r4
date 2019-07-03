@@ -52,22 +52,29 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Time In</th>
-                  <th>Time Out</th>
-                  <th>Tools</th>
+                  <th>รหัส15หลัก</th>
+                  <th>ฝ่าย/กอง/กฟฟ</th>
+                  <th>แผนก</th>
+                  <th>ชั้น</th>
+                  <th>ชื่อย่อ</th>
+                  <th>เขต</th>
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM schedules";
+                    $sql = "SELECT * FROM pea_office";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
                         <tr>
-                          <td>".date('h:i A', strtotime($row['time_in']))."</td>
-                          <td>".date('h:i A', strtotime($row['time_out']))."</td>
+                          <td>".$row['unit_code']."</td>
+                          <td>".$row['dept_name']."</td>
+                          <td>".$row['unit_name']."</td>
+                          <td>".$row['dept_class']."</td>
+                          <td>".$row['short_name']."</td>
+                          <td>".$row['region']."</td>
                           <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['unit_code']."'><i class='fa fa-edit'></i> Edit</button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['unit_code']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
                         </tr>
                       ";
