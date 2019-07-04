@@ -118,11 +118,14 @@ function getRow(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      $('#timeid').val(response.id);
-      $('#edit_time_in').val(response.time_in);
-      $('#edit_time_out').val(response.time_out);
-      $('#del_timeid').val(response.id);
-      $('#del_schedule').html(response.time_in+' - '+response.time_out);
+      $('#timeid').val(response.unit_code);
+      $('#edit_time_in').val(response.dept_name);
+      $('#edit_time_out').val(response.unit_name);
+      $('#edit_dept_class').val(response.dept_class);
+      $('#edit_short_name').val(response.short_name);
+      $('#edit_region').val(response.region);
+      $('#del_timeid').val(response.unit_code);
+      $('#del_schedule').html(response.region+' - '+response.short_name);
     }
   });
 }
