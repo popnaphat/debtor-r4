@@ -43,7 +43,7 @@
 						//if($result["complaint_type"] == $result_type["complaint_type"]){
 							echo '<div data-role="content">'; 
 							//echo '<ul data-role="listview">';
-							echo "<b>".$aa.".</b>".$result["cus_name"].", <b>หมายเลขผู้ใช้ไฟ:</b>".$result["cus_number"].", <b>บิลเดือน:</b>".$result["bill_month"].", <b>หนี้ค้าง:</b>".$result["outstanding_debt"]."บาท, <b>เงินประกัน:</b>".$result["bail"]." บาท, <b>ส่วนที่เกิน:</b>".$result["diff"]." บาท<br><br>";
+							echo "<b>".$aa.".</b>".$result["cus_name"].", <b>หมายเลขผู้ใช้ไฟ:</b>".$result["cus_number"].", <b>บิลเดือน:</b>".$result["bill_month"].", <b>หนี้ค้าง:</b>".$result["outstanding_debt"]."บาท, <b>เงินประกัน:</b>".$result["bail"]." บาท, <b>ส่วนที่เกิน:</b>".$result["diff"]." บาท<br>";
 							
 							//echo "<li><a>".$aa.".".$result["cus_name"].", หมายเลขผู้ใช้ไฟ:".$result["cus_number"].", บิลเดือน:".$result["bill_month"].", หนี้ค้าง:".$result["outstanding_debt"]."บาท, เงินประกัน:".$result["bail"]." บาท, ส่วนที่เกิน:".$result["diff"]." บาท</a></li>";
 							//echo '</ul>';
