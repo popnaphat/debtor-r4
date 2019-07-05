@@ -61,7 +61,7 @@
 					<?php
 						$a = 1;
 						while($result=mysqli_fetch_array($query)){
-							echo "<li><a href ='req_office.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย</a></li>";
+							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย</a></li>";
 							$a =$a +1;
 						}
 						$a = 0;

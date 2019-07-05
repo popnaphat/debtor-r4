@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
-		<title>รายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรก</title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</title>
 		<link href="./dist/css/jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<link href="./dist/css/jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<script src="./dist/js/jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -13,7 +13,7 @@
 		require('conn.php');
 		$NUMBER = $_GET['REQ'];
 		//$NUMBER2 = $_GET['REQ2'];
-		$sql = "SELECT region, left(DEPT_CHANGE_CODE,11) as dcc, dept_cover, dept_name, count(dept_cover) as deptNum from emplist join pea_office on emplist.DEPT_CHANGE_CODE = pea_office.unit_code WHERE region2 LIKE '$NUMBER' GROUP BY left(DEPT_CHANGE_CODE,11) ORDER BY dept_class ASC ,left(DEPT_CHANGE_CODE,11) ASC";
+		$sql = "SELECT count(DISTINCT cus_number) as num,debtor.dept_name,pea_office.unit_code from debtor join pea_office on pea_office.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') where region2 LIKE '$NUMBER' GROUP BY debtor.dept_name";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 		//$mode1 = mysqli_num_rows($query);
 		/*while($ofname = mysqli_fetch_array($query)){ 
@@ -23,7 +23,7 @@
 	?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>รายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรก </h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</h1>
 			</div>
 			<div data-role="content">
 			<?php 
@@ -40,7 +40,7 @@
 						$reg = "สำนักงานใหญ่";
 					}
 				//$fetch_number_complaint = "SELECT * FROM TBL_COMPLAINT";
-				echo "<b>รายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรก สังกัด '".$reg."'</b><br/>";
+				echo "<b>จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันแยกตามสังกัดของ '".$reg."'</b><br/>";
 			?>
 			</div>
 			<div data-role="content">	
@@ -49,7 +49,7 @@
 					mysqli_data_seek($query,0);
 					$a = 1;
 					while($result=mysqli_fetch_array($query)){
-						echo "<li><a href ='req_office1.php?REQ=".$result["dcc"]."'>".$a.".".$result["dept_cover"]."  จำนวน  ".$result["deptNum"]." คน</a></li>";;
+						echo "<li><a href ='req_office.php?REQ=".$result["unit_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย</a></li>";;
 						$a =$a +1;
 					}
 					$a = 0;
