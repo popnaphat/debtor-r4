@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set("Asia/Bangkok");
-  require('./conn.php');
+  require('./majorDebt/conn.php');
   require('./libs/utils/date_thai.php');
   require('./libs/utils/date_utils.php');
   require('./libs/utils/messages.php');
