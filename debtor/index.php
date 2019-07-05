@@ -23,10 +23,10 @@
 		<meta name="theme-color" content="#710E82">
 
 		<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-		<link href="./dist/css/jquery.mobile.theme-1.0.min.css" rel="stylesheet" />
-		<link href="./dist/css/jquery.mobile.structure-1.0.min.css" rel="stylesheet" />
-		<script src="./dist/js/jquery-1.6.4.min.js" ></script>
-		<script src="./dist/js/jquery.mobile-1.0.min.js" ></script>
+		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" />
+		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" />
+		<script src="jquery-1.6.4.min.js" ></script>
+		<script src="jquery.mobile-1.0.min.js" ></script>
 		<script>
 			$(function(){
 				liff.init();
