@@ -27,11 +27,7 @@
 		<link href="./dist/css/jquery.mobile.structure-1.0.min.css" rel="stylesheet" />
 		<script src="./dist/js/jquery-1.6.4.min.js" ></script>
 		<script src="./dist/js/jquery.mobile-1.0.min.js" ></script>
-		<script>
-			$(function(){
-				liff.init();
-			});
-		</script>
+		<script src="./dist/js/script.js"></script>
 	</head> 
 	<body> 
 		<?php
