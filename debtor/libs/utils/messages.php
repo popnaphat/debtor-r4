@@ -92,7 +92,7 @@
               "action": {
                 "type": "uri",
                 "label": "คลิกดูรายละเอียด",
-                "uri": "https://southpea.herokuapp.com/debtor/req_office.php?REQ='.$dept_code.'"
+                "uri": "https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ='.$dept_code.'"
               },
               "height": "sm",
               "style": "primary"
