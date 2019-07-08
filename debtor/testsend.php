@@ -43,7 +43,7 @@ date_default_timezone_set("Asia/Bangkok");
         //count employee each office
         $sql3 = "SELECT * from debtor 
         join pea_office on pea_office.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') 
-        WHERE unit_code = ".$manager['dept_change_code']." GROUP BY debtor.cus_number";
+        WHERE region2 = "J" GROUP BY debtor.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
         
