@@ -8,21 +8,12 @@ date_default_timezone_set("Asia/Bangkok");
   // line access token
   $access_token = 'CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=';
 
-  // check holiday
-  /*$todaytime = strtotime('today');
-  $todaydate = date('Y-m-d', $todaytime);
-  $fetch_holiday = "SELECT * FROM tbl_holiday WHERE status = 'A' AND holiday_date = '$todaydate'";
-  $holiday_list = mysqli_query($conn, $fetch_holiday);
-
-  if(isWeekend($todaydate) || mysqli_num_rows($holiday_list) > 0){
-      return;
-  }*/
+  
 
   // count complaint 
   $fetch_notify_office = "SELECT * FROM peamember m 
   JOIN peaemp ON m.memberid = peaemp.empID 
   JOIN pea_office o ON LEFT(peaemp.dept_change_code,11) = LEFT(o.unit_code,11)
-  JOIN debtor on o.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') 
   GROUP BY m.memberid";
   $notify_office = mysqli_query($conn, $fetch_notify_office) or die($fetch_notify_office);
   if(mysqli_num_rows($notify_office) == 0){
