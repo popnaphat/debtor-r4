@@ -1,4 +1,29 @@
-                      "wrap": true
+ <?php
+
+  function getBubbleMessages($countemp, $today, $dept_name, $dept_code){
+    $count = 0;
+    $json = '{
+      "type": "flex",
+      "altText": "แจ้งเตือนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน",
+      "contents": {
+        "type": "bubble",
+        "hero": {
+          "type": "image",
+          "url": "https://i.investopedia.com/thumbs/debtor.png",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover"
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันของ'.$dept_name.'",
+              "size": "xl",
+              "weight": "bold",
+              "wrap": true
                     }
                   ]
                 },
