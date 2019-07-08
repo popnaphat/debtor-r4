@@ -57,7 +57,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM tbl_log_notify ln JOIN peaemp pm ON ln.manager_id = pm.empID JOIN pea_office po ON LEFT(pm.dept_change_code,11) = LEFT(po.unit_code,11) GROUP BY ln.notify_timestamp";
+                    $sql = "SELECT * FROM tbl_log_notify ln LEFT JOIN peaemp pm ON ln.manager_id = pm.empID JOIN pea_office po ON LEFT(pm.dept_change_code,11) = LEFT(po.unit_code,11)";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
