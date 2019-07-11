@@ -41,7 +41,7 @@
 			$query = mysqli_query($conn,$sql);
 		?>
 		<div data-role="page" id="page">
-			<div data-role="header" data-theme="a">
+			<div data-role="header" data-theme="c">
 				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</h1>
 			</div>
 			<div data-role="content">
@@ -62,7 +62,7 @@
 					?>
 				</ul>		
 			</div>
-			<div data-role="footer" data-theme="a">
+			<div data-role="footer" data-theme="c">
 				<h4>PEA REGION 4</h4>
 			</div>
 		</div>
