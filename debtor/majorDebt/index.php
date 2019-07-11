@@ -36,7 +36,7 @@
 	<body> 
 		<?php
 			require('conn.php');
-			$sql = "SELECT region,region2,count(DISTINCT cus_number) as num from debtor join pea_office on pea_office.sapname like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') GROUP BY region";
+			$sql = "SELECT region,region2,count(DISTINCT cus_number) as num from debtor join pea_office on pea_office.sap_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') GROUP BY region";
 			// }
 			$query = mysqli_query($conn,$sql);
 		?>
