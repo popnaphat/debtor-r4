@@ -28,8 +28,6 @@ if (isset($_POST["import"])) {
 }
 if (isset($_POST["clear"])) {
     
-    $fileName = $_FILES["file"]["tmp_name"];
-    
         $sqlDelete = "DELETE FROM debtor_copy1";
         $result = mysqli_query($conn,$sqlDelete);
             
@@ -133,7 +131,9 @@ $(document).ready(function() {
         return true;
     });
     $("#frmCSVImport").on("sss", function () {
-        	    $("#response").addClass("display-block");
+        $("#response").attr("class", "");
+        $("#response").html("");
+        return true;
     });
 });
 </script>
@@ -149,13 +149,13 @@ $(document).ready(function() {
             <form class="form-horizontal" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
-                    <label class="col-md-4 control-label">Choose CSV
+                    <label class="col-md-6 control-label">Choose CSV
                         File</label> <input type="file" name="file"
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
                         class="btn-submit">Import</button>
-                    <button type="sss" id="sss" name="clear"
-                        class="btn-danger">Clear</button>
+                    <label class="col-md-6 control-label"><button type="sss" id="sss" name="clear"
+                        class="btn-danger">Clear</button></label>
                     <br />
 
                 </div>
