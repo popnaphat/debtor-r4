@@ -130,11 +130,6 @@ $(document).ready(function() {
         }
         return true;
     });
-    $("#frmCSVImport").on("sss", function () {
-        $("#response").attr("class", "");
-        $("#response").html("");
-        return true;
-    });
 });
 </script>
 </head>
