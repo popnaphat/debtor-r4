@@ -110,7 +110,7 @@ function getRow(id){
     success: function(response){
       $('.alertdate').html(response.alert_date);
       $('#decid').val(response.alert_date);
-      //$('#del_deduction').html(response.alert_date);
+      $('#del_deduction').html(response.alert_date);
       $('#delete').modal('show');
     }
   });
