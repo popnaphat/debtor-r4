@@ -6,12 +6,12 @@ if (isset($_POST["import"])) {
     $fileName = $_FILES["file"]["tmp_name"];
     
     if ($_FILES["file"]["size"] > 0) {
-        
+        $sqlDelete = "DELETE FROM debtor_copy1";
+        $delete = mysqli_query($conn,$sqlDelete);
         $file = fopen($fileName, "r");
         
         while (($column = fgetcsv($file, 10000, "#","#")) !== FALSE) {
-            $sqlDelete = "DELETE FROM debtor_copy1";
-            $delete = mysqli_query($conn,$sqlDelete);
+            
             $sqlInsert = "INSERT into debtor_copy1 (sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff)
                    values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "')";
             $result = mysqli_query($conn, $sqlInsert);
