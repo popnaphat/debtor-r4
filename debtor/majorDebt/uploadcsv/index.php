@@ -127,7 +127,7 @@ $(document).ready(function() {
             <form class="form-horizontal" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
-                    <label class="col-md-4 control-label">Choose CSV
+                    <label class="col-md-12 control-label">Choose CSV
                         File</label> <input type="file" name="file"
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
