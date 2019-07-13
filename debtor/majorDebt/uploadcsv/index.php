@@ -26,6 +26,23 @@ if (isset($_POST["import"])) {
         }
     }
 }
+if (isset($_POST["clear"])) {
+    
+    $fileName = $_FILES["file"]["tmp_name"];
+    
+        $sqlDelete = "DELETE FROM debtor_copy1";
+        $result = mysqli_query($conn,$sqlDelete);
+            
+            if (! empty($result)) {
+                $type = "success";
+                $message = "The Database has been clear";
+            } else {
+                $type = "error";
+                $message = "Problem in clear Database";
+            }
+        
+    
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -129,11 +146,13 @@ $(document).ready(function() {
             <form class="form-horizontal" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
-                    <label class="col-md-12 control-label">Choose CSV
+                    <label class="col-md-4 control-label">Choose CSV
                         File</label> <input type="file" name="file"
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
                         class="btn-submit">Import</button>
+                    <button type="submit" id="submit" name="clear"
+                        class="btn-delete">Clear</button>
                     <br />
 
                 </div>
