@@ -11,7 +11,7 @@ if (isset($_POST["import"])) {
         
         while (($column = fgetcsv($file, 10000, "#")) !== FALSE) {
             $sqlInsert = "INSERT into debtor_copy1 (sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff)
-                   values ('" . $column[0] . "'#'" . $column[1] . "'#'" . $column[2] . "'#'" . $column[3] . "'#'" . $column[4] . "'#'" . $column[5] . "'#'" . $column[6] . "'#'" . $column[7] . "')";
+                   values ('" . $column[0] . "'#'" . $column[1] . "'#'" . $column[2] . "'#'" . $column[3] . "'#'" . $column[4] . "'#'" . $column[5] . "'#'" . $column[6] . "'#'" . $column[7] . "'#)";
             $result = mysqli_query($conn, $sqlInsert);
             
             if (! empty($result)) {
