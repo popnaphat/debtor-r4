@@ -130,6 +130,14 @@ $(document).ready(function() {
         }
         return true;
     });
+    $("#frmCSVClear").on("reset", function () {
+
+	    $("#response").attr("class", "");
+        $("#response").html("");
+         
+        return true;
+    });
+
 });
 </script>
 </head>
@@ -141,7 +149,7 @@ $(document).ready(function() {
     <div class="outer-scontainer">
         <div class="row">
 
-            <form class="form-horizontal" action="" method="post"
+            <form class="form-horizontal col-md-6" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
                     <label class="col-md-6 control-label">Choose CSV
@@ -149,14 +157,16 @@ $(document).ready(function() {
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
                         class="btn-submit">Import</button>
-                    <label class="col-md-6 control-label"><button type="sss" id="sss" name="clear"
-                        class="btn-danger">Clear</button></label>
                     <br />
-
                 </div>
-
             </form>
-
+            <form class="form-horizontal col-md-6" action="" method="post"
+                name="frmCSVClear" id="frmCSVClear" enctype="multipart/form-data">
+                    <button type="reset" id="reset" name="clear"
+                        class="btn btn-danger">Clear</button>
+                    <br />
+            </form>
+            
         </div>
                <?php
             $sqlSelect = "SELECT * FROM debtor_copy1";
