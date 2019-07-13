@@ -65,7 +65,7 @@
                           <td>".$row['alert_date']."</td>
                           <td>".$row['alert_status']."</td>
                           <td>
-                            <button type='button' class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['alert_date']."' onclick='javascript:getRow(".$row['alert_date'].");'><i class='fa fa-trash'></i> Delete</button>
+                            <button type='button' class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['seq']."' onclick='javascript:getRow(".$row['seq'].");'><i class='fa fa-trash'></i> Delete</button>
                           </td>
                         </tr>
                       ";
@@ -108,8 +108,8 @@ function getRow(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      $('.alertdate').html(response.alert_date);
-      $('#decid').val(response.alert_date);
+      $('.alertdate').html(response.seq);
+      $('#decid').val(response.seq);
       $('#del_deduction').html(response.alert_date);
       $('#delete').modal('show');
     }

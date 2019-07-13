@@ -3,7 +3,7 @@
 
 	if(isset($_POST['id'])){
 		$id = $_POST['id'];
-		$sql = "SELECT * FROM alert_date WHERE alert_date='$id'";
+		$sql = "SELECT * FROM alert_date WHERE seq='$id'";
 		$query = $conn->query($sql);
 		$row = $query->fetch_assoc();
 
