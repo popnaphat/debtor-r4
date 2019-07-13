@@ -66,7 +66,6 @@
                           <td>".$row['alert_status']."</td>
                           <td>
                             <button type='button' class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['alert_date']."' onclick='javascript:getRow(".$row['alert_date'].");'><i class='fa fa-trash'></i> Delete</button>
-                            <!--button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['alert_date']."'><i class='fa fa-trash'></i> Delete</button-->
                           </td>
                         </tr>
                       ";
@@ -94,12 +93,12 @@ $(function(){
     getRow(id);
   });
 
-  $('.delete').click(function(e){
+  /*$('.delete').click(function(e){
     e.preventDefault();
     $('#delete').modal('show');
     var id = $(this).data('id');
     getRow(id);
-  });
+  });*/
 });
 
 function getRow(id){
@@ -112,6 +111,7 @@ function getRow(id){
       $('.alertdate').html(response.alert_date);
       $('#decid').val(response.alert_date);
       $('#del_deduction').html(response.alert_date);
+      $('#delete').modal('show');
     }
   });
 }
