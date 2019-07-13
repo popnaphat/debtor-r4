@@ -1,5 +1,5 @@
 <?php
-require('../majorDebt/conn.php');
+require('../conn.php');
 
 if (isset($_POST["import"])) {
     
