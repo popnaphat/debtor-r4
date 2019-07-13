@@ -10,8 +10,8 @@ if (isset($_POST["import"])) {
         $file = fopen($fileName, "r");
         
         while (($column = fgetcsv($file, 10000, "#")) !== FALSE) {
-            $sqlInsert = "INSERT into debtor (userId,userName,password,firstName,lastName)
-                   values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "')";
+            $sqlInsert = "INSERT into debtor_copy1 (sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff)
+                   values ('" . $column[0] . "'#'" . $column[1] . "'#'" . $column[2] . "'#'" . $column[3] . "'#'" . $column[4] . "'#'" . $column[5] . "'#'" . $column[6] . "'#'" . $column[7] . "')";
             $result = mysqli_query($conn, $sqlInsert);
             
             if (! empty($result)) {
@@ -118,7 +118,7 @@ $(document).ready(function() {
 </head>
 
 <body>
-    <h2>Import CSV file into Mysql using PHP</h2>
+    <h2>Import CSV file into debtorTBL using PHP</h2>
     
     <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>"><?php if(!empty($message)) { echo $message; } ?></div>
     <div class="outer-scontainer">
@@ -140,7 +140,7 @@ $(document).ready(function() {
 
         </div>
                <?php
-            $sqlSelect = "SELECT * FROM users";
+            $sqlSelect = "SELECT * FROM debtor_copy1";
             $result = mysqli_query($conn, $sqlSelect);
             
             if (mysqli_num_rows($result) > 0) {
@@ -148,10 +148,15 @@ $(document).ready(function() {
             <table id='userTable'>
             <thead>
                 <tr>
-                    <th>User ID</th>
-                    <th>User Name</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>sapcode</th>
+                    <th>กฟฟ</th>
+                    <th>CA</th>
+                    <th>ชื่อลูกค้า</th>
+                    <th>บิลเดือน</th>
+                    <th>ชื่อลูกค้า</th>
+                    <th>หนี้ค้างชำระ</th>
+                    <th>เงินประกัน</th>
+                    <th>เงินส่วนต่าง</th>
 
                 </tr>
             </thead>
@@ -162,10 +167,14 @@ $(document).ready(function() {
                     
                 <tbody>
                 <tr>
-                    <td><?php  echo $row['userId']; ?></td>
-                    <td><?php  echo $row['userName']; ?></td>
-                    <td><?php  echo $row['firstName']; ?></td>
-                    <td><?php  echo $row['lastName']; ?></td>
+                    <td><?php  echo $row['sap_code']; ?></td>
+                    <td><?php  echo $row['dept_name']; ?></td>
+                    <td><?php  echo $row['cus_number']; ?></td>
+                    <td><?php  echo $row['cus_name']; ?></td>
+                    <td><?php  echo $row['bill_month']; ?></td>
+                    <td><?php  echo $row['outstanding_debt']; ?></td>
+                    <td><?php  echo $row['bail']; ?></td>
+                    <td><?php  echo $row['diff']; ?></td>
                 </tr>
                     <?php
                 }
