@@ -132,6 +132,9 @@ $(document).ready(function() {
         }
         return true;
     });
+    $("#frmCSVImport").on("sss", function () {
+        	    $("#response").addClass("display-block");
+    });
 });
 </script>
 </head>
@@ -151,8 +154,8 @@ $(document).ready(function() {
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
                         class="btn-submit">Import</button>
-                    <button type="submit" id="submit" name="clear"
-                        class="btn-delete">Clear</button>
+                    <button type="sss" id="sss" name="clear"
+                        class="btn-danger">Clear</button>
                     <br />
 
                 </div>
