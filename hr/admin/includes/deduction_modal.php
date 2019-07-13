@@ -77,7 +77,7 @@
             		<input type="hidden" id="decid" name="id">
             		<div class="text-center">
 	                	<p>Delete date</p>
-	                	<h2 id="del_deduction" class="bold"></h2>
+	                	<h2 class="alertdate bold"></h2>
 	            	</div>
           	</div>
           	<div class="modal-footer">
