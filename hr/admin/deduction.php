@@ -65,8 +65,8 @@
                           <td>".$row['alert_date']."</td>
                           <td>".$row['alert_status']."</td>
                           <td>
-                            <!--button type='button' class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['alertdate']."' onclick='javascript:getRow(".$row['alert_date'].");'><i class='fa fa-trash'></i> Delete</button-->
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['alert_date']."'><i class='fa fa-trash'></i> Delete</button>
+                            <button type='button' class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['alert_date']."' onclick='javascript:getRow(".$row['alert_date'].");'><i class='fa fa-trash'></i> Delete</button>
+                            <!--button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['alert_date']."'><i class='fa fa-trash'></i> Delete</button-->
                           </td>
                         </tr>
                       ";
