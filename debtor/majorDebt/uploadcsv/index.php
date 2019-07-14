@@ -6,8 +6,6 @@ if (isset($_POST["import"])) {
     $fileName = $_FILES["file"]["tmp_name"];
     
     if ($_FILES["file"]["size"] > 0) {
-        $sqlDelete = "DELETE FROM debtor_copy1";
-        $delete = mysqli_query($conn,$sqlDelete);
         $file = fopen($fileName, "r");
         
         while (($column = fgetcsv($file, 10000, "#","#")) !== FALSE) {
@@ -150,7 +148,7 @@ $(document).ready(function() {
     <div class="outer-scontainer">
         <div class="row">
 
-            <form class="form-row" action="" method="post"
+            <form class="form-inline" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
                     <label class="control-label">Choose CSV
@@ -161,7 +159,7 @@ $(document).ready(function() {
                     <br />
                 </div>
             </form>
-            <form class="form-row" action="" method="post"
+            <form class="form-inline" action="" method="post"
                 name="frmCSVClear" id="frmCSVClear" enctype="multipart/form-data">
                     <button type="submit" id="submit" name="clear"
                         class="btn-submit">Clear</button>
