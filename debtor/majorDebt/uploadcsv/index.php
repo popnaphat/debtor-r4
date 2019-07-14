@@ -46,6 +46,7 @@ if (isset($_POST["clear"])) {
 <html>
 
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="jquery-3.2.1.min.js"></script>
 
 <style>
@@ -130,7 +131,7 @@ $(document).ready(function() {
         }
         return true;
     });
-    $("#frmCSVClear").on("reset", function () {
+    $("#frmCSVClear").on("submit", function () {
 
 	    $("#response").attr("class", "");
         $("#response").html("");
@@ -162,8 +163,8 @@ $(document).ready(function() {
             </form>
             <form class="form-horizontal col-md-6" action="" method="post"
                 name="frmCSVClear" id="frmCSVClear" enctype="multipart/form-data">
-                    <button type="reset" id="reset" name="clear"
-                        class="btn btn-danger">Clear</button>
+                    <button type="submit" id="submit" name="clear"
+                        class="btn-submit">Clear</button>
                     <br />
             </form>
             
