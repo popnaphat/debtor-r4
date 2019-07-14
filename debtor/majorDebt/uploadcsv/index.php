@@ -151,12 +151,11 @@ $(document).ready(function() {
             <form class="form-row col-md-6" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
-                    <label class="control-label">Choose CSV
+                    <label class="col-md-4 control-label">Choose CSV
                         File</label> <input type="file" name="file"
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
-                        class="btn-submit">Import</button>
-                    
+                        class="col-md-2 btn-submit">Import</button>
                 </div>
             </form>
             <form class="form-row col-md-6" action="" method="post"
