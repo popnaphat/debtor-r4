@@ -148,22 +148,22 @@ $(document).ready(function() {
     <div class="outer-scontainer">
         <div class="row">
 
-            <form class="form-inline" action="" method="post"
+            <form class="form-row col-md-6" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
-                    <label class="control-label">Choose CSV
+                    <label class="col-md-4 control-label">Choose CSV
                         File</label> <input type="file" name="file"
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
-                        class="btn-submit">Import</button>
-                    <br />
+                        class="btn-submit col-md-2">Import</button>
+                    
                 </div>
             </form>
-            <form class="form-inline" action="" method="post"
+            <form class="form-row col-md-6" action="" method="post"
                 name="frmCSVClear" id="frmCSVClear" enctype="multipart/form-data">
                     <button type="submit" id="submit" name="clear"
                         class="btn-submit">Clear</button>
-                    <br />
+                    
             </form>
             
         </div>
