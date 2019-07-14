@@ -150,10 +150,10 @@ $(document).ready(function() {
     <div class="outer-scontainer">
         <div class="row">
 
-            <form class="form-row col" action="" method="post"
+            <form class="form-row" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
-                    <label class="col-md-6 control-label">Choose CSV
+                    <label class="control-label">Choose CSV
                         File</label> <input type="file" name="file"
                         id="file" accept=".csv">
                     <button type="submit" id="submit" name="import"
