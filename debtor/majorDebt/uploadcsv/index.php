@@ -150,7 +150,7 @@ $(document).ready(function() {
     <div class="outer-scontainer">
         <div class="row">
 
-            <form class="form-horizontal col-md-6" action="" method="post"
+            <form class="form-row col" action="" method="post"
                 name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
                     <label class="col-md-6 control-label">Choose CSV
@@ -161,7 +161,7 @@ $(document).ready(function() {
                     <br />
                 </div>
             </form>
-            <form class="form-horizontal col-md-6" action="" method="post"
+            <form class="form-row" action="" method="post"
                 name="frmCSVClear" id="frmCSVClear" enctype="multipart/form-data">
                     <button type="submit" id="submit" name="clear"
                         class="btn-submit">Clear</button>
