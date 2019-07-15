@@ -19,7 +19,7 @@ date_default_timezone_set("Asia/Bangkok");
   }*/
 
   // count complaint 
-  $fetch_notify_office = "SELECT * FROM peamember m 
+  $fetch_notify_office = "SELECT *,dt.sap_code as dts1 FROM peamember m 
   JOIN peaemp ON m.memberid = peaemp.empID 
   JOIN pea_office o ON LEFT(peaemp.dept_change_code,11) = LEFT(o.unit_code,11)
   JOIN debtor_copy1 dt on o.sap_code = dt.sap_code
@@ -50,7 +50,7 @@ date_default_timezone_set("Asia/Bangkok");
                               "VALUES($log_id, ".$manager['memberid'].", '$timestamp')";
       mysqli_query($conn, $log_individual_notify) or die($log_individual_notify);
         //count employee each office
-        $sql3 = "SELECT * from debtor_copy1 dt join pea_office po on po.sap_code = dt.sap_code WHERE dt.sap_code = ".$manager['sap_code']." GROUP BY dt.cus_number";
+        $sql3 = "SELECT * from debtor_copy1 dt join pea_office po on po.sap_code = dt.sap_code WHERE dt.sap_code = ".$manager['dts1']." GROUP BY dt.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
         
