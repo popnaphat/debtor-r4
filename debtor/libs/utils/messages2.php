@@ -69,7 +69,7 @@
                     },
                     {
                       "type": "text",
-                      "text": "'.$countpea.' กฟฟ '.$countemp.' ราย",
+                      "text": "'.$countpea.' กฟฟ ('.$countemp.' ราย)",
                       "flex": 0,
                       "size": "sm",
                       "color": "#666666",
