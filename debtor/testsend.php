@@ -34,6 +34,7 @@ date_default_timezone_set("Asia/Bangkok");
       while($manager = $notify_office->fetch_assoc()){
       // auto increment with manual
       $log_id = $log_id + 1;
+      $sp = substr($manager['sap_code'],0,1);
       // log push data
 			$timestamp = date('Y-m-d H:i:s');
       $log_individual_notify = "INSERT INTO tbl_log_notifyjkl(id, manager_id, notify_timestamp) ".
@@ -42,11 +43,11 @@ date_default_timezone_set("Asia/Bangkok");
         //count employee each office
         $sql3 = "SELECT * from debtor 
         join pea_office on pea_office.sap_code = debtor.sap_code 
-        WHERE debtor.sap_code LIKE concat(LEFT('".$manager['sap_code']."',1),'%') GROUP BY debtor.cus_number";
+        WHERE debtor.sap_code LIKE concat('$sp','%') GROUP BY debtor.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
 
-        $sql4 = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE LEFT('".$manager['sap_code']."',1) GROUP BY debtor.sap_code";
+        $sql4 = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$sp' GROUP BY debtor.sap_code";
         $query4 = mysqli_query($conn,$sql4) or die(mysqli_error($conn));
         $countpea = mysqli_num_rows($query4);
         
