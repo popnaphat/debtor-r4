@@ -19,10 +19,10 @@ date_default_timezone_set("Asia/Bangkok");
     return;
   }
   // find maximum id
-  $find_maximum_id = "SELECT * FROM tbl_log_notify";
+  $find_maximum_id = "SELECT * FROM tbl_log_notifyjkl";
   $log_object = mysqli_query($conn, $find_maximum_id) or die($find_maximum_id);
   $log_id = mysqli_num_rows($log_object);
-  $getlast_row = "SELECT * FROM tbl_log_notify ORDER BY id DESC LIMIT 1";
+  $getlast_row = "SELECT * FROM tbl_log_notifyjkl ORDER BY id DESC LIMIT 1";
   $query_lastrow = mysqli_query($conn, $getlast_row);
   $lastrow = mysqli_fetch_array($query_lastrow);
   $dayissues = substr($lastrow['notify_timestamp'],0,10);
