@@ -51,7 +51,7 @@ date_default_timezone_set("Asia/Bangkok");
         $query4 = mysqli_query($conn,$sql4) or die(mysqli_error($conn));
         $countpea = mysqli_num_rows($query4);
         
-      $messages = getBubbleMessages($countpea,$countemp, DateThai(date("Y-m-d")), $manager['dept_name'], substr($manager['sap_code'],0,1));
+      $messages = getBubbleMessages($countpea,$countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $sp);
 
       $data = [
         'to' => $manager['memberuser_id'],
