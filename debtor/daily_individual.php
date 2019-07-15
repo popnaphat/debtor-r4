@@ -22,7 +22,7 @@ date_default_timezone_set("Asia/Bangkok");
   $fetch_notify_office = "SELECT * FROM peamember m 
   JOIN peaemp ON m.memberid = peaemp.empID 
   JOIN pea_office o ON LEFT(peaemp.dept_change_code,11) = LEFT(o.unit_code,11)
-  JOIN debtor on o.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') 
+  JOIN debtor_copy1 dt on o.sap_code = dt.sap_code
   GROUP BY m.memberid";
   $notify_office = mysqli_query($conn, $fetch_notify_office) or die($fetch_notify_office);
   if(mysqli_num_rows($notify_office) == 0){
@@ -50,9 +50,7 @@ date_default_timezone_set("Asia/Bangkok");
                               "VALUES($log_id, ".$manager['memberid'].", '$timestamp')";
       mysqli_query($conn, $log_individual_notify) or die($log_individual_notify);
         //count employee each office
-        $sql3 = "SELECT * from debtor 
-        join pea_office on pea_office.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') 
-        WHERE unit_code = ".$manager['dept_change_code']." GROUP BY debtor.cus_number";
+        $sql3 = "SELECT * from debtor_copy1 dt join pea_office po on po.sap_code = dt.sap_code WHERE dt.sap_code = ".$manager['sap_code']." GROUP BY dt.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
         
