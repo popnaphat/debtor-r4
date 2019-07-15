@@ -13,7 +13,7 @@
 		require('conn.php');
 		$NUMBER = $_GET['REQ'];
 		//$NUMBER2 = $_GET['REQ2'];
-		$sql = "SELECT count(DISTINCT cus_number) as num,debtor.dept_name,pea_office.unit_code from debtor join pea_office on pea_office.sap_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') where region2 LIKE '$NUMBER' GROUP BY debtor.dept_name";
+		$sql = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor.sap_code";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 		//$mode1 = mysqli_num_rows($query);
 		/*while($ofname = mysqli_fetch_array($query)){ 
@@ -49,7 +49,7 @@
 					mysqli_data_seek($query,0);
 					$a = 1;
 					while($result=mysqli_fetch_array($query)){
-						echo "<li><a href ='req_office.php?REQ=".$result["unit_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย</a></li>";;
+						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย</a></li>";;
 						$a =$a +1;
 					}
 					$a = 0;

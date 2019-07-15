@@ -14,7 +14,7 @@
 		$NUMBER = $_GET['REQ'];
 		//$NUMBER2 = $_GET['REQ2'];
 
-		$sql = "SELECT * from debtor join pea_office on pea_office.sap_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') where unit_code LIKE '$NUMBER' GROUP BY debtor.cus_number";
+		$sql = "SELECT * from debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$NUMBER' GROUP BY debtor.cus_number";
 		//$sql_type = "SELECT * FROM tbl_complaint WHERE office_name LIKE '%".$NUMBER."%' AND number_of_day>=".$NUMBER2." AND complaint_status <> 'ปิด' GROUP BY complaint_type";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 		//$query_type = mysqli_query($conn,$sql_type);
