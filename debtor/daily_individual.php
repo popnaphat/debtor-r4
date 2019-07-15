@@ -51,7 +51,7 @@ date_default_timezone_set("Asia/Bangkok");
                               "VALUES($log_id, ".$manager['memberid'].", '$timestamp')";
       mysqli_query($conn, $log_individual_notify) or die($log_individual_notify);
         //count employee each office
-        $sql3 = "SELECT * from debtor_copy1 dt join pea_office po on po.sap_code = dt.sp_code WHERE po.sap_code = ".$manager['sp_code']." GROUP BY dt.cus_number";
+        $sql3 = "SELECT * from debtor_copy1 join pea_office on pea_office.sap_code = debtor_copy1.sp_code WHERE pea_office.sap_code = ".$manager['sp_code']." GROUP BY debtor_copy1.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
      
