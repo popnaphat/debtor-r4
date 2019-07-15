@@ -32,6 +32,7 @@ date_default_timezone_set("Asia/Bangkok");
   $find_maximum_id = "SELECT * FROM tbl_log_notify";
   $log_object = mysqli_query($conn, $find_maximum_id) or die($find_maximum_id);
   $log_id = mysqli_num_rows($log_object);
+
   $getlast_row = "SELECT * FROM tbl_log_notify ORDER BY id DESC LIMIT 1";
   $query_lastrow = mysqli_query($conn, $getlast_row);
   $lastrow = mysqli_fetch_array($query_lastrow);
@@ -50,14 +51,14 @@ date_default_timezone_set("Asia/Bangkok");
                               "VALUES($log_id, ".$manager['memberid'].", '$timestamp')";
       mysqli_query($conn, $log_individual_notify) or die($log_individual_notify);
         //count employee each office
-        $sql3 = "SELECT * from debtor_copy1 dt join pea_office po on po.sap_code = dt.sp_code WHERE dt.sp_code = ".$manager['sp_code']." GROUP BY dt.cus_number";
+        $sql3 = "SELECT * from debtor_copy1 dt join pea_office po on po.sap_code = dt.sp_code WHERE po.sap_code = ".$manager['sp_code']." GROUP BY dt.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
-       echo $countemp;
-      //$messages = getBubbleMessages($countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['dept_change_code']);
+     
+      $messages = getBubbleMessages($countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['dept_change_code']);
       
 
-      /*$data = [
+      $data = [
         'to' => $manager['memberuser_id'],
         'messages' => [$messages]
       ];
@@ -72,8 +73,8 @@ date_default_timezone_set("Asia/Bangkok");
       curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
       $result = curl_exec($ch);
-      curl_close($ch);*/
+      curl_close($ch);
     }
-    //echo "this script run successful.";
-    //return;
+    echo "this script run successful.";
+    return;
   }
