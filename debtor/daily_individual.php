@@ -22,7 +22,7 @@ date_default_timezone_set("Asia/Bangkok");
   $fetch_notify_office = "SELECT * FROM peamember m 
   JOIN peaemp ON m.memberid = peaemp.empID 
   JOIN pea_office o ON LEFT(peaemp.dept_change_code,11) = LEFT(o.unit_code,11)
-  JOIN debtor_copy1 dt on o.sap_code = dt.sp_code
+  JOIN debtor on o.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') 
   GROUP BY m.memberid";
   $notify_office = mysqli_query($conn, $fetch_notify_office) or die($fetch_notify_office);
   if(mysqli_num_rows($notify_office) == 0){
@@ -32,7 +32,6 @@ date_default_timezone_set("Asia/Bangkok");
   $find_maximum_id = "SELECT * FROM tbl_log_notify";
   $log_object = mysqli_query($conn, $find_maximum_id) or die($find_maximum_id);
   $log_id = mysqli_num_rows($log_object);
-
   $getlast_row = "SELECT * FROM tbl_log_notify ORDER BY id DESC LIMIT 1";
   $query_lastrow = mysqli_query($conn, $getlast_row);
   $lastrow = mysqli_fetch_array($query_lastrow);
@@ -51,12 +50,18 @@ date_default_timezone_set("Asia/Bangkok");
                               "VALUES($log_id, ".$manager['memberid'].", '$timestamp')";
       mysqli_query($conn, $log_individual_notify) or die($log_individual_notify);
         //count employee each office
-        $sql3 = "SELECT * from debtor_copy1 join pea_office on pea_office.sap_code = debtor_copy1.sp_code WHERE pea_office.sap_code LIKE ".$manager['sp_code']." GROUP BY debtor_copy1.cus_number";
+        $sql3 = "SELECT * from debtor 
+        join pea_office on pea_office.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') 
+        WHERE unit_code = ".$manager['dept_change_code']." GROUP BY debtor.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
-     
+        
       $messages = getBubbleMessages($countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['dept_change_code']);
-      
+      /*$messages = [
+        "type"=> "text",
+        "text"=> "Individual Alert :\n\nรายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรกของ ".$manager['dept_name']." \n\nประจำวันที่ ".$today
+        ." \n\nhttps://allbackoffice.000webhostapp.com/hr/req_office1.php?REQ=".$manager['dept_name'].""
+      ];*/
 
       $data = [
         'to' => $manager['memberuser_id'],
