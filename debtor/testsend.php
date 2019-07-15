@@ -8,12 +8,11 @@ date_default_timezone_set("Asia/Bangkok");
   // line access token
   $access_token = 'CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=';
 
-  
-
   // count complaint 
   $fetch_notify_office = "SELECT * FROM peamember m 
   JOIN peaemp ON m.memberid = peaemp.empID 
   JOIN pea_office o ON LEFT(peaemp.dept_change_code,11) = LEFT(o.unit_code,11)
+  JOIN debtor on o.sap_code = concat(left(debtor.sap_code,1),'00000') 
   GROUP BY m.memberid";
   $notify_office = mysqli_query($conn, $fetch_notify_office) or die($fetch_notify_office);
   if(mysqli_num_rows($notify_office) == 0){
@@ -37,22 +36,21 @@ date_default_timezone_set("Asia/Bangkok");
       $log_id = $log_id + 1;
       // log push data
 			$timestamp = date('Y-m-d H:i:s');
-      $log_individual_notify = "INSERT INTO tbl_log_notify(id, manager_id, notify_timestamp) ".
+      $log_individual_notify = "INSERT INTO tbl_log_notifyjkl(id, manager_id, notify_timestamp) ".
                               "VALUES($log_id, ".$manager['memberid'].", '$timestamp')";
       mysqli_query($conn, $log_individual_notify) or die($log_individual_notify);
         //count employee each office
         $sql3 = "SELECT * from debtor 
-        join pea_office on pea_office.unit_name like concat('%',right(debtor.dept_name, CHAR_LENGTH(debtor.dept_name)-4),'%') 
-        WHERE region2 = "J" GROUP BY debtor.cus_number";
+        join pea_office on pea_office.sap_code = debtor.sap_code 
+        WHERE debtor.sap_code LIKE concat(LEFT('".$manager['sap_code']."',1),'%') GROUP BY debtor.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
+
+        $sql4 = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE LEFT('".$manager['sap_code']."',1) GROUP BY debtor.sap_code";
+        $query4 = mysqli_query($conn,$sql4) or die(mysqli_error($conn));
+        $countpea = mysqli_num_rows($query4);
         
-      $messages = getBubbleMessages($countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['dept_change_code']);
-      /*$messages = [
-        "type"=> "text",
-        "text"=> "Individual Alert :\n\nรายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรกของ ".$manager['dept_name']." \n\nประจำวันที่ ".$today
-        ." \n\nhttps://allbackoffice.000webhostapp.com/hr/req_office1.php?REQ=".$manager['dept_name'].""
-      ];*/
+      $messages = getBubbleMessages($countpea,$countemp, DateThai(date("Y-m-d")), $manager['dept_name'], LEFT($manager['sap_code'],1));
 
       $data = [
         'to' => $manager['memberuser_id'],

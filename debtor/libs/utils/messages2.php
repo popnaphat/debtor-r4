@@ -1,6 +1,6 @@
  <?php
 
-  function getBubbleMessages($countemp, $today, $dept_name, $dept_code){
+  function getBubbleMessages($countpea,$countemp, $today, $dept_name, $region){
     $count = 0;
     $json = '{
       "type": "flex",
@@ -42,7 +42,7 @@
                     },
                     {
                       "type": "text",
-                      "text": "'.$countemp.' ราย",
+                      "text": "'.$countemp.' กฟฟ '.$countemp.' ราย",
                       "flex": 0,
                       "size": "sm",
                       "color": "#666666",
@@ -65,7 +65,7 @@
               "action": {
                 "type": "uri",
                 "label": "คลิกดูรายละเอียด",
-                "uri": "https://southpea.herokuapp.com/debtor/majorDebt/region.php?REQ=J"
+                "uri": "https://southpea.herokuapp.com/debtor/majorDebt/region.php?REQ='.$region.'"
               },
               "height": "sm",
               "style": "primary"
