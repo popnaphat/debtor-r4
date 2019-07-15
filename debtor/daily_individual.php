@@ -53,15 +53,11 @@ date_default_timezone_set("Asia/Bangkok");
         $sql3 = "SELECT * from debtor_copy1 dt join pea_office po on po.sap_code = dt.sp_code WHERE dt.sp_code = ".$manager['sp_code']." GROUP BY dt.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
-        
-      $messages = getBubbleMessages($countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['dept_change_code']);
-      /*$messages = [
-        "type"=> "text",
-        "text"=> "Individual Alert :\n\nรายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรกของ ".$manager['dept_name']." \n\nประจำวันที่ ".$today
-        ." \n\nhttps://allbackoffice.000webhostapp.com/hr/req_office1.php?REQ=".$manager['dept_name'].""
-      ];*/
+       echo $countemp;
+      //$messages = getBubbleMessages($countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['dept_change_code']);
+      
 
-      $data = [
+      /*$data = [
         'to' => $manager['memberuser_id'],
         'messages' => [$messages]
       ];
@@ -76,8 +72,8 @@ date_default_timezone_set("Asia/Bangkok");
       curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
       $result = curl_exec($ch);
-      curl_close($ch);
+      curl_close($ch);*/
     }
-    echo "this script run successful.";
-    return;
+    //echo "this script run successful.";
+    //return;
   }
