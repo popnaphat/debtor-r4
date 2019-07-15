@@ -24,6 +24,33 @@
               "size": "xl",
               "weight": "bold",
               "wrap": true
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "margin": "lg",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "ประจำวันที่",
+                      "flex": 0,
+                      "size": "sm",
+                      "color": "#AAAAAA",
+                      "wrap": true
+                    },
+                    {
+                      "type": "text",
+                      "text": "'.$today.'",
+                      "flex": 0,
+                      "size": "sm",
+                      "color": "#666666",
+                      "wrap": true
                     }
                   ]
                 },
