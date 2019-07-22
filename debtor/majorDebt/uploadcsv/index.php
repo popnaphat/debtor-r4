@@ -16,11 +16,16 @@ function uploadCSVFile($conn, $file){
     $filename = $file['name'];
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
     $target_path = "./".basename(date('d-m-').(date("Y")+543)).".".$ext;
-    move_uploaded_file($file['tmp_name'], $target_path);
+    $uploaded_result = move_uploaded_file($file['tmp_name'], $target_path);
     /*$uploaded_result = @move_uploaded_file($file['tmp_name'], $target_path);
     if(!$uploaded_result) {
         die(error_get_last());
     }*/
+    if( $uploaded_result ) {
+        echo "Successfully uploaded";         
+      } else {
+        echo "Not uploaded because of error #".$_FILES['error'];
+      }
     $current_timestamp = date("Y-m-d H:i:s");
     $insert_log_file = "INSERT INTO tbl_log_csv_debt1(file_path, file_upload_timestamp) VALUES('$target_path', '$current_timestamp')";
     mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$sql]");    
