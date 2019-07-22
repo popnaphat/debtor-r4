@@ -1,5 +1,17 @@
 <?php
 require('../conn.php');
+require('../../timezone.php');
+function DateThai($strDate){
+    $strYear = date("Y",strtotime($strDate))+543;
+    $strMonth= date("n",strtotime($strDate));
+    $strDay= date("j",strtotime($strDate));
+    //$strHour= date("H",strtotime($strDate));
+    //$strMinute= date("i",strtotime($strDate));
+    //$strSeconds= date("s",strtotime($strDate));
+    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    $strMonthThai=$strMonthCut[$strMonth];
+    return "$strDay $strMonthThai $strYear";
+}
 
 if (isset($_POST["import"])) {
     
@@ -9,9 +21,9 @@ if (isset($_POST["import"])) {
         $file = fopen($fileName, "r");
         
         while (($column = fgetcsv($file, 10000, "#","#")) !== FALSE) {
-            
-            $sqlInsert = "INSERT into debtor(sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff)
-                   values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "')";
+            $timeupload = DateThai(date("Y-m-d"));
+            $sqlInsert = "INSERT into debtor(sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff,timeupload)
+                   values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $timeupload . "')";
             $result = mysqli_query($conn, $sqlInsert);
             
             if (! empty($result)) {
