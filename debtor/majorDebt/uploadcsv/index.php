@@ -12,15 +12,27 @@ function DateThai($strDate){
     $strMonthThai=$strMonthCut[$strMonth];
     return "$strDay $strMonthThai $strYear";
 }
+function uploadCSVFile($conn, $file){
+    $filename = $file['name'];
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    $target_path = "../filecsv/".basename(date('d-m-').(date("Y")+543)).".".$ext;
+    $uploaded_result = @move_uploaded_file($file['tmp_name'], $target_path);
+    if(!$uploaded_result) {
+        die(error_get_last());
+    }
+    $current_timestamp = date("Y-m-d H:i:s");
+    $insert_log_file = "INSERT INTO tbl_log_csv_debt1(file_path, file_upload_timestamp) VALUES('$target_path', '$current_timestamp')";
+    mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$sql]");    
+    return $target_path;
+}
 
 if (isset($_POST["import"])) {
     
     $fileName = $_FILES["file"]["tmp_name"];
-    
     if ($_FILES["file"]["size"] > 0) {
         $file = fopen($fileName, "r");
-        
         while (($column = fgetcsv($file, 10000, "#","#")) !== FALSE) {
+            uploadCSVFile($conn,$fileName);
             $timeupload = DateThai(date("Y-m-d"));
             $sqlInsert = "INSERT into debtor(sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff,timeupload)
                    values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $timeupload . "')";
