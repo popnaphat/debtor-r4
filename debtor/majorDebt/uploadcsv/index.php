@@ -27,7 +27,7 @@ function uploadCSVFile($conn, $file){
 }
 
 if (isset($_POST["import"])) {
-    $filenn = $_FILES["file"]
+    $filenn = $_FILES["file"];
     $fileName = $_FILES["file"]["tmp_name"];
     if ($_FILES["file"]["size"] > 0) {
         $file = fopen($fileName, "r");
