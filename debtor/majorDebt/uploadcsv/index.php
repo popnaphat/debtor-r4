@@ -15,8 +15,8 @@ function DateThai($strDate){
 function uploadCSVFile($conn, $file){
     $filename = $file["name"];
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    $target_path = "filecsv/".basename(date('d-m-').(date("Y")+543)).".".$ext;
-    $uploaded_result = @move_uploaded_file($file["tmp_name"], $target_path);
+    $target_path = "./filecsv/".basename(date('d-m-').(date("Y")+543)).".".$ext;
+    $uploaded_result = move_uploaded_file($file["tmp_name"], $target_path);
     if(!$uploaded_result) {
         die(error_get_last());
     }
