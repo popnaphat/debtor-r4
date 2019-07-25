@@ -15,7 +15,8 @@ $result = curl_exec($cURL);
 
 curl_close($cURL);
 
-//$json = json_decode($result, true);
-//echo $json['totalUsage'];
-echo $result;
+$json = json_decode($result, true);
+$numsend = $json['totalUsage'];
+$remain = 1000 - $numsend;
+echo $remain;
 ?>
