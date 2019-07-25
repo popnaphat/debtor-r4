@@ -9,8 +9,8 @@ $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $a
    
       curl_setopt($ch,CURLOPT_URL,$url);
       curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-      curl_setopt($ch,CURLOPT_HEADER, $headers); 
-      //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+      curl_setopt($ch,CURLOPT_HTTPHEADER, $headers); 
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
       $output=curl_exec($ch);
    
       curl_close($ch);
