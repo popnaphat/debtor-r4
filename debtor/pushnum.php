@@ -14,5 +14,7 @@ curl_setopt($cURL, CURLOPT_HTTPHEADER, $headers);
 $result = curl_exec($cURL);
 
 curl_close($cURL);
-print_r($result);
+
+$json = json_decode($result, true);
+print_r($json);
 ?>
