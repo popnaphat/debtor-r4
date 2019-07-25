@@ -18,7 +18,7 @@ curl_close($ch);
 var_dump(json_decode($result, true));
 //Using file_get_contents
 
-//$result = file_get_contents($url);
+$result2 = file_get_contents($url);
 // Will dump a beauty json :3
-//var_dump(json_decode($result, true));
+var_dump(json_decode($result2, true));
 ?>
