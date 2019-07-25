@@ -16,5 +16,5 @@ $result = curl_exec($cURL);
 curl_close($cURL);
 
 $json = json_decode($result, true);
-print_r($json);
+echo $json['totalUsage'];
 ?>
