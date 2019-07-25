@@ -17,5 +17,5 @@ $headers = 'Authorization: Bearer ' . $access_token;
       return $output;
   }
    
-  echo httpGet("https://api.line.me/v2/bot/message/quota");
+  echo httpGet("https://api.line.me/v2/bot/message/quota/consumption");
 ?>
