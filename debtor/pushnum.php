@@ -16,7 +16,8 @@ $result = curl_exec($cURL);
 curl_close($cURL);
 
 $json = json_decode($result, true);
-$numsend[] = $json['totalUsage'];
+$arr = json_decode($json,true);
+$numsend = $arr['totalUsage'];
 echo $numsend;
 //$remain = 1000 - $numsend;
 //echo $remain;
