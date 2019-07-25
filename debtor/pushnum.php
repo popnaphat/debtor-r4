@@ -13,12 +13,12 @@ curl_setopt($ch, CURLOPT_URL,$url);
 $result=curl_exec($ch);
 // Closing
 curl_close($ch);
-
+print_r($result);
 // Will dump a beauty json :3
-var_dump(json_decode($result, true));
+//var_dump(json_decode($result, true));
 //Using file_get_contents
 
-$result2 = file_get_contents($url);
+//$result2 = file_get_contents($url);
 // Will dump a beauty json :3
-var_dump(json_decode($result2, true));
+//var_dump(json_decode($result2, true));
 ?>
