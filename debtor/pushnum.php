@@ -10,16 +10,14 @@ $cURL = curl_init();
 curl_setopt($cURL, CURLOPT_URL, $url);
 curl_setopt($cURL, CURLOPT_HTTPGET, true);
 curl_setopt($cURL, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($cURL, CURLOPT_RETURNTRANSFER, 1);
 
 $result = curl_exec($cURL);
 curl_close($cURL);
 
 $json = json_decode($result, true);
 
-foreach ($json as $value) {
-    echo gettype($value), "\n";
-}*/
+echo $json['totalUsage'];
 //$remain = 1000 - $numsend;
 //echo $remain;
 ?>
