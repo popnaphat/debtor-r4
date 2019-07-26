@@ -19,6 +19,5 @@ $json = json_decode($result, true);
 
 echo $json['totalUsage'] "\n";
 
-$remain = 1000 - $json['totalUsage'];
-echo $remain;
+
 ?>
