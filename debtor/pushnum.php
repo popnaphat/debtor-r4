@@ -14,8 +14,7 @@ curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
 
 $result = curl_exec($cURL);
 curl_close($cURL);
-var_dump($result);
-/*
+
 $json = json_decode($result, true);
 
 foreach ($json as $value) {
