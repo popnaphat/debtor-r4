@@ -10,8 +10,8 @@ $cURL = curl_init();
 curl_setopt($cURL, CURLOPT_URL, $url);
 curl_setopt($cURL, CURLOPT_HTTPGET, true);
 curl_setopt($cURL, CURLOPT_HTTPHEADER, $headers);
-
-$result = curl_exec($cURL);
+curl_exec($cURL);
+/*$result = curl_exec($cURL);
 
 curl_close($cURL);
 
@@ -19,7 +19,7 @@ $json = json_decode($result, true);
 
 foreach ($json as $value) {
     echo gettype($value), "\n";
-}
+}*/
 //$remain = 1000 - $numsend;
 //echo $remain;
 ?>
