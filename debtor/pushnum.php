@@ -10,12 +10,12 @@ $cURL = curl_init();
 curl_setopt($cURL, CURLOPT_URL, $url);
 curl_setopt($cURL, CURLOPT_HTTPGET, true);
 curl_setopt($cURL, CURLOPT_HTTPHEADER, $headers);
-curl_exec($cURL);
-curl_close($cURL);
-/*$result = curl_exec($cURL);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
+$result = curl_exec($cURL);
 curl_close($cURL);
-
+var_dump($result);
+/*
 $json = json_decode($result, true);
 
 foreach ($json as $value) {
