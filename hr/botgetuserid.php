@@ -188,7 +188,7 @@ if($event['type'] == 'postback') {
    $fullpostback = $event['postback']['data'];
    $postbackstatus = substr($fullpostback,0,strlen($fullpostback)-6);
    $postbackid = substr($fullpostback,-6);
-      $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE empID = '$postbackid'";
+      $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '$postbackid'";
       $sql_id = mysqli_query($conn, $select_id);
       $empinfo = mysqli_fetch_array($sql_id);
       $p0 = $empinfo['user_id'];
