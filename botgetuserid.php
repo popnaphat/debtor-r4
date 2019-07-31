@@ -49,6 +49,7 @@
       $s3 = $res['surname'];
       $s4 = $res['pea_email'];
       $s5 = $res['empID'];
+      
       $select_id3 = "SELECT * FROM peamember WHERE memberid = '".$message."'";
       $query3 = mysqli_query($conn, $select_id3);
       $nums3 = mysqli_num_rows($query3);
