@@ -92,7 +92,7 @@
               "action": {
                 "type": "uri",
                 "label": "คลิกดูรายละเอียด",
-                "uri": "https://allbackoffice.000webhostapp.com/hr/req_office1.php?REQ='.$dept_code.'"
+                "uri": "https://southpea.herokuapp.com/hr/emplv1-5/req_office.php?REQ='.$dept_code.'"
               },
               "height": "sm",
               "style": "primary"
