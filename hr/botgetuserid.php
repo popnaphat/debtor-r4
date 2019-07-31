@@ -85,13 +85,13 @@
             $empid = $result['empID'];
             $activation=md5($email.time());
          
-            if($nums == 1 AND $s1 == "" AND $count_existing == 0){
+            if($nums == 1 AND $t1 == "" AND $count_existing == 0){
                //$shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
                //$sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
                $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation' WHERE empID = '".$message."'";
                mysqli_query($conn, $sql_regis);
                //$txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
-               $messages = getBubbleMessages1($s5,$email);
+               $messages = getBubbleMessages1($empid,$email);
                   $url = 'https://api.line.me/v2/bot/message/reply';
                   $data = [
                         'replyToken' => $replyToken,
@@ -112,7 +112,7 @@
             else if($message > 99999 && $message < 999999 AND ctype_digit($message) AND $nums == 0){
                $txtans = "ไม่มีรหัสพนักงานนี้ในสายงานการไฟฟ้า ภาค 4";
             }
-            else if($nums == 1 AND $s1 == "" AND $count_existing == 1){
+            else if($nums == 1 AND $t1 == "" AND $count_existing == 1){
                //$shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
                //$sql_del = "UPDATE peaemp SET user_id ='', activation ='', bitly = '', pea_email = '' WHERE user_id = '$id'";
                $sql_del = "UPDATE peaemp SET user_id ='', activation ='' WHERE user_id = '$id'";
@@ -121,7 +121,7 @@
                $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation' WHERE empID = '".$message."'";
                mysqli_query($conn, $sql_regis);
                //$txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
-               $messages = getBubbleMessages1($s5,$email);
+               $messages = getBubbleMessages1($empid,$email);
                   $url = 'https://api.line.me/v2/bot/message/reply';
                   $data = [
                         'replyToken' => $replyToken,
