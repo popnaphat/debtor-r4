@@ -141,7 +141,8 @@
                   return; 
             }
             else if(substr($message,0,3) == "pea" AND substr($message,3,6) > 99999 AND substr($message,3,6) < 999999 AND ctype_digit(substr($message,3,6))){
-               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', direct_request ='A' WHERE empID = '".$message."'";
+               $empid = substr($message,3,6);
+               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', direct_request ='A' WHERE empID = '".$empid."'";
                mysqli_query($conn, $sql_regis);
                $txtans = "กำลังตรวจสอบคำขอลงทะเบียน...";
             }         
