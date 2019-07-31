@@ -164,6 +164,8 @@
                   $txtans = "รหัสพนักงานนี้ได้ลงทะเบียนไปแล้ว";
                }
                else{
+               $sql_del = "UPDATE peaemp SET user_id ='', activation ='', direct_request = '' WHERE user_id = '".$id."'";
+               mysqli_query($conn, $sql_del);   
                $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', direct_request ='A' WHERE empID = '".$empid."'";
                mysqli_query($conn, $sql_regis);
                $txtans = "กำลังดำเนินการลงทะเบียน...";
