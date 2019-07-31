@@ -142,9 +142,32 @@
             }
             else if(substr($message,0,3) == "pea" AND substr($message,3,6) > 99999 AND substr($message,3,6) < 999999 AND ctype_digit(substr($message,3,6))){
                $empid = substr($message,3,6);
+               $select_id3 = "SELECT * FROM peamember WHERE memberid = '".$empid."'";
+               $query3 = mysqli_query($conn, $select_id3);
+               $nums3 = mysqli_num_rows($query3);
+               $res3 = mysqli_fetch_array($query3);
+               $q1 = $res3['memberid'];
+               $q2 = $res3['memberuser_id'];
+               $q3 = $res3['membername'];
+               $q4 = $res3['membersurname'];
+               $select_id4 = "SELECT * FROM peamember WHERE memberuser_id = '".$id."'";
+               $query4 = mysqli_query($conn, $select_id4);
+               $nums4 = mysqli_num_rows($query4);
+               $res4 = mysqli_fetch_array($query4);
+               $r1 = $res4['membername'];
+               $r2 = $res4['membersurname'];
+
+               if($nums4 > 0){
+                  $txtans = "คุณได้ลงทะเบียนแล้ว ในนาม $r1 $r2";
+               }
+               else if($nums3 > 0 AND $nums3 <> $nums4){
+                  $txtans = "รหัสพนักงานนี้ได้ลงทะเบียนไปแล้ว";
+               }
+               else{
                $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', direct_request ='A' WHERE empID = '".$empid."'";
                mysqli_query($conn, $sql_regis);
-               $txtans = "กำลังตรวจสอบคำขอลงทะเบียน...";
+               $txtans = "กำลังดำเนินการลงทะเบียน...";
+               }
             }         
             /*else if(substr($message,-10) == "@pea.co.th" AND $count_existing > 0){
                $sql_regis = "UPDATE peaemp SET pea_email = '$message' WHERE user_id = '".$id."'";
