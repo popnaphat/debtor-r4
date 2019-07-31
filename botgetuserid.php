@@ -139,6 +139,11 @@
                   $result = curl_exec($ch);
                   curl_close($ch);
                   return; 
+            }
+            else if(substr($message,0,3) == "pea" AND substr($message,3,6) > 99999 AND substr($message,3,6) < 999999 AND ctype_digit(substr($message,3,6))){
+               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', direct_request ='A' WHERE empID = '".$message."'";
+               mysqli_query($conn, $sql_regis);
+               $txtans = "กำลังตรวจสอบคำขอลงทะเบียน...";
             }         
             /*else if(substr($message,-10) == "@pea.co.th" AND $count_existing > 0){
                $sql_regis = "UPDATE peaemp SET pea_email = '$message' WHERE user_id = '".$id."'";
