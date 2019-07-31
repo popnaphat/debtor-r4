@@ -1,3 +1,3 @@
 select z.peacode,z.peaname,z.classaccount,z.name ,z.cacode, sum(z.money) as Totalmoney,count(z.cacode) as billNUM , s.status, TIMESTAMPDIFF(month,billmonth,CURRENT_DATE) as monthdiff from (SELECT n.id, n.cacode, n.msg, n.date_note, d.status, n.debtstatus FROM note_tb n 
 LEFT JOIN debtstatus d ON n.debtstatus = d.sq where n.debtstatus = 0 OR n.debtstatus = 8) s 
-LEFT JOIN zcanr030 z ON s.cacode = z.cacode where TIMESTAMPDIFF(month,billmonth,CURRENT_DATE) >2 AND z.classaccount LIKE "%เอกชน%" GROUP BY z.cacode ORDER BY Totalmoney DESC, billNUM ASC, monthdiff ASC
+LEFT JOIN zcanr030 z ON s.cacode = z.cacode where TIMESTAMPDIFF(month,billmonth,CURRENT_DATE) > 2 AND z.classaccount LIKE "%เอกชน%" GROUP BY z.cacode ORDER BY Totalmoney DESC, billNUM ASC, monthdiff ASC
