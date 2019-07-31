@@ -6,7 +6,7 @@
    $content = file_get_contents('php://input');  //อ่าน json เป็น string
    $arrayJson = json_decode($content, true); //แปลง json string เป็น php array
 
-  function make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1')
+  /*function make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1')
    {
 	//create the URL
 	$bitly = 'http://api.bit.ly/shorten?version='.$version.'&longUrl='.urlencode($url).'&login='.$login.'&apiKey='.$appkey.'&format='.$format;
@@ -25,7 +25,7 @@
          $xml = simplexml_load_string($response);
          return 'https://bit.ly/'.$xml->results->nodeKeyVal->hash;
       }
-   }
+   }*/
 
    #ตัวอย่าง Message Type "Text + Sticker"
    if (!is_null($arrayJson['events'])) {
@@ -40,7 +40,7 @@
             //รับ displayName
             $replyToken = $event['replyToken'];
 
-      $find_existing_regis = "SELECT * FROM peaemp WHERE user_id = '$id'";
+      $find_existing_regis = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE user_id = '$id'";
       $query = mysqli_query($conn, $find_existing_regis);
       $count_existing = mysqli_num_rows($query);
       $res = mysqli_fetch_array($query);
@@ -74,7 +74,7 @@
             $txtans = "กรุณายืนยันการลงทะเบียนทาง $s4";
          }
          else{
-            $select_id = "SELECT * FROM peaemp WHERE empID = '".$message."'";
+            $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE empID = '".$message."'";
             $query2 = mysqli_query($conn, $select_id);
             $nums = mysqli_num_rows($query2);
             $result = mysqli_fetch_array($query2);
@@ -86,23 +86,60 @@
             $activation=md5($email.time());
          
             if($nums == 1 AND $s1 == "" AND $count_existing == 0){
-               $shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
-               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
+               //$shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
+               //$sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
+               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation' WHERE empID = '".$message."'";
                mysqli_query($conn, $sql_regis);
-               $txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
+               //$txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
+               $messages = getBubbleMessages1($s5,$email);
+                  $url = 'https://api.line.me/v2/bot/message/reply';
+                  $data = [
+                        'replyToken' => $replyToken,
+                        'messages' => [$messages],
+                  ];
+                  $post = json_encode($data);
+                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+                  $ch = curl_init($url);
+                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+                  return; 
             }
             else if($message > 99999 && $message < 999999 AND ctype_digit($message) AND $nums == 0){
                $txtans = "ไม่มีรหัสพนักงานนี้ในสายงานการไฟฟ้า ภาค 4";
             }
             else if($nums == 1 AND $s1 == "" AND $count_existing == 1){
-               $shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
-               $sql_del = "UPDATE peaemp SET user_id ='', activation ='', bitly = '', pea_email = '' WHERE user_id = '$id'";
+               //$shorturl = make_bitly_url("https://southpea.herokuapp.com/hr/activation.php?code=$activation",'o_5cm7sdg39v','R_9e58931faa3c4f7aae9afa35cc2982f2','json');
+               //$sql_del = "UPDATE peaemp SET user_id ='', activation ='', bitly = '', pea_email = '' WHERE user_id = '$id'";
+               $sql_del = "UPDATE peaemp SET user_id ='', activation ='' WHERE user_id = '$id'";
                mysqli_query($conn, $sql_del);
-               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
+               //$sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation', bitly = '$shorturl' WHERE empID = '".$message."'";
+               $sql_regis = "UPDATE peaemp SET user_id ='$id', activation ='$activation' WHERE empID = '".$message."'";
                mysqli_query($conn, $sql_regis);
-               $txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
+               //$txtans = "คุณคือ$t $t2 รึเปล่า? ถ้าใช่กรุณากรอกอีเมล @pea.co.th ของคุณ";
+               $messages = getBubbleMessages1($s5,$email);
+                  $url = 'https://api.line.me/v2/bot/message/reply';
+                  $data = [
+                        'replyToken' => $replyToken,
+                        'messages' => [$messages],
+                  ];
+                  $post = json_encode($data);
+                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+                  $ch = curl_init($url);
+                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+                  return; 
             }         
-            else if(substr($message,-10) == "@pea.co.th" AND $count_existing > 0){
+            /*else if(substr($message,-10) == "@pea.co.th" AND $count_existing > 0){
                $sql_regis = "UPDATE peaemp SET pea_email = '$message' WHERE user_id = '".$id."'";
                mysqli_query($conn, $sql_regis);
                   $messages = getBubbleMessages1($s5,$message);
@@ -122,7 +159,7 @@
                   $result = curl_exec($ch);
                   curl_close($ch);
                   return; 
-            } 
+            }*/ 
             else if($nums == 0){
                $txtans = "";
             }
@@ -151,7 +188,7 @@ if($event['type'] == 'postback') {
    $fullpostback = $event['postback']['data'];
    $postbackstatus = substr($fullpostback,0,strlen($fullpostback)-6);
    $postbackid = substr($fullpostback,-6);
-      $select_id = "SELECT * FROM peaemp WHERE empID = '$postbackid'";
+      $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE empID = '$postbackid'";
       $sql_id = mysqli_query($conn, $select_id);
       $empinfo = mysqli_fetch_array($sql_id);
       $p0 = $empinfo['user_id'];
@@ -161,24 +198,23 @@ if($event['type'] == 'postback') {
       $p4 = $empinfo['bitly'];
       $p5 = substr($p4,7);
       $p6 = $empinfo['send_status'];
-	$p7 = $empinfo['activation'];
+	   $p7 = $empinfo['activation'];
          if($postbackstatus == 'confirm' AND $p6 == ""){
 		 	
-	$from = new SendGrid\Email(null, "HRrg4@pea.co.th");
-	$content = new SendGrid\Content("text/html", "https://southpea.herokuapp.com/hr/activation.php?code=".$p7);
-	$subject = "To K.$p1 please confirm LINE bot";
-	$to = new SendGrid\Email(null, "$p3");
-	//$content = "confirm register click: https://$p5";
-	$mail = new SendGrid\Mail($from, $subject, $to, $content);
-	$apiKey = getenv('SENDGRID_API_KEY');
-	$sg = new \SendGrid($apiKey);
-	$sg->client->mail()->send()->post($mail);
-		 
-		 
-        $send_update = "UPDATE peaemp SET send_status = 'A' WHERE empID = '$postbackid'";   
-        mysqli_query($conn, $send_update);
-         }
-            
+            $from = new SendGrid\Email(null, "botrg4@pea.co.th");
+            $content = new SendGrid\Content("text/html", "https://southpea.herokuapp.com/hr/activation.php?code=".$p7);
+            $subject = "To K.$p1 please confirm LINE bot";
+            $to = new SendGrid\Email(null, "$p3");
+            //$content = "confirm register click: https://$p5";
+            $mail = new SendGrid\Mail($from, $subject, $to, $content);
+            $apiKey = getenv('SENDGRID_API_KEY');
+            $sg = new \SendGrid($apiKey);
+            $sg->client->mail()->send()->post($mail);
+
+            $send_update = "UPDATE peaemp SET send_status = 'A' WHERE empID = '$postbackid'";   
+            mysqli_query($conn, $send_update);
+         }         
 }
+
 }}
 ?>

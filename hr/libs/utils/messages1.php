@@ -12,12 +12,6 @@
             "label":"ยืนยันคำขอ",
             "data":"confirm'.$empID.'",
             "displayText": "โปรดยืนยันการลงทะเบียนทางอีเมล '.$email.'"
-          },
-          {  
-            "type":"postback",
-            "label":"ยกเลิกคำขอ",
-            "data":"cancel'.$empID.'",
-            "displayText": "ยกเลิกคำขอแล้ว"
           }
         ],
         "text": "ส่งอีเมลยืนยันไปที่ '.$email.' ?"
