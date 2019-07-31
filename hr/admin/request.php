@@ -71,7 +71,7 @@
                           <td>".$row['dept_short']."</td>
                           <td>".$row['pea_email']."</td>
                           <td>
-                            <button type='button' class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['memberid']."' onclick='javascript:getRow(".$row['memberid'].");'><i class='fa fa-trash'></i> Delete</button>
+                            <button type='button' class='btn btn-success btn-sm btn-flat delete' data-id='".$row['empID']."' onclick='javascript:getRow(".$row['empID'].");'><i class='fa fa-thumbs-up'></i> Approve</button>
                           </td>
                         </tr>
                       ";
@@ -114,9 +114,9 @@ function getRow(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      $('.memberid').html(response.memberid);
-      $('#del_attid').val(response.memberid);
-      $('#del_employee_name').html(response.name+' '+response.surname);
+      $('.memberid').html(response.empID);
+      $('#del_attid').val(response.empID);
+      $('#del_employee_name').html(response.pre_name+''+response.name+' '+response.surname);
       $('#delete').modal('show');
     }
   });

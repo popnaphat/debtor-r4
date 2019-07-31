@@ -112,16 +112,16 @@
             	<h4 class="modal-title"><b><span class="memberid"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="attendance_delete.php">
+            	<form class="form-horizontal" method="POST" action="request_delete.php">
             		<input type="hidden" id="del_attid" name="id">
             		<div class="text-center">
-	                	<p>DELETE MEMBER</p>
+	                	<p>Approve member</p>
 	                	<h2 id="del_employee_name" class="bold"></h2>
 	            	</div>
           	</div>
           	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
+            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i>Close</button>
+            	<button type="submit" class="btn btn-success btn-flat" name="delete"><i class="fa fa-trash"></i>Approve</button>
             	</form>
           	</div>
         </div>
