@@ -1,6 +1,7 @@
 <?php
     date_default_timezone_set("Asia/Bangkok");
-    require('conn.php');
+	require('conn.php');
+	require('./libs/utils/messages.php');
     $code = $_POST['code'];
     $name = $_POST['name'];
     $surname = $_POST['surname'];
