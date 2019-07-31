@@ -74,7 +74,7 @@
             $txtans = "กรุณายืนยันการลงทะเบียนทาง $s4";
          }
          else{
-            $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE empID = '".$message."'";
+            $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '".$message."'";
             $query2 = mysqli_query($conn, $select_id);
             $nums = mysqli_num_rows($query2);
             $result = mysqli_fetch_array($query2);
