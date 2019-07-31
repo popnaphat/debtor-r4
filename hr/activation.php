@@ -19,7 +19,7 @@ require('conn.php');
 <body>
 	<?php 
 		
-		$check = "SELECT * FROM peaemp WHERE activation='$code'";
+		$check = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.activation='$code'";
 		$querycheck = mysqli_query($conn, $check);
 		$checknum = mysqli_num_rows($querycheck);
 		$res = mysqli_fetch_array($querycheck);
