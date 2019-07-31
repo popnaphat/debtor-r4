@@ -36,6 +36,13 @@
 	<body> 
 		<?php
 			require('conn.php');
+			/*$NUMBER = $_GET['NUMBER'];
+			$addpos = strpos($NUMBER,"@");
+			$lengh = strlen($NUMBER);
+			$lengh1 =$lengh-1;
+			echo $NUMBER;
+			// if($addpos == 0){
+			$datenum = substr($NUMBER,$addpos+1,$lengh1);*/
 			$sql = "SELECT region,region2,count(DISTINCT cus_number) as num from debtor join pea_office on pea_office.sap_code = debtor.sap_code GROUP BY region";
 			// }
 			$query = mysqli_query($conn,$sql);
