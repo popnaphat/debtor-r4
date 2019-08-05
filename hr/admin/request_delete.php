@@ -1,6 +1,6 @@
 <?php
 	include 'includes/session.php';
-
+	include '../timezone.php';
 	if(isset($_POST['delete'])){
 		$id = $_POST['id'];
 		$data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '$id'";
