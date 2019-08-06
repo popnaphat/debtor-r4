@@ -3,9 +3,10 @@ date_default_timezone_set("Asia/Bangkok");
   require('./majorDebt/conn.php');
   require('./libs/utils/date_thai.php');
   require('./libs/utils/date_utils.php');
-  require('./libs/utils/messages.php');
+  //require('./libs/utils/messages.php');
 
-  // line access token
+  function man(){
+    // line access token
   $access_token = 'CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=';
 
   // check holiday
@@ -38,7 +39,8 @@ date_default_timezone_set("Asia/Bangkok");
   $dayissues = substr($lastrow['notify_timestamp'],0,10);
   $today = DateThai(date("Y-m-d"));
       if($dayissues == date("Y-m-d")){
-      echo "this script has been run for today.";
+      //echo "this script has been run for today.";
+      return;
       }
       else{
       while($manager = $notify_office->fetch_assoc()){
@@ -80,7 +82,7 @@ date_default_timezone_set("Asia/Bangkok");
       $result = curl_exec($ch);
       curl_close($ch);
     }
-    echo "this script run successful.";
+    //echo "this script run successful.";
     return;
-  }
+  }}
 
