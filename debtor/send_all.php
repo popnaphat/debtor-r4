@@ -12,6 +12,8 @@ date_default_timezone_set("Asia/Bangkok");
   // sendtomanager();
   // sendtoregion();
   echo "ok200";
+  error_reporting(E_ALL);
+  ini_set('display_errors', 'on');
   // $ttn = getnumsend();
   // echo $ttn;
   ?>
