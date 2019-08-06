@@ -15,13 +15,17 @@
 			$surname = $result['surname'];
 			$email = $result['pea_email'];
 			$sapcode = $result['sap_code'];
+				$sapnum = substr($sapcode,1);
+				$sapreg = substr($sapcode,0,1);
 			$cDate = date("Y-m-d H:i:s");
 		$sql = "UPDATE peaemp SET send_status = 'A' ,active_status = 'A' WHERE empID = '$id'";
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
 			$_SESSION['success'] = 'Member has been added.';
-			if(substr($sapcode,1) == '00000'){
-			////
+			if($sapnum == '00000'){
+				$countpea = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
+				$countpea2 = mysqli_query($conn,$countpea);
+				$countpea3 = mysqli_num_rows($countpea2);
 			}
 		}
 		else{
