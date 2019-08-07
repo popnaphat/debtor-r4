@@ -1,5 +1,5 @@
 <?php 
-function getnumsend(){
+//function getnumsend(){
     $access_token = 'CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=';
 $headers = array('Authorization: Bearer ' . $access_token);
       
@@ -17,9 +17,9 @@ $result = curl_exec($cURL);
 curl_close($cURL);
 
 $json = json_decode($result, true);
- return $json['totalUsage'];
-}
-//echo $json['totalUsage'] ;
+ //return $json['totalUsage'];
+//}
+echo $json['totalUsage'] ;
 //echo "<br>";
 //$remain = 1000 - $json['totalUsage'];
 //echo $remain;
