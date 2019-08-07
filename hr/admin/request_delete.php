@@ -39,7 +39,7 @@
 				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 					$data = [
-						'to' => $manager['memberuser_id'],
+						'to' => $userId,
 						'messages' => [$messages]
 					];
 					$url = 'https://api.line.me/v2/bot/message/push';
