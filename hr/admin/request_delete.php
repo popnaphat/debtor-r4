@@ -1,6 +1,7 @@
 <?php
 	include 'includes/session.php';
 	include '../timezone.php';
+	include '../../debtor/libs/utils/messages2.php';
 	if(isset($_POST['delete'])){
 		$id = $_POST['id'];
 		$data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode left join (SELECT m.memberid, o.sap_code FROM peamember m 
@@ -17,15 +18,41 @@
 			$sapcode = $result['sap_code'];
 				$sapnum = substr($sapcode,1);
 				$sapreg = substr($sapcode,0,1);
+				if($sapreg == 'J'){
+					$regionname = "กฟต.1 เพชรบุรี";
+				}else if($sapreg == 'K'){
+					$regionname = "กฟต.2 นครศรีธรรมราช";
+				}else if($sapreg == 'L'){
+					$regionname = "กฟต.3 ยะลา";
+				}
 			$cDate = date("Y-m-d H:i:s");
 		$sql = "UPDATE peaemp SET send_status = 'A' ,active_status = 'A' WHERE empID = '$id'";
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
 			$_SESSION['success'] = 'Member has been added.';
 			if($sapnum == '00000'){
-				$countpea = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
-				$countpea2 = mysqli_query($conn,$countpea);
-				$countpea3 = mysqli_num_rows($countpea2);
+				$countdeb = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg'"));
+				$getlastrow = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg' LIMIT 1"));
+				$dateupload = $getlastrow['timeupload'];
+				$countpea = mysqli_num_rows(mysqli_query($conn,"SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code")); 
+				
+				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
+
+					$data = [
+						'to' => $manager['memberuser_id'],
+						'messages' => [$messages]
+					];
+					$url = 'https://api.line.me/v2/bot/message/push';
+					$post = json_encode($data);
+					$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+					$ch = curl_init($url);
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+					$result = curl_exec($ch);
+					curl_close($ch);
 			}
 		}
 		else{
