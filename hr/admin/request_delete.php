@@ -37,7 +37,7 @@
 				$countpea = mysqli_num_rows(mysqli_query($conn,"SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code")); 
 				
 				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
-
+				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 					$data = [
 						'to' => $manager['memberuser_id'],
 						'messages' => [$messages]
