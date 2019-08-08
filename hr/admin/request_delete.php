@@ -63,7 +63,7 @@
 					$result = curl_exec($ch);
 					curl_close($ch);*/
 			//}
-			$_SESSION['success'] = "Member $sapcode $sapnum $sapreg has been added.";
+			$_SESSION['success'] = "Member aaa $name $sapcode $sapnum $sapreg has been added.";
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
