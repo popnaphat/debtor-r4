@@ -15,7 +15,8 @@
 			$name = $result['name'];
 			$surname = $result['surname'];
 			$email = $result['pea_email'];
-			$sapcode = $result['sap_code'];
+			$memberid = $result['memberid'];
+			$sapcode = $result['sub.sap_code'];
 				$sapnum = substr($sapcode,1);
 				$sapreg = substr($sapcode,0,1);
 				if($sapreg == 'J'){
@@ -63,7 +64,7 @@
 					$result = curl_exec($ch);
 					curl_close($ch);*/
 			//}
-			$_SESSION['success'] = "Member aaa $name $sapcode $sapnum $sapreg has been added.";
+			$_SESSION['success'] = "Member aaa $name $memberid $sapcode $sapnum $sapreg has been added.";
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
