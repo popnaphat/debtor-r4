@@ -29,7 +29,7 @@
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
 			//if($sapnum == '00000'){
-				/*$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
+				$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
 				$cdb = mysqli_query($conn,$selectcdb);
 				$countdeb = mysqli_num_rows($cdb);
 				
@@ -42,10 +42,10 @@
 				$cp = mysqli_query($conn,$selectcp);
 				$countpea = mysqli_num_rows($cp); 
 				
-				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);*/
-				/*$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
-				$texts = "คุณ $name $surname ลงทะเบียนเสร็จสิ้น";
-				$messages = [ 'type' => 'text', 'text' => $texts];
+				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
+				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
+				//$texts = "คุณ $name $surname ลงทะเบียนเสร็จสิ้น";
+				//$messages = [ 'type' => 'text', 'text' => $texts];
 				$data = [
 						'to' => $userId,
 						'messages' => [$messages]
@@ -61,8 +61,8 @@
 					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 					$result = curl_exec($ch);
 					curl_close($ch);*/
-			//}
-			$_SESSION['success'] = "Member aaa $name $sapcode $sapnum $sapreg has been added.";
+			}
+			$_SESSION['success'] = "Member has been added.";
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
