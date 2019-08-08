@@ -44,7 +44,7 @@
 				$countpea = mysqli_num_rows($cp); 
 				
 				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);*/
-				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
+				/*$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 				$texts = "คุณ $name $surname ลงทะเบียนเสร็จสิ้น";
 				$messages = [ 'type' => 'text', 'text' => $texts];
 				$data = [
@@ -61,9 +61,9 @@
 					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 					$result = curl_exec($ch);
-					curl_close($ch);
+					curl_close($ch);*/
 			//}
-			$_SESSION['success'] = 'Member has been added.';
+			$_SESSION['success'] = "Member $sapcode $sapnum $sapreg has been added.";
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
