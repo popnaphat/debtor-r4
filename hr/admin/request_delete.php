@@ -29,7 +29,7 @@
 		$sql = "UPDATE peaemp SET send_status = 'A' ,active_status = 'A' WHERE empID = '$id'";
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
-			if($sapnum == '00000'){
+			//if($sapnum == '00000'){
 				/*$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
 				$cdb = mysqli_query($conn,$selectcdb);
 				$countdeb = mysqli_num_rows($cdb);
@@ -62,7 +62,7 @@
 					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 					$result = curl_exec($ch);
 					curl_close($ch);
-			}
+			//}
 			$_SESSION['success'] = 'Member has been added.';
 		}
 		else{
