@@ -4,10 +4,10 @@
 	include '../../debtor/libs/utils/messages2.php';
 	if(isset($_POST['delete'])){
 		$id = $_POST['id'];
-		$data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode left join (SELECT m.memberid, o.sap_code FROM peamember m 
-		JOIN peaemp ON m.memberid = peaemp.empID 
+		$data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode left join (SELECT pm.memberid, o.sap_code FROM peamember pm 
+		JOIN peaemp ON pm.memberid = peaemp.empID 
 		JOIN pea_office o ON LEFT(peaemp.dept_change_code,11) = LEFT(o.unit_code,11)
-		GROUP BY m.memberid) sub on e.empID = sub.memberid WHERE e.empID = '$id'";
+		GROUP BY pm.memberid) sub on e.empID = sub.memberid WHERE e.empID = '$id'";
 			$querydata = mysqli_query($conn, $data);
 			$result = mysqli_fetch_array($querydata);
 			$empID = $result['empID'];
