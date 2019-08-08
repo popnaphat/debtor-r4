@@ -30,30 +30,30 @@
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
 			$_SESSION['success'] = 'Member has been added.';
-			if($sapnum == '00000'){
-				$countdeb = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg'"));
-				$getlastrow = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg' LIMIT 1"));
-				$dateupload = $getlastrow['timeupload'];
-				$countpea = mysqli_num_rows(mysqli_query($conn,"SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code")); 
-				
-				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
-				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
-					$data = [
-						'to' => $userId,
-						'messages' => [$messages]
-					];
-					$url = 'https://api.line.me/v2/bot/message/push';
-					$post = json_encode($data);
-					$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-					$ch = curl_init($url);
-					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-					$result = curl_exec($ch);
-					curl_close($ch);
-			}
+		}
+		else if($sapnum == '00000'){
+			$countdeb = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg'"));
+			$getlastrow = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg' LIMIT 1"));
+			$dateupload = $getlastrow['timeupload'];
+			$countpea = mysqli_num_rows(mysqli_query($conn,"SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code")); 
+			
+			$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
+			$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
+				$data = [
+					'to' => $userId,
+					'messages' => [$messages]
+				];
+				$url = 'https://api.line.me/v2/bot/message/push';
+				$post = json_encode($data);
+				$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+				$ch = curl_init($url);
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				$result = curl_exec($ch);
+				curl_close($ch);
 		}
 		else{
 			$_SESSION['error'] = $conn->error;

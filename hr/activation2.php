@@ -19,11 +19,30 @@
 		$result2 = mysqli_query($conn,$insert);
         echo "ลงทะเบียนเสร็จสิ้น";
 		
-		$check = "SELECT pea_office.sap_code FROM peaemp LEFT JOIN pea_office ON peaemp.dept_change_code = pea_office.unit_code WHERE peaemp.empID = '$empID'";
-		$qcheck = mysqli_query($conn,$check);
-		$fcheck = mysqli_fetch_array($qcheck);
-		$spc = $fcheck['sap_code'];
+		// $check = "SELECT pea_office.sap_code FROM peaemp LEFT JOIN pea_office ON peaemp.dept_change_code = pea_office.unit_code WHERE peaemp.empID = '$empID'";
+		// $qcheck = mysqli_query($conn,$check);
+		// $fcheck = mysqli_fetch_array($qcheck);
+		// $spc = $fcheck['sap_code'];
 
-		if(substr($spc,1) == '00000'){
+		// if(substr($spc,1) == '00000'){
+			$accessToken = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
+		$texts = "คุณ $name $surname ลงทะเบียนเสร็จสิ้น";
+		$messages = [ 'type' => 'text', 'text' => $texts];
 		
-    	}
+		$data = [
+			  'to' => $userId,
+			  'messages' => [$messages]
+		];
+		$url = 'https://api.line.me/v2/bot/message/push';
+		$post = json_encode($data);
+		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		$result = curl_exec($ch);
+        curl_close($ch);
+    }
+    	
