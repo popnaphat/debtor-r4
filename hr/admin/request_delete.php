@@ -30,10 +30,18 @@
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
 			if($sapnum == '00000'){
-				$countdeb = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg'"));
-				$getlastrow = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM debtor where left(sap_code,1) = '$sapreg' LIMIT 1"));
+				$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
+				$cdb = mysqli_query($conn,$selectcdb);
+				$countdeb = mysqli_num_rows($cdb);
+				
+				$selectglr = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg' LIMIT 1";
+				$glr = mysqli_query($conn,$selectglr);
+				$getlastrow = mysqli_fetch_array($glr);
 				$dateupload = $getlastrow['timeupload'];
-				$countpea = mysqli_num_rows(mysqli_query($conn,"SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code")); 
+
+				$selectcp = "SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code";
+				$cp = mysqli_query($conn,$selectcp);
+				$countpea = mysqli_num_rows($cp); 
 				
 				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
