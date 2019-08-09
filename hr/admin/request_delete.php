@@ -133,7 +133,7 @@
 		}
 		$sql2 = "UPDATE peaemp SET direct_request = '' WHERE empID = '$id'";
 		mysqli_query($conn,$sql2);
-		mysqli_close()
+		mysqli_close();
 	}
 	else{
 		$_SESSION['error'] = 'Select item to delete first';
