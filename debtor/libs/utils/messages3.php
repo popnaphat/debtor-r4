@@ -1,6 +1,6 @@
  <?php
 
-  function getBubbleMessages2($countpea,$countemp, $today, $dept_name, $region){
+  function getBubbleMessages3($countpea,$countemp, $today){
     $count = 0;
     $json = '{
       "type": "flex",
@@ -20,7 +20,7 @@
           "contents": [
             {
               "type": "text",
-              "text": "จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันของ'.$dept_name.'",
+              "text": "จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันของ สายงานฯ ภ4",
               "size": "xl",
               "weight": "bold",
               "wrap": true
@@ -92,7 +92,7 @@
               "action": {
                 "type": "uri",
                 "label": "คลิกดูรายละเอียด",
-                "uri": "https://southpea.herokuapp.com/debtor/majorDebt/region.php?REQ='.$region.'"
+                "uri": "https://southpea.herokuapp.com/debtor/majorDebt/"
               },
               "height": "sm",
               "style": "primary"

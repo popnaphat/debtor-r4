@@ -1,7 +1,9 @@
 <?php
 	include 'includes/session.php';
 	include '../timezone.php';
+	include '../../debtor/libs/utils/messages.php';
 	include '../../debtor/libs/utils/messages2.php';
+	include '../../debtor/libs/utils/messages3.php';
 	if(isset($_POST['delete'])){
 		$id = $_POST['id'];
 		$data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
@@ -28,7 +30,40 @@
 		$sql = "UPDATE peaemp SET send_status = 'A' ,active_status = 'A' WHERE empID = '$id'";
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
-			if($sapnum == '00000'){
+			if($sapcode == 'Z00000'){
+				$selectcdb = "SELECT * FROM debtor";
+				$cdb = mysqli_query($conn,$selectcdb);
+				$countdeb = mysqli_num_rows($cdb);
+				
+				$selectglr = "SELECT * FROM debtor LIMIT 1";
+				$glr = mysqli_query($conn,$selectglr);
+				$getlastrow = mysqli_fetch_array($glr);
+				$dateupload = $getlastrow['timeupload'];
+
+				$selectcp = "SELECT * from debtor GROUP BY sap_code";
+				$cp = mysqli_query($conn,$selectcp);
+				$countpea = mysqli_num_rows($cp); 
+				
+				$messages = getBubbleMessages3($countpea, $countdeb, $dateupload);
+				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
+
+				$data = [
+						'to' => $userId,
+						'messages' => [$messages]
+					];
+					$url = 'https://api.line.me/v2/bot/message/push';
+					$post = json_encode($data);
+					$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+					$ch = curl_init($url);
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+					$result = curl_exec($ch);
+					curl_close($ch);
+			}
+			else if($sapnum == '00000' AND $sapreg <> 'Z'){
 				$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
 				$cdb = mysqli_query($conn,$selectcdb);
 				$countdeb = mysqli_num_rows($cdb);
@@ -42,10 +77,39 @@
 				$cp = mysqli_query($conn,$selectcp);
 				$countpea = mysqli_num_rows($cp); 
 				
-				$messages = getBubbleMessages($countpea, $countdeb, $dateupload, $regionname, $sapreg);
+				$messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $regionname, $sapreg);
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
-				//$texts = "คุณ $name $surname ลงทะเบียนเสร็จสิ้น";
-				//$messages = [ 'type' => 'text', 'text' => $texts];
+
+				$data = [
+						'to' => $userId,
+						'messages' => [$messages]
+					];
+					$url = 'https://api.line.me/v2/bot/message/push';
+					$post = json_encode($data);
+					$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+					$ch = curl_init($url);
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+					$result = curl_exec($ch);
+					curl_close($ch);
+			}
+			else if($sapnum <> '00000'){
+				$selectcdb = "SELECT * FROM debtor where sap_code = '$sapcode'";
+				$cdb = mysqli_query($conn,$selectcdb);
+				$countdeb = mysqli_num_rows($cdb);
+				
+				$selectglr = "SELECT * FROM debtor where sap_code = '$sapcode' LIMIT 1";
+				$glr = mysqli_query($conn,$selectglr);
+				$getlastrow = mysqli_fetch_array($glr);
+				$dateupload = $getlastrow['timeupload'];
+				$dept_name = $getlastrow['dept_name'];
+				
+				$messages = getBubbleMessages($countdeb, $dateupload, $dept_name, $sapcode);
+				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
+
 				$data = [
 						'to' => $userId,
 						'messages' => [$messages]
@@ -69,7 +133,7 @@
 		}
 		$sql2 = "UPDATE peaemp SET direct_request = '' WHERE empID = '$id'";
 		mysqli_query($conn,$sql2);
-		
+		mysqli_close()
 	}
 	else{
 		$_SESSION['error'] = 'Select item to delete first';
