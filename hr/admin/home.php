@@ -130,7 +130,7 @@
             <div class="icon">
               <i class="ion ion-clock"></i>
             </div>
-            <a class="small-box-footer"><?php echo $rem; ?></a>
+            <a class="small-box-footer"><?php echo "คงเหลือ $rem ข้อความ"; ?></a>
           </div>
         </div>
         <!-- ./col -->
