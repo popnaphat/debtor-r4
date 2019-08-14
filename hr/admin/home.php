@@ -122,7 +122,7 @@
                 curl_close($cURL);
                 $json = json_decode($result, true);
                 $rem = 1000 - $json['totalUsage'];
-                echo "<h3>".$json['totalUsage']."</h3>" "(คงเหลือ ".$rem.")"
+                echo "<h3>".$json['totalUsage']."</h3>"
               ?>
              
               <p>จำนวนข้อความที่ส่งในเดือนนี้</p>
