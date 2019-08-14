@@ -44,7 +44,13 @@
 				$cp = mysqli_query($conn,$selectcp);
 				$countpea = mysqli_num_rows($cp); 
 				
+				if($countdeb == 0){
+					$txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
+					$messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+				}
+				else{
 				$messages = getBubbleMessages3($countpea, $countdeb, $dateupload);
+				}
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 
 				$data = [
@@ -77,9 +83,15 @@
 				$cp = mysqli_query($conn,$selectcp);
 				$countpea = mysqli_num_rows($cp); 
 				
+				
+				if($countdeb == 0){
+					$txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
+					$messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+				}
+				else{
 				$messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $regionname, $sapreg);
+				}
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
-
 				$data = [
 						'to' => $userId,
 						'messages' => [$messages]
