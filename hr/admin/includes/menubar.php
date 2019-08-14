@@ -18,7 +18,7 @@
         <li class="header">MANAGE</li>
         
         <li><a href="attendance.php"><i class="fa fa-users"></i> <span>BOT MEMBER</span></a></li>
-        <li><a href="request.php"><i class="fa fa-certificate"></i> <span>Request</span></a></li>
+        <li><a href="request.php"><i class="fa fa-check-square-o"></i> <span>Request</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-upload"></i>
