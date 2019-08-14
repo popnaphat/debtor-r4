@@ -97,6 +97,7 @@
 					curl_close($ch);
 			}
 			else if($sapnum <> '00000'){
+				
 				$selectcdb = "SELECT * FROM debtor where sap_code = '$sapcode'";
 				$cdb = mysqli_query($conn,$selectcdb);
 				$countdeb = mysqli_num_rows($cdb);
@@ -106,10 +107,16 @@
 				$getlastrow = mysqli_fetch_array($glr);
 				$dateupload = $getlastrow['timeupload'];
 				$dept_name = $getlastrow['dept_name'];
-				
-				$messages = getBubbleMessages($countdeb, $dateupload, $dept_name, $sapcode);
-				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 
+				if($countdeb == 0){
+					$txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
+					$messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+				}
+				else{
+				$messages = getBubbleMessages($countdeb, $dateupload, $dept_name, $sapcode);
+				}
+
+				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 				$data = [
 						'to' => $userId,
 						'messages' => [$messages]
