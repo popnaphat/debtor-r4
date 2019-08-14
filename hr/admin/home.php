@@ -130,7 +130,7 @@
             <div class="icon">
               <i class="ion ion-clock"></i>
             </div>
-            <!-- <a href="overtime.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+            <a class="small-box-footer"><?php echo $rem; ?></a>
           </div>
         </div>
         <!-- ./col -->
