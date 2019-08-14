@@ -105,18 +105,32 @@
           <div class="small-box bg-red">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM emplist";
-                $query = $conn->query($sql);
+                // $sql = "SELECT * FROM emplist";
+                // $query = $conn->query($sql);
+                $access_token = 'CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=';
+                $headers = array('Authorization: Bearer ' . $access_token);
+                      
+                $url = "https://api.line.me/v2/bot/message/quota/consumption";
 
-                echo "<h3>".$query->num_rows."</h3>"
+                $cURL = curl_init();
+                curl_setopt($cURL, CURLOPT_URL, $url);
+                curl_setopt($cURL, CURLOPT_HTTPGET, true);
+                curl_setopt($cURL, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($cURL, CURLOPT_FOLLOWLOCATION, 1);
+                $result = curl_exec($cURL);
+                curl_close($cURL);
+                $json = json_decode($result, true);
+                $rem = 1000 - $json['totalUsage'];
+                echo "<h3>".$json['totalUsage']."</h3>" "(คงเหลือ ".$rem.")"
               ?>
              
-              <p>พนักงานที่ยังไม่เคยได้รับการแต่งตั้ง</p>
+              <p>จำนวนข้อความที่ส่งในเดือนนี้</p>
             </div>
             <div class="icon">
               <i class="ion ion-clock"></i>
             </div>
-            <a href="overtime.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <!-- <a href="overtime.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
           </div>
         </div>
         <!-- ./col -->

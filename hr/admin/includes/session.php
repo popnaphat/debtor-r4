@@ -11,7 +11,7 @@
 	$user = $query->fetch_assoc();
 	
 	if(isset($_SESSION['admin'])){
-		if((time() - $_SESSION['last_time'])>300){
+		if((time() - $_SESSION['last_time'])>600){
 			header('location:logout.php');
 		}
 		else{
