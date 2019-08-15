@@ -216,6 +216,9 @@
             }
 ///////
          }
+         else if($nums4 > 0 AND substr($message,0,2) == "dt"){
+            
+         }
          else{
             $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '".$message."'";
             $query2 = mysqli_query($conn, $select_id);
