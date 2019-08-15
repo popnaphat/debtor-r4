@@ -3,6 +3,10 @@
   function getBubbleMessages3($countpea,$countemp, $today){
     $count = 0;
     $json = '{
+      "type": "text",
+      "text": "นี่คือข้อความแจ้งเตือนของคุณ"
+      },
+      {
       "type": "flex",
       "altText": "แจ้งเตือนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน",
       "contents": {
