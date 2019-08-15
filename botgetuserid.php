@@ -58,10 +58,12 @@
       $q2 = $res3['memberuser_id'];
       $q3 = $res3['membername'];
       $q4 = $res3['membersurname'];
+
       $select_id4 = "SELECT * FROM peamember WHERE memberuser_id = '".$id."'";
       $query4 = mysqli_query($conn, $select_id4);
       $nums4 = mysqli_num_rows($query4);
       $res4 = mysqli_fetch_array($query4);
+      $r0 = $res4['memberid'];
       $r1 = $res4['membername'];
       $r2 = $res4['membersurname'];
 
@@ -73,6 +75,143 @@
          }
          else if($count_existing > 0 AND $s1 == "" AND $s4 <> "" AND $message == $s5) {
             $txtans = "กรุณายืนยันการลงทะเบียนทาง $s4";
+         }
+         else if($nums4 > 0 AND $message == "myalert"){
+            $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
+            left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
+            WHERE e.empID = '$r0' GROUP BY e.empID";
+            $querydata = mysqli_query($conn, $data);
+            $result = mysqli_fetch_array($querydata);
+            $empID = $result['empID'];
+            //$userId = $result['user_id'];
+            $name = $result['name'];
+            $surname = $result['surname'];
+            $email = $result['pea_email'];
+            $sapcode = $result['sap_code'];
+               $sapnum = substr($sapcode,1);
+               $sapreg = substr($sapcode,0,1);
+               if($sapreg == 'J'){
+                  $regionname = "กฟต.1 เพชรบุรี";
+               }else if($sapreg == 'K'){
+                  $regionname = "กฟต.2 นครศรีธรรมราช";
+               }else if($sapreg == 'L'){
+                  $regionname = "กฟต.3 ยะลา";
+               }
+            if($sapcode == 'Z00000'){
+               $selectcdb = "SELECT * FROM debtor";
+               $cdb = mysqli_query($conn,$selectcdb);
+               $countdeb = mysqli_num_rows($cdb);
+               
+               $selectglr = "SELECT * FROM debtor LIMIT 1";
+               $glr = mysqli_query($conn,$selectglr);
+               $getlastrow = mysqli_fetch_array($glr);
+               $dateupload = $getlastrow['timeupload'];
+   
+               $selectcp = "SELECT * from debtor GROUP BY sap_code";
+               $cp = mysqli_query($conn,$selectcp);
+               $countpea = mysqli_num_rows($cp); 
+               
+               if($countdeb == 0){
+                  $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
+                  $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+               }
+               else{
+               $messages = getBubbleMessages3($countpea, $countdeb, $dateupload);
+               }
+               $data = [
+                     'replyToken' => $replyToken,
+                     'messages' => [$messages]
+                  ];
+                  $url = 'https://api.line.me/v2/bot/message/reply';
+                  $post = json_encode($data);
+                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+                  $ch = curl_init($url);
+                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+                  return;
+            }
+            else if($sapnum == '00000' AND $sapreg <> 'Z'){
+               $selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
+               $cdb = mysqli_query($conn,$selectcdb);
+               $countdeb = mysqli_num_rows($cdb);
+               
+               $selectglr = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg' LIMIT 1";
+               $glr = mysqli_query($conn,$selectglr);
+               $getlastrow = mysqli_fetch_array($glr);
+               $dateupload = $getlastrow['timeupload'];
+   
+               $selectcp = "SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code";
+               $cp = mysqli_query($conn,$selectcp);
+               $countpea = mysqli_num_rows($cp); 
+               
+               
+               if($countdeb == 0){
+                  $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
+                  $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+               }
+               else{
+               $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $regionname, $sapreg);
+               }
+               $data = [
+                     'replyToken' => $replyToken,
+                     'messages' => [$messages]
+                  ];
+                  $url = 'https://api.line.me/v2/bot/message/reply';
+                  $post = json_encode($data);
+                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+                  $ch = curl_init($url);
+                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+                  return;
+            }
+            else if($sapnum <> '00000'){
+               
+               $selectcdb = "SELECT * FROM debtor where sap_code = '$sapcode'";
+               $cdb = mysqli_query($conn,$selectcdb);
+               $countdeb = mysqli_num_rows($cdb);
+               
+               $selectglr = "SELECT * FROM debtor where sap_code = '$sapcode' LIMIT 1";
+               $glr = mysqli_query($conn,$selectglr);
+               $getlastrow = mysqli_fetch_array($glr);
+               $dateupload = $getlastrow['timeupload'];
+               $dept_name = $getlastrow['dept_name'];
+   
+               if($countdeb == 0){
+                  $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
+                  $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+               }
+               else{
+               $messages = getBubbleMessages($countdeb, $dateupload, $dept_name, $sapcode);
+               }
+   
+               $data = [
+                     'replyToken' => $replyToken,
+                     'messages' => [$messages]
+                  ];
+                  $url = 'https://api.line.me/v2/bot/message/reply';
+                  $post = json_encode($data);
+                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+                  $ch = curl_init($url);
+                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+                  return;
+            }
+///////
          }
          else{
             $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '".$message."'";
