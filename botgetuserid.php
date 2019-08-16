@@ -216,37 +216,37 @@
             }
 ///////
          }
-         else if($nums4 > 0 AND  AND substr($message,0,2) == "dt"){
-            $peaname = substr($message,2);
-            $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
-            left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
-            WHERE e.empID = '$r0' GROUP BY e.empID";
-            $querydata = mysqli_query($conn, $data);
-            $result = mysqli_fetch_array($querydata);
-            $empID = $result['empID'];
-            //$userId = $result['user_id'];
-            $name = $result['name'];
-            $surname = $result['surname'];
-            $email = $result['pea_email'];
-            $sapcode = $result['sap_code'];
-               $sapnum = substr($sapcode,1);
-               $sapreg = substr($sapcode,0,1);
-            if($sapnum == '00000'){
-               $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE '%$sapreg%' AND dept_name LIKE '%$peaname%'";
-               $findpea2 = mysqli_query($conn, $findpea1);
-               $findpea3 = mysqli_num_rows($findpea2);
-               $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE '%$sapreg%' AND dept_name LIKE '%$peaname%' limit 1";
-               $lastpea2 = mysqli_query($conn, $lastpea1);
-               $lastpea3 = mysqli_fetch_array($lastpea2);
-               $pn = $lastpea3['dept_name'];
-               $sc = $lastpea3['sap_code'];
+         // else if($nums4 > 0 AND  AND substr($message,0,2) == "dt"){
+         //    $peaname = substr($message,2);
+         //    $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
+         //    left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
+         //    WHERE e.empID = '$r0' GROUP BY e.empID";
+         //    $querydata = mysqli_query($conn, $data);
+         //    $result = mysqli_fetch_array($querydata);
+         //    $empID = $result['empID'];
+         //    //$userId = $result['user_id'];
+         //    $name = $result['name'];
+         //    $surname = $result['surname'];
+         //    $email = $result['pea_email'];
+         //    $sapcode = $result['sap_code'];
+         //       $sapnum = substr($sapcode,1);
+         //       $sapreg = substr($sapcode,0,1);
+         //    if($sapnum == '00000'){
+         //       $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE '%$sapreg%' AND dept_name LIKE '%$peaname%'";
+         //       $findpea2 = mysqli_query($conn, $findpea1);
+         //       $findpea3 = mysqli_num_rows($findpea2);
+         //       $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE '%$sapreg%' AND dept_name LIKE '%$peaname%' limit 1";
+         //       $lastpea2 = mysqli_query($conn, $lastpea1);
+         //       $lastpea3 = mysqli_fetch_array($lastpea2);
+         //       $pn = $lastpea3['dept_name'];
+         //       $sc = $lastpea3['sap_code'];
 
-               $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
-            }
-            else{
-               return;
-            }
-         }
+         //       $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
+         //    }
+         //    else{
+         //       return;
+         //    }
+         // }
          else{
             $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '".$message."'";
             $query2 = mysqli_query($conn, $select_id);
