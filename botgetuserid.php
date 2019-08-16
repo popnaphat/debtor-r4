@@ -240,7 +240,7 @@
                $lastpea3 = mysqli_fetch_array($lastpea2);
                $pn = $lastpea3['dept_name'];
                $sc = $lastpea3['sap_code'];
-               if($findpea3 = 0){
+               if($findpea3 == 0){
                   $txtans = "ท่านไม่มีสิทธิ์เข้าถึงข้อมูลการไฟฟ้านี้";
                }
                else{
