@@ -79,6 +79,9 @@
          else if($count_existing > 0 AND $s1 == "" AND $s4 <> "" AND $message == $s5) {
             $txtans = "กรุณายืนยันการลงทะเบียนทาง $s4";
          }
+         else if($nums4 > 0 AND $message == "help"){
+            $txtans = "ฟังก์ชันที่มีได้ในบอท ณ ปัจจุบัน\n1.พิมพ์ dt ตามด้วย ชื่อกฟฟ เช่น dtตรัง เพื่อดูข้อมูลลูกหนี้\n2.พิมพ์ myalert เพื่อดูข้อมูลการแจ้งเตือนที่จะได้รับ";
+         }
          else if($nums4 > 0 AND $message == "myalert"){
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
