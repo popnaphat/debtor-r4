@@ -240,8 +240,11 @@
                $lastpea3 = mysqli_fetch_array($lastpea2);
                $pn = $lastpea3['dept_name'];
                $sc = $lastpea3['sap_code'];
-               
+
                $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
+            }
+            else{
+               return;
             }
          }
          else{
