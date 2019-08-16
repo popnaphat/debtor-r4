@@ -231,7 +231,7 @@
             $sapcode = $result['sap_code'];
                $sapnum = substr($sapcode,1);
                $sapreg = substr($sapcode,0,1);
-            if($sapnum == '00000'){
+            if($sapnum == '00000' AND $sapreg <> 'Z'){
                $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE '%$sapreg%' AND dept_name LIKE '%$peaname%'";
                $findpea2 = mysqli_query($conn, $findpea1);
                $findpea3 = mysqli_num_rows($findpea2);
@@ -240,12 +240,24 @@
                $lastpea3 = mysqli_fetch_array($lastpea2);
                $pn = $lastpea3['dept_name'];
                $sc = $lastpea3['sap_code'];
-
+               if($findpea3 = 0){
+                  $txtans = "ท่านไม่มีสิทธิ์เข้าถึงข้อมูลการไฟฟ้านี้";
+               }
+               else{
+               $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
+               }
+            }
+            else if($sapcode == 'Z00000'){
+               $findpea1 = "SELECT * FROM debtor WHERE dept_name LIKE '%$peaname%'";
+               $findpea2 = mysqli_query($conn, $findpea1);
+               $findpea3 = mysqli_num_rows($findpea2);
+               $lastpea1 = "SELECT * FROM debtor WHERE dept_name LIKE '%$peaname%' limit 1";
+               $lastpea2 = mysqli_query($conn, $lastpea1);
+               $lastpea3 = mysqli_fetch_array($lastpea2);
+               $pn = $lastpea3['dept_name'];
+               $sc = $lastpea3['sap_code'];
                $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
             }
-            // else{
-            //    return;
-            // }
          }
          else{
             $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '".$message."'";
