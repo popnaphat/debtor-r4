@@ -232,10 +232,10 @@
                $sapnum = substr($sapcode,1);
                $sapreg = substr($sapcode,0,1);
             if($sapnum == '00000' AND $sapreg <> 'Z'){
-               $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE '%$sapreg%' AND dept_name LIKE '%$peaname%'";
+               $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%')";
                $findpea2 = mysqli_query($conn, $findpea1);
                $findpea3 = mysqli_num_rows($findpea2);
-               $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE '%$sapreg%' AND dept_name LIKE '%$peaname%' limit 1";
+               $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
                $lastpea2 = mysqli_query($conn, $lastpea1);
                $lastpea3 = mysqli_fetch_array($lastpea2);
                $pn = $lastpea3['dept_name'];
@@ -248,10 +248,10 @@
                }
             }
             else if($sapcode == 'Z00000'){
-               $findpea1 = "SELECT * FROM debtor WHERE dept_name LIKE '%$peaname%'";
+               $findpea1 = "SELECT * FROM debtor WHERE dept_name LIKE concat('%','$peaname','%')";
                $findpea2 = mysqli_query($conn, $findpea1);
                $findpea3 = mysqli_num_rows($findpea2);
-               $lastpea1 = "SELECT * FROM debtor WHERE dept_name LIKE '%$peaname%' limit 1";
+               $lastpea1 = "SELECT * FROM debtor WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
                $lastpea2 = mysqli_query($conn, $lastpea1);
                $lastpea3 = mysqli_fetch_array($lastpea2);
                $pn = $lastpea3['dept_name'];
