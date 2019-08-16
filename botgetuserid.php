@@ -232,14 +232,14 @@
                $sapnum = substr($sapcode,1);
                $sapreg = substr($sapcode,0,1);
             if($sapnum == '00000' AND $sapreg <> 'Z'){
-               $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%')";
-               $findpea2 = mysqli_query($conn, $findpea1);
-               $findpea3 = mysqli_num_rows($findpea2);
                $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
                $lastpea2 = mysqli_query($conn, $lastpea1);
                $lastpea3 = mysqli_fetch_array($lastpea2);
                $pn = $lastpea3['dept_name'];
                $sc = $lastpea3['sap_code'];
+               $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND sap_code = '$sc'";
+               $findpea2 = mysqli_query($conn, $findpea1);
+               $findpea3 = mysqli_num_rows($findpea2);
                if($findpea3 == 0){
                   $txtans = "ท่านไม่มีสิทธิ์เข้าถึงข้อมูลการไฟฟ้านี้";
                }
