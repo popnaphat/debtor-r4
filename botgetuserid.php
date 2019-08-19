@@ -79,13 +79,13 @@
          else if($count_existing > 0 AND $s1 == "" AND $s4 <> "" AND $message == $s5) {
             $txtans = "กรุณายืนยันการลงทะเบียนทาง $s4";
          }
-         else if($nums4 > 0 AND $message == "help"){
+         else if($nums4 > 0 AND strtolower($message) == "help"){
             $txtans = "ฟังก์ชันที่มใช้ได้ในบอท ณ ปัจจุบัน มีดังนี้\n1.พิมพ์ dt ตามด้วย ชื่อกฟฟ เช่น dtตรัง เพื่อดูข้อมูลลูกหนี้\n2.พิมพ์ myalert เพื่อดูข้อมูลการแจ้งเตือนที่จะได้รับ";
          }
-         else if($message == "register"){
+         else if(strtolower($message) == "register"){
             $txtans = "การลงทะเบียนบอททำได้ 2 วิธี\nวิธีที่ 1.พิมพ์ pea ตามด้วยรหัสพนักงาน เช่น pea505093\nวิธีที่ 2.พิมพ์รหัสพนักงานแล้วทำตามคำแนะนำของบอท";
          }
-         else if($nums4 > 0 AND $message == "myalert"){
+         else if($nums4 > 0 AND strtolower($message) == "myalert"){
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
             WHERE e.empID = '$r0' GROUP BY e.empID";
@@ -221,7 +221,7 @@
             }
          }
          //////
-         else if($nums4 > 0 AND substr($message,0,2) == "dt" OR substr($message,0,2) == "Dt" OR substr($message,0,2) == "DT" OR substr($message,0,2) == "dT"){
+         else if($nums4 > 0 AND strtolower(substr($message,0,2)) == "dt"){
             $peaname = substr($message,2);
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
