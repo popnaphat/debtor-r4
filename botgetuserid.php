@@ -82,6 +82,11 @@
          else if($nums4 > 0 AND $message == "help"){
             $txtans = "ฟังก์ชันที่มีได้ในบอท ณ ปัจจุบัน\n1.พิมพ์ dt ตามด้วย ชื่อกฟฟ เช่น dtตรัง เพื่อดูข้อมูลลูกหนี้\n2.พิมพ์ myalert เพื่อดูข้อมูลการแจ้งเตือนที่จะได้รับ";
          }
+         else if($message == "register"){
+            $txtans = "การลงทะเบียนบอทได้ 2 วิธี 
+            วิธีที่ 1.พิมพ์ pea ตามด้วยรหัสพนักงาน
+            เช่น pea505093\n2.พิมพ์รหัสพนักงานแล้วทำตามคำแนะนำของบอท";
+         }
          else if($nums4 > 0 AND $message == "myalert"){
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
