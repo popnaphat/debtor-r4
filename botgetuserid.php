@@ -155,7 +155,6 @@
                $cp = mysqli_query($conn,$selectcp);
                $countpea = mysqli_num_rows($cp); 
                
-               
                if($countdeb == 0){
                   $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
                   $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
@@ -251,12 +250,12 @@
                }
             }
             else if($sapcode == 'Z00000'){
-               $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
+               $lastpea1 = "SELECT * FROM debtor WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
                $lastpea2 = mysqli_query($conn, $lastpea1);
                $lastpea3 = mysqli_fetch_array($lastpea2);
                $pn = $lastpea3['dept_name'];
                $sc = $lastpea3['sap_code'];
-               $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND sap_code = '$sc'";
+               $findpea1 = "SELECT * FROM debtor WHERE sap_code = '$sc'";
                $findpea2 = mysqli_query($conn, $findpea1);
                $findpea3 = mysqli_num_rows($findpea2);
                $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
