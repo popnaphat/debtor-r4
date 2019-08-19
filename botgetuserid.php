@@ -218,7 +218,7 @@
             }
          }
          //////
-         else if($nums4 > 0 AND substr($message,0,2) == "dt"){
+         else if($nums4 > 0 AND substr($message,0,2) == "dt" OR substr($message,0,2) == "Dt" OR substr($message,0,2) == "DT" OR substr($message,0,2) == "dT"){
             $peaname = substr($message,2);
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
