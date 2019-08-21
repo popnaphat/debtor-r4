@@ -39,6 +39,7 @@
 			$dateupload = "SELECT bill_month,timeupload FROM debtor ORDER BY bill_month DESC LIMIT 1";
 			$querydu = mysqli_query($conn,$dateupload);
 			$fetchdu = mysqli_fetch_array($querydu);
+			$mmm = $fetchdu['bill_month'];
 			/*$NUMBER = $_GET['NUMBER'];
 			$addpos = strpos($NUMBER,"@");
 			$lengh = strlen($NUMBER);
@@ -56,7 +57,7 @@
 			</div>
 			<div data-role="content">
 			<?php   กรกฎาคม 2562
-				echo "รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน รวมค่าไฟฟ้าเดือน ".$fetchdu['bill_month']." แยกตามเขตการไฟฟ้า ข้อมูล ณ วันที่ " .$fetchdu['timeupload'];	
+				echo "รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน รวมค่าไฟฟ้าเดือน $mmm แยกตามเขตการไฟฟ้า ข้อมูล ณ วันที่ " .$fetchdu['timeupload'];	
 			?>
 			</div>
 			<div data-role="content">
