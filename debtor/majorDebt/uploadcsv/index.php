@@ -21,11 +21,15 @@ function uploadCSVFile($conn, $file){
     if(!$uploaded_result) {
         die(error_get_last());
     }*/
-    
+    $bm = "SELECT bill_month FROM debtor ORDER BY bill_month DESC LIMIT 1";
+			$querybm = mysqli_query($conn,$bm);
+			$fetchbm = mysqli_fetch_array($querybm);
+			$mmm = $fetchbm['bill_month'];
     $current_timestamp = DateThai(date("Y-m-d"));
     //$insert_log_file = "INSERT INTO tbl_log_csv_debt1(file_path, file_upload_timestamp) VALUES('$target_path', '$current_timestamp')";
-    $insert_log_file = "INSERT INTO tbl_log_csv_debt1(file_upload_timestamp) VALUES('$current_timestamp')";
-    mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$sql]");    
+    $insert_log_file = "INSERT INTO tbl_log_csv_debt1(file_upload_timestamp,bill_month) VALUES('$current_timestamp','$mmm')";
+    mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$insert_log_file]");
+        
 }
 
 if (isset($_POST["import"])) {
@@ -33,7 +37,7 @@ if (isset($_POST["import"])) {
     $fileName = $_FILES["file"]["tmp_name"];
     if ($_FILES["file"]["size"] > 0) {
         $file = fopen($fileName, "r");
-        uploadCSVFile($conn,$filenn);
+        
         while (($column = fgetcsv($file, 10000, "#","#")) !== FALSE) {
             $timeupload = DateThai(date("Y-m-d"));
             $sqlInsert = "INSERT into debtor(sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff,timeupload)
@@ -48,6 +52,7 @@ if (isset($_POST["import"])) {
                 $message = "Problem in Importing CSV Data";
             }
         }
+        uploadCSVFile($conn,$filenn);
     }
 }
 if (isset($_POST["clear"])) {
