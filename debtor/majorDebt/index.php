@@ -40,6 +40,7 @@
 			$querydu = mysqli_query($conn,$dateupload);
 			$fetchdu = mysqli_fetch_array($querydu);
 			$mmm = $fetchdu['bill_month'];
+			$ccc = $fetchdu['file_upload_timestamp'];
 			/*$NUMBER = $_GET['NUMBER'];
 			$addpos = strpos($NUMBER,"@");
 			$lengh = strlen($NUMBER);
@@ -57,7 +58,7 @@
 			</div>
 			<div data-role="content">
 			<?php   
-				echo "รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน รวมค่าไฟฟ้าเดือน $mmm แยกตามเขตการไฟฟ้า ข้อมูล ณ วันที่ " .$fetchdu['file_upload_timestamp'];	
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน รวมค่าไฟฟ้าเดือน $mmm แยกตามเขตการไฟฟ้า ข้อมูล ณ วันที่ $ccc</b><br/>";	
 			?>
 			</div>
 			<div data-role="content">

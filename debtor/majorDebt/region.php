@@ -12,6 +12,11 @@
 	<?php
 		require('conn.php');
 		$NUMBER = $_GET['REQ'];
+		$dateupload = "SELECT bill_month,file_upload_timestamp FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
+			$querydu = mysqli_query($conn,$dateupload);
+			$fetchdu = mysqli_fetch_array($querydu);
+			$mmm = $fetchdu['bill_month'];
+			$ccc = $fetchdu['file_upload_timestamp'];
 		//$NUMBER2 = $_GET['REQ2'];
 		$sql = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor.sap_code";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
@@ -40,7 +45,7 @@
 						$reg = "สำนักงานใหญ่";
 					}
 				//$fetch_number_complaint = "SELECT * FROM TBL_COMPLAINT";
-				echo "<b>จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันแยกตามสังกัดของ '".$reg."'</b><br/>";
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันรวมค่าไฟฟ้าเดือน '".$mmm."' แยกตามสังกัดของ '".$reg."' ข้อมูล ณ วันที่ '".$ccc."'</b><br/>";
 			?>
 			</div>
 			<div data-role="content">	

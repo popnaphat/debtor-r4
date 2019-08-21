@@ -13,7 +13,11 @@
 		require('conn.php');
 		$NUMBER = $_GET['REQ'];
 		//$NUMBER2 = $_GET['REQ2'];
-
+		$dateupload = "SELECT bill_month,file_upload_timestamp FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
+		$querydu = mysqli_query($conn,$dateupload);
+		$fetchdu = mysqli_fetch_array($querydu);
+		$mmm = $fetchdu['bill_month'];
+		$ccc = $fetchdu['file_upload_timestamp'];
 		$sql = "SELECT * from debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$NUMBER' GROUP BY debtor.cus_number";
 		//$sql_type = "SELECT * FROM tbl_complaint WHERE office_name LIKE '%".$NUMBER."%' AND number_of_day>=".$NUMBER2." AND complaint_status <> 'ปิด' GROUP BY complaint_type";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
@@ -29,7 +33,7 @@
 			</div>
 			<div data-role="content">
 			<?php 
-				echo "รายละเอียดลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันของ ".$ofname1." จำนวน ".$mode1." ราย";	
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันรวมค่าไฟฟ้าเดือน '".$mmm."' ของ ".$ofname1." จำนวน ".$mode1." ราย ข้อมูล ณ วันที่ '".$ccc."'</b><br/>";	
 				mysqli_data_seek($query,0);
 			?>
 			</div>
