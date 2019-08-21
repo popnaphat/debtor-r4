@@ -11,7 +11,7 @@
         $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
         $strMonthThai=$strMonthCut[$strMonth];
         return "$strDay $strMonthThai $strYear";
-    }
+	}
 ?>
 <!DOCTYPE html> 
 <html lang="th">
@@ -36,7 +36,7 @@
 	<body> 
 		<?php
 			require('conn.php');
-			$dateupload = "SELECT timeupload FROM debtor LIMIT 1";
+			$dateupload = "SELECT bill_month,timeupload FROM debtor ORDER BY bill_month DESC LIMIT 1";
 			$querydu = mysqli_query($conn,$dateupload);
 			$fetchdu = mysqli_fetch_array($querydu);
 			/*$NUMBER = $_GET['NUMBER'];
@@ -55,8 +55,8 @@
 				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</h1>
 			</div>
 			<div data-role="content">
-			<?php 
-				echo "จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน แยกตามเขตการไฟฟ้า ประจำวันที่ " .$fetchdu['timeupload'];	
+			<?php   กรกฎาคม 2562
+				echo "รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน รวมค่าไฟฟ้าเดือน ".$fetchdu['bill_month']." แยกตามเขตการไฟฟ้า ข้อมูล ณ วันที่ " .$fetchdu['timeupload'];	
 			?>
 			</div>
 			<div data-role="content">
