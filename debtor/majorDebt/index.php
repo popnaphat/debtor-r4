@@ -36,6 +36,9 @@
 	<body> 
 		<?php
 			require('conn.php');
+			$dateupload = "SELECT timeupload FROM debtor LIMIT 1";
+			$querydu = mysqli_query($conn,$dateupload);
+			$fetchdu = mysqli_fetch_array($querydu);
 			/*$NUMBER = $_GET['NUMBER'];
 			$addpos = strpos($NUMBER,"@");
 			$lengh = strlen($NUMBER);
@@ -53,7 +56,7 @@
 			</div>
 			<div data-role="content">
 			<?php 
-				echo "จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน แยกตามเขตการไฟฟ้า ประจำวันที่ " .DateThai(date("Y-m-d"));	
+				echo "จำนวนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน แยกตามเขตการไฟฟ้า ประจำวันที่ " .$fetchdu['timeupload'];	
 			?>
 			</div>
 			<div data-role="content">
