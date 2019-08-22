@@ -36,10 +36,12 @@
 	<body> 
 		<?php
 			require('conn.php');
-			$dateupload = "SELECT bill_month,file_upload_timestamp FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
+			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
 			$querydu = mysqli_query($conn,$dateupload);
 			$fetchdu = mysqli_fetch_array($querydu);
 			$mmm = $fetchdu['bill_month'];
+			$crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
+			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
 			$ccc = $fetchdu['file_upload_timestamp'];
 			/*$NUMBER = $_GET['NUMBER'];
 			$addpos = strpos($NUMBER,"@");
