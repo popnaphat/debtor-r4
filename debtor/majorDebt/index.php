@@ -42,7 +42,7 @@
 			$mmm = $fetchdu['bill_month'];
 			$crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
-			$ccc = $fetchdu['file_upload_timestamp'];
+			$ccc = $crecord1['file_upload_timestamp'];
 			/*$NUMBER = $_GET['NUMBER'];
 			$addpos = strpos($NUMBER,"@");
 			$lengh = strlen($NUMBER);

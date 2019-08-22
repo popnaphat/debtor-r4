@@ -18,7 +18,7 @@
 			$mmm = $fetchdu['bill_month'];
 			$crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
-			$ccc = $fetchdu['file_upload_timestamp'];
+			$ccc = $crecord1['file_upload_timestamp'];
 		//$NUMBER2 = $_GET['REQ2'];
 		$sql = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor.sap_code";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
