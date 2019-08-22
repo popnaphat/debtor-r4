@@ -21,7 +21,7 @@ function uploadCSVFile($conn, $file){
     if(!$uploaded_result) {
         die(error_get_last());
     }*/
-    $bm = "SELECT bill_month FROM debtor ORDER BY bill_month DESC LIMIT 1";
+    $bm = "SELECT bill_month FROM debtor where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
 			$querybm = mysqli_query($conn,$bm);
 			$fetchbm = mysqli_fetch_array($querybm);
 			$mmm = $fetchbm['bill_month'];
