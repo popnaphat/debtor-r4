@@ -55,31 +55,31 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-body">
-              <table id="employee-grid" class="table table-bordered table-hover">
+              <table id="example1" class="table table-bordered table-hover">
                 <thead>
-                  <!--th class="hidden">รหัสสังกัด</th--> 
+                  <th class="hidden">รหัสสังกัด</th> 
                   <th>รหัสพนักงาน</th>
                   <th>ชื่อ - สกุล</th>
                   <th>ตำแหน่ง</th>
                   <th>สังกัด</th>
                 </thead>
-                <!--tbody>
-                  <!--?php
-                  //  $sql = "SELECT * FROM peaemp";
-                  //  $query = $conn->query($sql);
-                  // while($row = $query->fetch_assoc()){
+                <tbody>
+                  <?php
+                   $sql = "SELECT * FROM peaemp";
+                   $query = $conn->query($sql);
+                  while($row = $query->fetch_assoc()){
                       ?>
                         <tr>
-                        <td class='hidden'><!--?php echo $row['dept_change_code']; ?></td>
-                          <td><!--?php echo $row['empID']; ?></td>
-                          <td><!--?php echo $row['pre_name'].''.$row['name'].' '.$row['surname']; ?></td>
-                          <td><!--?php echo $row['position']; ?></td>
-                          <td><!--?php echo $row['dept_short']; ?></td>
+                        <td class='hidden'><?php echo $row['dept_change_code']; ?></td>
+                          <td><?php echo $row['empID']; ?></td>
+                          <td><?php echo $row['pre_name'].''.$row['name'].' '.$row['surname']; ?></td>
+                          <td><?php echo $row['position']; ?></td>
+                          <td><?php echo $row['dept_short']; ?></td>
                         </tr>
-                      <!--?php
+                      <?php
                     }
                   ?>
-                </tbody-->
+                </tbody>
               </table>
             </div>
           </div>
