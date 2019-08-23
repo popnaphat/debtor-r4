@@ -41,7 +41,7 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
 	$nestedData[] = $row["empID"];
-	$nestedData[] = $row['pre_name'].''.$row['name'].' '.$row['surname'];
+	$nestedData[] = $row['surname'];
 	$nestedData[] = $row["position"];
 	$nestedData[] = $row["dept_short"];
 	
