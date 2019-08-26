@@ -29,14 +29,14 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="employee.php"><i class="fa fa-id-badge"></i><span>พนักงานสายงาน ภาค 4</span></a></li>
-            <li><a href="overtime.php"><i class="fa fa-user-o"></i><span>พนักงานที่ยังไม่ปรับระดับ</span></a></li>
-            <li><a href="schedule.php"><i class="fa fa-building-o"></i><span>การไฟฟ้าทั้งหมด</span></a></li>
+            <li><a href="overtime.php"><i class="fa fa-user-o"></i><span>พนักงานที่ยังไม่ปรับระดับ</span></a></li>            
             <!--li><a href="cashadvance.php"><i class="fa fa-circle-o"></i> Cash Advance</a></li>
             <li><a href="schedule.php"><i class="fa fa-circle-o"></i> Schedules</a></li-->
           </ul>
         </li>
         <li><a href="cashadvance.php"><i class="fa fa-paper-plane-o"></i> <span>Detail & Go</span></a></li>
         <li><a href="deduction.php"><i class="fa fa-calendar-check-o"></i> <span>วันแจ้งเตือน</span></a></li>
+        <li><a href="schedule.php"><i class="fa fa-building-o"></i><span>การไฟฟ้าทั้งหมด</span></a></li>
         <li><a href="position.php"><i class="fa fa-suitcase"></i> <span>Activity log</span></a></li>
         <!--li class="header">PRINTABLES</li>
         <li><a href="payroll.php"><i class="fa fa-files-o"></i> <span>Payroll</span></a></li>
