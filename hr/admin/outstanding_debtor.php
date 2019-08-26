@@ -55,7 +55,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-body">
-              <table id="employee-grid" class="table table-bordered table-hover">
+              <table id="outdebtor-grid" class="table table-bordered table-hover">
                 <thead>
                   <!--th class="hidden">รหัสสังกัด</th--> 
                   <th>รหัสพนักงาน</th>
