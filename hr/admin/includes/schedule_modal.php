@@ -44,27 +44,23 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b>Update Schedule</b></h4>
+            	<h4 class="modal-title"><b>แก้ไขข้อมูล</b></h4>
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="schedule_edit.php">
             		<input type="hidden" id="timeid" name="id">
                 <div class="form-group">
-                    <label for="edit_time_in" class="col-sm-3 control-label">Time In</label>
+                    <label for="edit_deptname" class="col-sm-3 control-label">ฝ่าย/กอง/กฟฟ</label>
 
                     <div class="col-sm-9">
-                      <div class="bootstrap-timepicker">
-                        <input type="text" class="form-control timepicker" id="edit_time_in" name="time_in">
-                      </div>
+                      <input type="text" class="form-control" id="edit_deptname" name="deptname">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_time_out" class="col-sm-3 control-label">Time out</label>
+                    <label for="edit_deptclass" class="col-sm-3 control-label">ชั้น</label>
 
                     <div class="col-sm-9">
-                      <div class="bootstrap-timepicker">
-                        <input type="text" class="form-control timepicker" id="edit_time_out" name="time_out">
-                      </div>
+                      <input type="text" class="form-control" id="edit_deptclass" name="deptclass">
                     </div>
                 </div>
           	</div>

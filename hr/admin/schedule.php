@@ -11,12 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Schedules
+        รายชื่อการไฟฟ้า
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Employees</li>
-        <li class="active">Schedules</li>
+        <li class="active">รายชื่อการไฟฟ้า</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -53,6 +53,7 @@
               <table id="example1" class="table table-bordered table-hover">
                 <thead>
                   <th>รหัส15หลัก</th>
+                  <th>รหัส SAP</th>
                   <th>ฝ่าย/กอง/กฟฟ</th>
                   <th>แผนก</th>
                   <th>ชั้น</th>
@@ -68,14 +69,14 @@
                       echo "
                         <tr>
                           <td>".$row['unit_code']."</td>
+                          <td>".$row['sap_code']."</td>
                           <td>".$row['dept_name']."</td>
                           <td>".$row['unit_name']."</td>
                           <td>".$row['dept_class']."</td>
                           <td>".$row['short_name']."</td>
                           <td>".$row['region']."</td>
                           <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['unit_code']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['unit_code']."'><i class='fa fa-trash'></i> Delete</button>
+                          <button type='button' class='btn btn-success btn-sm btn-flat edit' data-id='".$row['unit_code']."' onclick='javascript:getRow(".$row['unit_code'].");'><i class='fa fa-edit'></i> Edit</button>
                           </td>
                         </tr>
                       ";
@@ -95,21 +96,21 @@
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
-$(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+// $(function(){
+//   $('.edit').click(function(e){
+//     e.preventDefault();
+//     $('#edit').modal('show');
+//     var id = $(this).data('id');
+//     getRow(id);
+//   });
 
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-});
+//   $('.delete').click(function(e){
+//     e.preventDefault();
+//     $('#delete').modal('show');
+//     var id = $(this).data('id');
+//     getRow(id);
+//   });
+// });
 
 function getRow(id){
   $.ajax({
@@ -119,13 +120,21 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('#timeid').val(response.unit_code);
-      $('#edit_time_in').val(response.dept_name);
+      $('#sapcode').val(response.sap_code);
+      $('#edit_deptname').val(response.dept_name);
       $('#edit_time_out').val(response.unit_name);
-      $('#edit_dept_class').val(response.dept_class);
+      $('#edit_deptclass').val(response.dept_class);
       $('#edit_short_name').val(response.short_name);
       $('#edit_region').val(response.region);
       $('#del_timeid').val(response.unit_code);
       $('#del_schedule').html(response.region+' - '+response.short_name);
+      $('#edit').modal('show');
+    },
+    error: function(error){
+
+    }, 
+    complete: function(data){
+
     }
   });
 }
