@@ -6,44 +6,51 @@ $requestData= $_REQUEST;
 //ฟิลด์ที่จะเอามาแสดงและค้นหา
 $columns = array( 
 // datatable column index  => database column name
-	0 =>'empID', 
-	1 => 'surname',
-	2 => 'position',
-	3 => 'dept_short'
+	0 =>'sap_code', 
+	1 => 'dept_name',
+	2 => 'cus_number',
+	3 => 'cus_name',
+	4 => 'bill_month',
+	5 => 'outstanding_debt',
+	6 => 'bail',
+	7 => 'diff'
 );
 
 // getting total number records without any search
-$sql = "SELECT empID, surname, position, dept_short ";
-$sql.=" FROM peaemp";
-$query=mysqli_query($conn, $sql) or die("employee-grid-data.php: get employees");
+$sql = "SELECT * ";
+$sql.=" FROM debtor";
+$query=mysqli_query($conn, $sql) or die("outstanding_debtor_grid_data.php: get debtor");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 
-$sql = "SELECT empID, pre_name, name, surname, position, dept_short ";
-$sql.=" FROM peaemp WHERE 1=1";
+$sql = "SELECT sap_code,dept_name,cus_number,cus_name,bill_month";
+$sql.=" FROM debtor WHERE 1=1";
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
-	$sql.=" AND ( surname LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR pre_name LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR name LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR empID LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR dept_short LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR position LIKE '".$requestData['search']['value']."%' )";
+	$sql.=" AND ( sap_code LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR dept_name LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR cus_number LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR cus_name LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR bill_month LIKE '".$requestData['search']['value']."%' ";
 }
-$query=mysqli_query($conn, $sql) or die("employee-grid-data.php: get employees");
+$query=mysqli_query($conn, $sql) or die("outstanding_debtor_grid_data.php: get debtor");
 $totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result. 
 $sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."  LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 /* $requestData['order'][0]['column'] contains colmun index, $requestData['order'][0]['dir'] contains order such as asc/desc  */	
-$query=mysqli_query($conn, $sql) or die("employee-grid-data.php: get employees");
+$query=mysqli_query($conn, $sql) or die("outstanding_debtor_grid_data.php: get debtor");
 
 $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
-	$nestedData[] = $row["empID"];
-	$nestedData[] = $row["pre_name"].''.$row["name"].' '.$row["surname"];
-	$nestedData[] = $row["position"];
-	$nestedData[] = $row["dept_short"];
+	$nestedData[] = $row["sap_code"];
+	$nestedData[] = $row["dept_name"];
+	$nestedData[] = $row["cus_number"];
+	$nestedData[] = $row["cus_name"];
+	$nestedData[] = $row["bill_month"];
+	$nestedData[] = $row["outstanding_debt"];
+	$nestedData[] = $row["bail"];
+	$nestedData[] = $row["diff"];
 	
 	$data[] = $nestedData;
 }

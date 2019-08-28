@@ -97,7 +97,7 @@
                 event.preventDefault();
                 var formData = new FormData($(this)[0]);
                 $.ajax({
-                    url: './api/upload-data2.php',
+                    url: './api/upload-data3.php',
                     method: 'POST',
                     data: formData,
                     async: true,

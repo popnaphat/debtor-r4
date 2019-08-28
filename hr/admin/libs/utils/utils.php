@@ -20,6 +20,15 @@
         }
     }
 
+    function DateThai($strDate){
+        $strYear = date("Y",strtotime($strDate))+543;
+        $strMonth= date("n",strtotime($strDate));
+        $strDay= date("j",strtotime($strDate));
+        $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+        $strMonthThai=$strMonthCut[$strMonth];
+        return "$strDay $strMonthThai $strYear";
+    }
+
     function convertToStandardDate($raw_date){
         // $raw_date = d/m/Y H:m:s
         if(!isset($raw_date) || empty($raw_date)){
@@ -109,6 +118,16 @@
         mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$sql]");    
         return $target_path;
     }
+    function uploadXLSXFile4($conn, $file){
+        $filename = $file['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $target_path = "../uploads-files4/".basename(date('d-m-').(date("Y")+543)).".".$ext;
+        $uploaded_result = @move_uploaded_file($file['tmp_name'], $target_path);
+        if(!$uploaded_result) {
+            die(error_get_last());
+        }   
+        return $target_path;
+    }
 
     function clearEmplistData($conn){
         $sql = "DELETE FROM emplist";
@@ -120,6 +139,10 @@
     }
     function clearPeaofficeData($conn){
         $sql = "DELETE FROM pea_office";
+        mysqli_query($conn, $sql);
+    }
+    function clearDebtorData($conn){
+        $sql = "DELETE FROM debtor";
         mysqli_query($conn, $sql);
     }
 
@@ -205,25 +228,28 @@
             $stmt->execute();
         }
     }
-    /*function insertComplaintData($conn, $namedDataArray){
-        $i = 0;
-        foreach ($namedDataArray as $result) {
-            $i++;
-            $strSQL = "";
-            $strSQL .= "INSERT INTO emplist "; //tabel ในดาต้าเบส  
-            $strSQL .= "(id, empID, emp_prename, emp_name, emp_surname, emp_position, appointdate, DEPT_SHORT, DEPT_CHANGE_CODE,	emp_lv, Posidate, emp_period, edu, AGE, retireyear)"; //คอลัมในดาต้าเบส เรียงตามดาต้าเบส
-            $strSQL .= "VALUES ";
-            $strSQL .= "('".$result['รหัส']."','".$result['PRE_NAME']."'
-            ,'".$result['ชื่อ']."','".$result['นามสกุล']."'
-            ,'".$result['ตำแหน่ง']."','".$result['บรรจุ']."'
-            ,'".$result['DEPT_SHORT']."','".$result['DEPT_CHANGE_CODE']."'
-            ,'".$result['ระดับ']."','".$result['Posidate']."'
-            ,'".$result['ระยะเวลา']."','".$result['วุฒิการศึกษา']."'
-            ,'".$result['AGE']."','".$result['เกษียณ']."' )"; //คอลัมในดาต้าเบส เรียงตามดาต้าเบส
-     
-            mysqli_query($conn, $strSQL);
+    function insertDebtorData($conn, $namedDataArray){
+        foreach($namedDataArray as $row){
+            $sap_code = $row['sap_code'];
+            $dept_name = $row['dept_name'];
+            $cus_number = $row['cus_number'];
+            $cus_name = $row['cus_name'];
+            $bill_month = $row['bill_month'];
+            $outstanding_debt = $row['outstanding_debt'];
+            $bail = $row['bail'];
+            $diff = $row['diff'];
+            $timeupload = DateThai(date("Y-m-d"));
+
+            $sql = "INSERT INTO debtor(sap_code, dept_name, cus_number, cus_name, bill_month, outstanding_debt, bail,diff,timeupload) ".
+                    "VALUES(?,?,?,?,?,?,?,?,?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssssssss", 
+                    $sap_code,$dept_name,$cus_number,
+                    $cus_name,$bill_month,
+                    $outstanding_debt,$bail,$diff,$timeupload);
+            $stmt->execute();
         }
-    }*/
+    }
 
     function countEmplistData($conn){
         $sql = "SELECT COUNT(*) AS count_emp FROM emplist";
@@ -236,4 +262,10 @@
         $results = mysqli_query($conn, $sql) or trigger_error($conn->error."[$sql]");    
         $row = $results->fetch_assoc();
         return $row['count_emp']; 
+    }
+    function countDebtorData($conn){
+        $sql = "SELECT COUNT(*) AS count_debt FROM debtor";
+        $results = mysqli_query($conn, $sql) or trigger_error($conn->error."[$sql]");    
+        $row = $results->fetch_assoc();
+        return $row['count_debt']; 
     }
