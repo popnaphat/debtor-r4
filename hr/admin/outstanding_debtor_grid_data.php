@@ -24,7 +24,7 @@ $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 
-$sql = "SELECT sap_code,dept_name,cus_number,cus_name,bill_month";
+$sql = "SELECT sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff";
 $sql.=" FROM debtor WHERE 1=1";
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
 	$sql.=" AND ( sap_code LIKE '".$requestData['search']['value']."%' ";
@@ -32,6 +32,9 @@ if( !empty($requestData['search']['value']) ) {   // if there is a search parame
 	$sql.=" OR cus_number LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR cus_name LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR bill_month LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR outstanding_debt LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR bail LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR diff LIKE '".$requestData['search']['value']."%' ";
 }
 $query=mysqli_query($conn, $sql) or die("outstanding_debtor_grid_data.php: get debtor");
 $totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result. 
