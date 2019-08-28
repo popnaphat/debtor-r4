@@ -57,29 +57,16 @@
             <div class="box-body">
               <table id="outdebtor-grid" class="table table-bordered table-hover">
                 <thead>
-                  <!--th class="hidden">รหัสสังกัด</th--> 
-                  <th>รหัสพนักงาน</th>
-                  <th>ชื่อ - สกุล</th>
-                  <th>ตำแหน่ง</th>
-                  <th>สังกัด</th>
+                  <th>รหัส SAP</th>
+                  <th>ชื่อ กฟฟ</th>
+                  <th>CA</th>
+                  <th>ชื่อลูกค้า</th>
+                  <th>บิลเดือน</th>
+                  <th>หนี้คงค้าง</th>
+                  <th>เงินประกัน</th>
+                  <th>ผลต่าง</th>
                 </thead>
-                <!-- <tbody>
-                  <!?php
-                  //  $sql = "SELECT * FROM peaemp";
-                  //  $query = $conn->query($sql);
-                  // while($row = $query->fetch_assoc()){
-                  //     ?>
-                  //       <tr>
-                  //       <td class='hidden'><!?php echo $row['dept_change_code']; ?></td>
-                  //         <td><!?php echo $row['empID']; ?></td>
-                  //         <td><!?php echo $row['pre_name'].''.$row['name'].' '.$row['surname']; ?></td>
-                  //         <td><!?php echo $row['position']; ?></td>
-                  //         <td><!?php echo $row['dept_short']; ?></td>
-                  //       </tr>
-                  //     <!?php
-                  //   }
-                  ?>
-                </tbody> -->
+                
               </table>
             </div>
           </div>
@@ -88,7 +75,6 @@
     </section>   
   </div>  
   <?php include 'includes/footer.php'; ?>
-  <!--?php include 'includes/employee_modal.php'; ?-->
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
