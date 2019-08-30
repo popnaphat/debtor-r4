@@ -42,6 +42,7 @@
 					}
 					else if($NUMBER == "L"){
 						$reg = "กฟต.3 ยะลา";
+						$mmm = "06/2562";
 					}
 					else if($NUMBER == "C"){
 						$reg = "สำนักงานใหญ่";
