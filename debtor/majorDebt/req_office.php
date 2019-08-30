@@ -12,6 +12,7 @@
 	<?php
 		require('conn.php');
 		$NUMBER = $_GET['REQ'];
+		$reg = substr($NUMBER,0,1);
 		//$NUMBER2 = $_GET['REQ2'];
 		$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
 			$querydu = mysqli_query($conn,$dateupload);
@@ -35,6 +36,9 @@
 			</div>
 			<div data-role="content">
 			<?php 
+			if($reg == "L"){
+				$mmm = "06/2562";
+			}
 				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันรวมค่าไฟฟ้าเดือน $mmm ของ $ofname1 จำนวน $mode1 ราย ข้อมูล ณ วันที่ $ccc</b><br/>";	
 				mysqli_data_seek($query,0);
 			?>
