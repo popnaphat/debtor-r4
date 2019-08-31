@@ -333,7 +333,7 @@
                   curl_close($ch);
                   return; 
             }
-            else if(substr($message,0,3) == "pea" AND substr($message,3,6) > 99999 AND substr($message,3,6) < 999999 AND ctype_digit(substr($message,3,6))){
+            else if(strtolower(substr($message,0,3)) == "pea" AND substr($message,3,6) > 99999 AND substr($message,3,6) < 999999 AND ctype_digit(substr($message,3,6))){
                $empid = substr($message,3,6);
                $select_id3 = "SELECT * FROM peamember WHERE memberid = '".$empid."'";
                $query3 = mysqli_query($conn, $select_id3);
