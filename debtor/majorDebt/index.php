@@ -80,7 +80,7 @@
 				<h4>PEA REGION 4</h4>
 			</div>
 		</div>
-		<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-		<script src="liff-starter.js"></script>
+		<!-- <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+		<script src="liff-starter.js"></script> -->
 	</body>
 </html>
