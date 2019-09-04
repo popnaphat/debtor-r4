@@ -22,7 +22,7 @@
 		<link rel="manifest" href="./images/manifest.json">
 		<meta name="theme-color" content="#710E82">
 
-		<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+		
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" />
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" />
 		<script src="jquery-1.6.4.min.js" ></script>
@@ -80,5 +80,7 @@
 				<h4>PEA REGION 4</h4>
 			</div>
 		</div>
+		<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+		<script src="liff-starter.js"></script>
 	</body>
 </html>
