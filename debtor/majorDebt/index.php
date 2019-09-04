@@ -36,10 +36,6 @@
 	<body> 
 		<?php
 			require('conn.php');
-			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
-			$querydu = mysqli_query($conn,$dateupload);
-			$fetchdu = mysqli_fetch_array($querydu);
-			$mmm = $fetchdu['bill_month'];
 			$crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
 			$ccc = $crecord1['file_upload_timestamp'];
@@ -60,7 +56,7 @@
 			</div>
 			<div data-role="content">
 			<?php   
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน รวมค่าไฟฟ้าเดือน $mmm แยกตามเขตการไฟฟ้า ข้อมูล ณ วันที่ $ccc</b><br/>";	
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน แยกตามเขตการไฟฟ้า ข้อมูล ณ วันที่ $ccc</b><br/>";	
 			?>
 			</div>
 			<div data-role="content">
@@ -68,7 +64,11 @@
 					<?php
 						$a = 1;
 						while($result=mysqli_fetch_array($query)){
-							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย</a></li>";
+							$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and region = '$result["region2"]' ORDER BY bill_month DESC LIMIT 1";
+							$querydu = mysqli_query($conn,$dateupload);
+							$fetchdu = mysqli_fetch_array($querydu);
+							$mmm = $fetchdu['bill_month'];
+							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย รวมค่าไฟฟ้าเดือน ".$mmm."</a></li>";
 							$a =$a +1;
 						}
 						$a = 0;
