@@ -3,15 +3,18 @@
     require('../includes/conn.php');
     require('../libs/utils/utils.php');
     function recordto_csvdebt1($conn){
-        $bm = "SELECT bill_month FROM debtor where right(bill_month,4) = YEAR(CURRENT_DATE)+543 ORDER BY bill_month DESC LIMIT 1";
+        $reg = array("J","K","L");
+        foreach($reg as $row){
+        $bm = "SELECT right(bill_month,7) as bm FROM debtor where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and left(sap_code,1) = '$row' ORDER BY bill_month DESC LIMIT 1";
         $querybm = mysqli_query($conn,$bm);
         $fetchbm = mysqli_fetch_array($querybm);
-        $mmm = $fetchbm['bill_month'];
+        $mmm = substr($fetchbm['bill_month'],-7);
         $id = "SELECT * FROM tbl_log_csv_debt1";
         $countid = mysqli_num_rows(mysqli_query($conn,$id)) + 1; 
         $current_timestamp = DateThai(date("Y-m-d"));
-        $insert_log_file = "INSERT INTO tbl_log_csv_debt1(id,file_upload_timestamp,bill_month) VALUES('$countid','$current_timestamp','$mmm')";
+        $insert_log_file = "INSERT INTO tbl_log_csv_debt1(id,file_upload_timestamp,bill_month,region) VALUES('$countid','$current_timestamp','$mmm','$row')";
         mysqli_query($conn, $insert_log_file) or trigger_error($conn->error."[$insert_log_file]");
+        }
     }
 
     $target_path = uploadXLSXFile4($conn, $_FILES['empIssuefile']);
