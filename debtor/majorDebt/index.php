@@ -68,7 +68,7 @@
 							$querydu = mysqli_query($conn,$dateupload);
 							$fetchdu = mysqli_fetch_array($querydu);
 							$mmm = $fetchdu['bill_month'];
-							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย รวมค่าไฟฟ้าเดือน ".$mmm."</a></li>";
+							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย รวมค่าไฟฟ้าเดือน $mmm</a></li>";
 							$a =$a +1;
 						}
 						$a = 0;
