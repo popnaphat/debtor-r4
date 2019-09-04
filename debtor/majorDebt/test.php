@@ -52,9 +52,9 @@ alert('done');
 <form action="save.php" method="get">
 <div class="row">
 <div class="col-md-6" style="margin:5px">
-<input class="form-control" type="hidden" id="userid" name="userid" /> <br />
+<input class="form-control" type="text" id="userid" name="userid" /> <br />
 <label>ชื่อนามสกุล</label>
-<input class="form-control" type="text" id="name" name="name"/><br />
+<input class="form-control" type="text" id="UserInfo" name="UserInfo"/><br />
 <label>สำนัก:</label>
 <input class="form-control" type="text" id="samnak" name="samnak" /><br />
 <! — <button class="btn btn-primary" id="ButtonSendMsg" >ลงทะเบียน</button> →
