@@ -27,11 +27,11 @@
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" />
 		<script src="jquery-1.6.4.min.js" ></script>
 		<script src="jquery.mobile-1.0.min.js" ></script>
-		<script>
+		<!-- <script>
 			$(function(){
 				liff.init();
 			});
-		</script>
+		</script> -->
 	</head> 
 	<body> 
 		<?php
