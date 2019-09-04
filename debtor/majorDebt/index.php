@@ -64,11 +64,12 @@
 					<?php
 						$a = 1;
 						while($result=mysqli_fetch_array($query)){
-							$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and region = ".$result['region2']." ORDER BY bill_month DESC LIMIT 1";
+							$reg = $result['region2'];
+							$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and region = '$reg' ORDER BY bill_month DESC LIMIT 1";
 							$querydu = mysqli_query($conn,$dateupload);
 							$fetchdu = mysqli_fetch_array($querydu);
 							$mmm = $fetchdu['bill_month'];
-							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย รวมค่าไฟฟ้าเดือน $mmm</a></li>";
+							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย รวมค่าไฟฟ้าเดือน ".$mmm."</a></li>";
 							$a =$a +1;
 						}
 						$a = 0;
