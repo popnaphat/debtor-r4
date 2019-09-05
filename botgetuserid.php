@@ -467,7 +467,7 @@ if($event['type'] == 'postback') {
             $send_update = "UPDATE peaemp SET send_status = 'A' WHERE empID = '$postbackid'";   
             mysqli_query($conn, $send_update);
          }
-         else if($postbackstatus == 'debt' AND )         
+        // else if($postbackstatus == 'debt' AND )         
 }
 
 }}
