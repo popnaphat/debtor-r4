@@ -88,6 +88,25 @@
          else if(strtolower($message) == "register"){
             $txtans = "การลงทะเบียนบอททำได้ 2 วิธี\nวิธีที่ 1.พิมพ์ pea ตามด้วยรหัสพนักงาน เช่น pea505093\nวิธีที่ 2.พิมพ์รหัสพนักงานแล้วทำตามคำแนะนำของบอท";
          }
+         else if($nums4 > 0 AND strtolower($message) == "qwerty"){
+            $messages = getBubbleMessages4("87", "4 ก.ย. 62", "การไฟฟ้าส่วนภูมิภาคสาขาย่อยอำเภอแก่งกระจาน", "J01302");
+                  $data = [
+                     'replyToken' => $replyToken,
+                     'messages' => [$messages]
+                  ];
+                  $url = 'https://api.line.me/v2/bot/message/reply';
+                  $post = json_encode($data);
+                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+                  $ch = curl_init($url);
+                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                  $result = curl_exec($ch);
+                  curl_close($ch);
+                  return;
+         }
          else if($nums4 > 0 AND strtolower($message) == "myalert"){
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
@@ -411,6 +430,7 @@
 if($event['type'] == 'postback') {
    $replyToken = $event['replyToken'];
    $fullpostback = $event['postback']['data'];
+   
    $postbackstatus = substr($fullpostback,0,strlen($fullpostback)-6);
    $postbackid = substr($fullpostback,-6);
       $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '$postbackid'";
