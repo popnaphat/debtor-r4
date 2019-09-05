@@ -1,7 +1,6 @@
 <!DOCTYPE html> 
 <html>
 	<head>
-	<?php include("googleAna.php"); ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
 		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</title>
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
@@ -75,4 +74,5 @@
 			</div>
 		</div>
 	</body>
+	<?php include("googleAna.php"); ?>
 </html>

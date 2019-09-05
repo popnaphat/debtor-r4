@@ -16,7 +16,6 @@
 <!DOCTYPE html> 
 <html lang="th">
 	<head>
-		<?php include("googleAna.php"); ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false">
 		<meta charset="utf-8" >
 		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</title>
@@ -85,4 +84,5 @@
 		<!-- <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 		<script src="liff-starter.js"></script> -->
 	</body>
+	<?php include("googleAna.php"); ?>
 </html>
