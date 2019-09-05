@@ -3,6 +3,9 @@
 function getBubbleMessages4($countemp, $today, $dept_name, $dept_code){
   $count = 0;
   $json = '{
+    "type": "flex",
+    "altText": "แจ้งเตือนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน",
+    "contents": {
     "type": "bubble",
     "hero": {
       "type": "image",
@@ -105,7 +108,8 @@ function getBubbleMessages4($countemp, $today, $dept_name, $dept_code){
       "label": "action",
       "data": "debt'.$region.'"
     }
-  }';
+  }
+}';
   $result = json_decode($json);
   return $result;
 }
