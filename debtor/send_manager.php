@@ -38,6 +38,10 @@ date_default_timezone_set("Asia/Bangkok");
   $lastrow = mysqli_fetch_array($query_lastrow);
   $dayissues = substr($lastrow['notify_timestamp'],0,10);
   //$today = DateThai(date("Y-m-d"));
+  $crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
+	$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
+  $ccc = $crecord1['file_upload_timestamp'];
+  
       if($dayissues == date("Y-m-d")){
       echo "this script has been run for today.";
       }
@@ -57,7 +61,7 @@ date_default_timezone_set("Asia/Bangkok");
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
         
-      $messages = getBubbleMessages($log_id, $countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['sap_code']);
+      $messages = getBubbleMessages($log_id, $countemp, $ccc, $manager['dept_name'], $manager['sap_code']);
       /*$messages = [
         "type"=> "text",
         "text"=> "Individual Alert :\n\nรายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรกของ ".$manager['dept_name']." \n\nประจำวันที่ ".$today

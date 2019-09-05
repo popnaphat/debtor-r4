@@ -106,7 +106,7 @@ function getBubbleMessages4($countemp, $today, $dept_name, $dept_code){
     "action": {
       "type": "postback",
       "label": "action",
-      "data": "debt'.$dept_code.'"
+      "data": "10debt'.$dept_code.'"
     }
   }
 }';
