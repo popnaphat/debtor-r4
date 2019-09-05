@@ -1,6 +1,6 @@
 <?php
 
-  function getBubbleMessages($countemp, $today, $dept_name, $dept_code){
+  function getBubbleMessages($id,$countemp, $today, $dept_name, $dept_code){
     $count = 0;
     $json = '{
       "type": "flex",
@@ -102,6 +102,11 @@
               "size": "sm"
             }
           ]
+        },
+        "action": {
+          "type": "postback",
+          "label": "action",
+          "data": "'.$id.'debt'.$dept_code.'"
         }
       }
     }';

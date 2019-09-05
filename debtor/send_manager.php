@@ -47,8 +47,8 @@ date_default_timezone_set("Asia/Bangkok");
       $log_id = $log_id + 1;
       // log push data
 			$timestamp = date('Y-m-d H:i:s');
-      $log_individual_notify = "INSERT INTO tbl_log_notify(id, manager_id, notify_timestamp) ".
-                              "VALUES($log_id, ".$manager['memberid'].", '$timestamp')";
+      $log_individual_notify = "INSERT INTO tbl_log_notify(id, manager_id, notify_timestamp, view_stat) ".
+                              "VALUES('$log_id', ".$manager['memberid'].", '$timestamp', 'N')";
       mysqli_query($conn, $log_individual_notify) or die($log_individual_notify);
         //count employee each office
         $sql3 = "SELECT * from debtor 
@@ -57,7 +57,7 @@ date_default_timezone_set("Asia/Bangkok");
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
         
-      $messages = getBubbleMessages($countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['sap_code']);
+      $messages = getBubbleMessages($log_id, $countemp, DateThai(date("Y-m-d")), $manager['dept_name'], $manager['sap_code']);
       /*$messages = [
         "type"=> "text",
         "text"=> "Individual Alert :\n\nรายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรกของ ".$manager['dept_name']." \n\nประจำวันที่ ".$today

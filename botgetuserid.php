@@ -89,25 +89,25 @@
          else if(strtolower($message) == "register"){
             $txtans = "การลงทะเบียนบอททำได้ 2 วิธี\nวิธีที่ 1.พิมพ์ pea ตามด้วยรหัสพนักงาน เช่น pea505093\nวิธีที่ 2.พิมพ์รหัสพนักงานแล้วทำตามคำแนะนำของบอท";
          }
-         else if($nums4 > 0 AND strtolower($message) == "qwerty"){
-            $messages = getBubbleMessages4("87", "4 ก.ย. 62", "การไฟฟ้าส่วนภูมิภาคสาขาย่อยอำเภอแก่งกระจาน", "J01302");
-                  $data = [
-                     'replyToken' => $replyToken,
-                     'messages' => [$messages]
-                  ];
-                  $url = 'https://api.line.me/v2/bot/message/reply';
-                  $post = json_encode($data);
-                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
-                  $ch = curl_init($url);
-                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                  $result = curl_exec($ch);
-                  curl_close($ch);
-                  return;
-         }
+         // else if($nums4 > 0 AND strtolower($message) == "qwerty"){
+         //    $messages = getBubbleMessages4($countdebt, $dateupload, $deptname, $sapcode);
+         //          $data = [
+         //             'replyToken' => $replyToken,
+         //             'messages' => [$messages]
+         //          ];
+         //          $url = 'https://api.line.me/v2/bot/message/reply';
+         //          $post = json_encode($data);
+         //          $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
+         //          $ch = curl_init($url);
+         //          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         //          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         //          curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         //          curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         //          curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         //          $result = curl_exec($ch);
+         //          curl_close($ch);
+         //          return;
+         // }
          else if($nums4 > 0 AND strtolower($message) == "myalert"){
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
@@ -222,7 +222,7 @@
                   $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
                }
                else{
-               $messages = getBubbleMessages($countdeb, $dateupload, $dept_name, $sapcode);
+               $messages = getBubbleMessages("xx",$countdeb, $dateupload, $dept_name, $sapcode);
                }
    
                $data = [
@@ -429,11 +429,12 @@
       mysqli_close($conn);
 }
 if($event['type'] == 'postback') {
-   $replyToken = $event['replyToken'];
-   $fullpostback = $event['postback']['data'];
-   
-   $postbackstatus = substr($fullpostback,0,strlen($fullpostback)-6);
-   $postbackid = substr($fullpostback,-6);
+   //$replyToken = $event['replyToken'];
+   $pbuserid = $event['source']['userId'];
+   $pbdata = $event['postback']['data'];
+   $postbackstatus = substr($pbdata,0,strlen($pbdata)-6);
+   $postbackid = substr($pbdata,-6);
+
       $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '$postbackid'";
       $sql_id = mysqli_query($conn, $select_id);
       $empinfo = mysqli_fetch_array($sql_id);
@@ -444,7 +445,13 @@ if($event['type'] == 'postback') {
       $p4 = $empinfo['bitly'];
       $p5 = substr($p4,7);
       $p6 = $empinfo['send_status'];
-	   $p7 = $empinfo['activation'];
+      $p7 = $empinfo['activation'];
+
+      $viewlogupdate = "SELECT * FROM viewldstat WHERE userid_view_request = '$pbuserid'";
+      $viewlogupdate2 = mysqli_query($conn, $viewlogupdate);
+      $viewlogupdate3 = mysqli_fetch_array($viewlogupdate2);
+
+      
          if($postbackstatus == 'confirm' AND $p6 == ""){
 		 	
             $from = new SendGrid\Email(null, "botrg4@pea.co.th");
@@ -459,7 +466,8 @@ if($event['type'] == 'postback') {
 
             $send_update = "UPDATE peaemp SET send_status = 'A' WHERE empID = '$postbackid'";   
             mysqli_query($conn, $send_update);
-         }         
+         }
+         else if($postbackstatus == 'debt' AND )         
 }
 
 }}
