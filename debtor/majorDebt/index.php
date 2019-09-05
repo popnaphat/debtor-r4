@@ -16,6 +16,15 @@
 <!DOCTYPE html> 
 <html lang="th">
 	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147154201-1"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-147154201-1');
+		</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false">
 		<meta charset="utf-8" >
 		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</title>
