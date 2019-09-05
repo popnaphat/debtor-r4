@@ -90,7 +90,7 @@
             $txtans = "การลงทะเบียนบอททำได้ 2 วิธี\nวิธีที่ 1.พิมพ์ pea ตามด้วยรหัสพนักงาน เช่น pea505093\nวิธีที่ 2.พิมพ์รหัสพนักงานแล้วทำตามคำแนะนำของบอท";
          }
          else if($nums4 > 0 AND strtolower($message) == "qwerty"){
-            $messages = getBubbleMessages4($countdebt, $dateupload, $deptname, $sapcode);
+            $messages = getBubbleMessages4("14", "4 ก.ย.62", "บ้านละลม", "J01303");
                   $data = [
                      'replyToken' => $replyToken,
                      'messages' => [$messages]
