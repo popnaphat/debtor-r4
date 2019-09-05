@@ -37,7 +37,7 @@ date_default_timezone_set("Asia/Bangkok");
   $query_lastrow = mysqli_query($conn, $getlast_row);
   $lastrow = mysqli_fetch_array($query_lastrow);
   $dayissues = substr($lastrow['notify_timestamp'],0,10);
-  $today = DateThai(date("Y-m-d"));
+  //$today = DateThai(date("Y-m-d"));
       if($dayissues == date("Y-m-d")){
       echo "this script has been run for today.";
       }
