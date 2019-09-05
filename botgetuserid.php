@@ -6,6 +6,7 @@
    require('./debtor/libs/utils/messages2.php');
    require('./debtor/libs/utils/messages3.php');
    require('./debtor/libs/utils/messages4.php');
+   require('./debtor/timezone.php');
    $accessToken = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";//copy ข้อความ Channel access token ตอนที่ตั้งค่า
    $content = file_get_contents('php://input');  //อ่าน json เป็น string
    $arrayJson = json_decode($content, true); //แปลง json string เป็น php array
@@ -432,7 +433,7 @@ if($event['type'] == 'postback') {
    //$replyToken = $event['replyToken'];
    $pbuserid = $event['source']['userId'];
    $pbdata = $event['postback']['data'];
-   $pbunix = $event['timestamp'];
+   //$pbunix = $event['timestamp'];
    $postbackstatus = substr($pbdata,0,strlen($pbdata)-6);
    $postbackid = substr($pbdata,-6);
 
@@ -466,7 +467,7 @@ if($event['type'] == 'postback') {
          }
          else if(substr($postbackstatus,0,2) <> 'xx' AND substr($postbackstatus,-4) == 'debt'){
             $pbid = substr($postbackstatus,0,strlen($postbackstatus)-4);
-            $viewtime = date("Y-m-d H:i:s",$pbunix);
+            $viewtime = date("Y-m-d H:i:s");
             $checkviewstat = "SELECT view_stat FROM tbl_log_notify WHERE id = '$pbid'";
             $checkviewstat2 = mysqli_fetch_array(mysqli_query($conn,$checkviewstat));
             $cvs = $checkviewstat2['view_stat'];   
