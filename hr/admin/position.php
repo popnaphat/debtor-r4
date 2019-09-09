@@ -48,12 +48,12 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered table-hover">
                 <thead>
-                  
-                  <th>รหัสพนักงาน</th>
+                  <th class="hidden">รหัสพนักงาน</th>
                   <th>ชื่อ - สกุล</th>
                   <th>ตำแหน่ง</th>
                   <th>สังกัด</th>
                   <th>วัน เวลาที่ส่งข้อความ</th>
+                  <th>วัน เวลาที่อ่านข้อความ</th>
                 </thead>
                 <tbody>
                   <?php
@@ -61,13 +61,13 @@
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
-                        <tr>
-                          
-                          <td>".$row['empID']."</td>
+                        <tr>                      
+                          <td class='hidden'>".$row['empID']."</td>
                           <td>".$row['pre_name'].''.$row['name'].' '.$row['surname']."</td>
                           <td>".$row['position']."</td>
                           <td>".$row['dept_name']."</td>
                           <td>".$row['notify_timestamp']."</td>
+                          <td>".$row['time_view']."</td>
                         </tr>
                       ";
                     }
