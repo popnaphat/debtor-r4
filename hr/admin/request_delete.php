@@ -46,7 +46,7 @@
 				
 				if($countdeb == 0){
 					$txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
-					$messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+					$messages = [ 'type' => 'text', 'text' => $txtans];
 				}
 				else{
 				$messages = getBubbleMessages3($countpea, $countdeb, $dateupload);
@@ -86,7 +86,7 @@
 				
 				if($countdeb == 0){
 					$txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
-					$messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+					$messages = [ 'type' => 'text', 'text' => $txtans];
 				}
 				else{
 				$messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $regionname, $sapreg);
@@ -117,15 +117,16 @@
 				$selectglr = "SELECT * FROM debtor where sap_code = '$sapcode' LIMIT 1";
 				$glr = mysqli_query($conn,$selectglr);
 				$getlastrow = mysqli_fetch_array($glr);
+
 				$dateupload = $getlastrow['timeupload'];
 				$dept_name = $getlastrow['dept_name'];
 
 				if($countdeb == 0){
 					$txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
-					$messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+					$messages = [ 'type' => 'text', 'text' => $txtans];
 				}
 				else{
-				$messages = getBubbleMessages($countdeb, $dateupload, $dept_name, $sapcode);
+				$messages = getBubbleMessages("xx",$countdeb, $dateupload, $dept_name, $sapcode);
 				}
 
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
