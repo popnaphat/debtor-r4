@@ -1,4 +1,9 @@
 <?php include 'includes/session.php'; ?>
+if(isset($_SESSION['admin'])){
+		if($_SESSION['admin'] <> "1"){
+			header('location: home.php');
+		}
+	}
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 
