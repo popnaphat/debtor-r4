@@ -1,5 +1,5 @@
 <?php include 'includes/session.php'; ?>
-<?php if(isset($_SESSION['admin']) && $_SESSION['admin'] <> "1"){
+<?php if($_SESSION['user_type'] <> "admin"){
 			header('location: home.php');
 	}?>
 <?php include 'includes/header.php'; ?>
