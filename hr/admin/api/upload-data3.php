@@ -20,9 +20,9 @@
 
     $target_path = uploadXLSXFile4($conn, $_FILES['empIssuefile']);
     $namedDataArray = getDataFromXLSXPath($target_path);
-    recordto_csvdebt1($conn);
     clearDebtorData($conn);
     insertDebtorData($conn, $namedDataArray);
+    recordto_csvdebt1($conn);
     $number_debtor = countDebtorData($conn);
     echo "ได้เพิ่มข้อมูลแล้วทั้งหมด ".$number_debtor." ข้อมูล";
 
