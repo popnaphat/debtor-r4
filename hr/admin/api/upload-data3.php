@@ -5,7 +5,7 @@
     function recordto_csvdebt1($conn){
         $reg = array("J","K","L");
         foreach($reg as $rng){
-        $bm = "SELECT right(bill_month,7) as bm, left(sap_code,1) as region FROM debtor where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and left(sap_code,1) = '$rng' ORDER BY bill_month DESC LIMIT 1";
+        $bm = "SELECT right(bill_month,7) as bm, left(sap_code,1) as region FROM debtor where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and left(sap_code,1) = '$rng' ORDER BY bm DESC LIMIT 1";
         $querybm = mysqli_query($conn,$bm);
         $fetchbm = mysqli_fetch_array($querybm);
         $mmm = substr($fetchbm['bm'],-7);
