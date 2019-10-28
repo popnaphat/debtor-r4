@@ -20,7 +20,7 @@ date_default_timezone_set("Asia/Bangkok");
   }*/
 
   // count complaint 
-  $fetch_notify_office = "SELECT * FROM peamember m 
+  $fetch_notify_office = "SELECT m.memberid,o.sap_code,o.dept_name,m.memberuser_id FROM peamember m 
   JOIN peaemp ON m.memberid = peaemp.empID 
   JOIN pea_office o ON LEFT(peaemp.dept_change_code,11) = LEFT(o.unit_code,11)
   JOIN debtor on o.sap_code = debtor.sap_code 
