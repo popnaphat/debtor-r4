@@ -84,7 +84,7 @@
           $fileName = $_FILES["file"]["tmp_name"];
           if ($_FILES["file"]["size"] > 0) {
               $file = fopen($fileName, "r");
-              $headings = fgetcsv($file, 0, "#","#")
+              $headings = fgetcsv($file, 0, "#","#");
               $num_cols = count($headings);             
               while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {
                 if (count($column) != $num_cols) {
