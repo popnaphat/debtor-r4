@@ -95,10 +95,10 @@
           <div class="col-md-6">
             <form action="" method="post" name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                   <div class="form-group"><div class="row">
-                  <div class="col-xs-3">
+                  <div class="col-lg-6">
                     <label for="file">File CSV input</label>
                         <input type="file" class="custom-file-input" name="file" id="file" accept=".csv"></div>
-                        <div class="col-xs-3">    
+                        <div class="col-lg-6">    
                         <button class="btn btn-primary" type="submit" id="submit" name="import">Upload</button>
                         </div>
                   </div></div>                              
