@@ -108,7 +108,7 @@
                             <input type="file" required name="empIssuefile" class="form-control-file btn btn-dark" id="empIssuefile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                         </div></div>
                         <div class="col-lg-6"><div align="center">
-                            <input type="submit" class="btn btn-success" value="อัพโหลดข้อมูล">
+                            <input type="submit" class="btn btn-success" value="XLSX file">
                             </div></div>
                         </div>
                     </form>
@@ -120,7 +120,7 @@
                           <input type="file" class="form-control-file btn btn-dark" name="file" id="file" accept=".csv">
                         </div>
                         <div class="col-lg-6">    
-                          <button class="btn btn-primary" type="submit" id="submit" name="import">Upload</button>
+                          <button class="btn btn-primary" type="submit" id="submit" name="import">CSV file</button>
                         </div>
                   </div>                             
             </form>
