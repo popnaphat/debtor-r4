@@ -93,8 +93,7 @@
                     </form>
           </div>
           <div class="col-md-6">
-            <form class="form-row col-md-6" action="" method="post"
-                name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
+            <form action="" method="post" name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                 <div class="input-row">
                     <label class="col control-label">Choose CSV
                         File</label> <input type="file" name="file"
