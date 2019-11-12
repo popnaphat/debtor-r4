@@ -95,9 +95,13 @@
               echo "<meta http-equiv='refresh' content='0'>";
           }
       }
+      if (isset($_POST["clear"])) {    
+        $sqlDelete = "DELETE FROM debtor";
+        mysqli_query($conn,$sqlDelete);
+      }
       ?>
       <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
                     <form name="empIssue" id="empIssue" method="POST" class="text-center" enctype="multipart/form-data">
                         <div class="row form-group">
                         <div class="col-lg-6"><div align="center">
@@ -109,7 +113,7 @@
                         </div>
                     </form>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <form action="" method="post" name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                   <div class="row form-group">
                         <div class="col-lg-6">                    
@@ -119,6 +123,11 @@
                           <button class="btn btn-primary" type="submit" id="submit" name="import">Upload</button>
                         </div>
                   </div>                             
+            </form>
+          </div>          
+          <div class="col-md-2">
+            <form action="" method="post" name="frmCSVClear" id="frmCSVClear" enctype="multipart/form-data">
+                    <button type="submit" id="submit" name="clear" class="btn btn-danger">Clear</button>                    
             </form>
           </div>
       </div>
