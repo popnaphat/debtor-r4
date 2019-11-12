@@ -96,7 +96,7 @@
             <form action="" method="post" name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                   <div class="row form-group">
                         <div class="col-lg-6">                    
-                          <input type="file" class="custom-file-input" name="file" id="file" accept=".csv">
+                          <input type="file" class="form-control-file btn btn-dark" name="file" id="file" accept=".csv">
                         </div>
                         <div class="col-lg-6">    
                           <button class="btn btn-primary" type="submit" id="submit" name="import">Upload</button>
