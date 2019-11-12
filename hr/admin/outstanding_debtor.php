@@ -43,8 +43,45 @@
           ";
           unset($_SESSION['success']);
         }
+        function DateThai($strDate){
+          $strYear = date("Y",strtotime($strDate))+543;
+          $strMonth= date("n",strtotime($strDate));
+          $strDay= date("j",strtotime($strDate));
+          $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+          $strMonthThai=$strMonthCut[$strMonth];
+          return "$strDay $strMonthThai $strYear";
+      }
+      function recordto_csvdebt1($conn,$reg){
+        $bm = "SELECT right(bill_month,7) as bm, left(sap_code,1) as region FROM debtor where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and left(sap_code,1) = '$reg' ORDER BY bm DESC LIMIT 1";
+        $querybm = mysqli_query($conn,$bm);
+        $fetchbm = mysqli_fetch_array($querybm);
+        $mmm = substr($fetchbm['bm'],-7);
+        $nnn = $fetchbm['region'];
+        $id = "SELECT * FROM tbl_log_csv_debt1";
+        $countid = mysqli_num_rows(mysqli_query($conn,$id)) + 1; 
+        $current_timestamp = DateThai(date("Y-m-d"));
+        $insert_log_file = "INSERT INTO tbl_log_csv_debt1(id,file_upload_timestamp,bill_month,region) VALUES('$countid','$current_timestamp','$mmm','$nnn')";
+        mysqli_query($conn, $insert_log_file);// or trigger_error($conn->error."[$insert_log_file]")
+    }
+      if (isset($_POST["import"])) {
+          $filenn = $_FILES["file"];
+          $fileName = $_FILES["file"]["tmp_name"];
+          if ($_FILES["file"]["size"] > 0) {
+              $file = fopen($fileName, "r");              
+              while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {
+                  $timeupload = DateThai(date("Y-m-d"));
+                  $sqlInsert = "INSERT into debtor(sap_code,dept_name,cus_number,cus_name,bill_month,outstanding_debt,bail,diff,timeupload)
+                         values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $timeupload . "')";
+                  mysqli_query($conn, $sqlInsert);                  
+              }
+              recordto_csvdebt1($conn);
+          }
+          echo "<meta http-equiv='refresh' content='0'>";
+      }
       ?>
-      <form name="empIssue" id="empIssue" method="POST" class="text-center" enctype="multipart/form-data">
+      <div class="row">
+          <div class="col-md-6">
+                    <form name="empIssue" id="empIssue" method="POST" class="text-center" enctype="multipart/form-data">
                         <div class="row form-group">
                         <div class="col-md-2"><div align="center">
                             <input type="file" required name="empIssuefile" class="form-control-file btn btn-dark" id="empIssuefile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
@@ -54,6 +91,20 @@
                             </div></div>
                         </div>
                     </form>
+          </div>
+          <div class="col-md-6">
+            <form class="form-row col-md-6" action="" method="post"
+                name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
+                <div class="input-row">
+                    <label class="col control-label">Choose CSV
+                        File</label> <input type="file" name="file"
+                        id="file" accept=".csv">
+                    <button type="submit" id="submit" name="import"
+                        class="col btn-submit">Import</button>
+                </div>                
+            </form>
+          </div>
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -111,53 +162,22 @@
                 return false;
             });
         });
-    </script>
-<!--script>
-$(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+$(document).ready(function() {
+    $("#frmCSVImport").on("submit", function () {
 
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.photo').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
+	    $("#response").attr("class", "");
+        $("#response").html("");
+        var fileType = ".csv";
+        var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + fileType + ")$");
+        if (!regex.test($("#file").val().toLowerCase())) {
+        	    $("#response").addClass("error");
+        	    $("#response").addClass("display-block");
+            $("#response").html("Invalid File. Upload : <b>" + fileType + "</b> Files.");
+            return false;
+        }
+        return true;
+    });
 });
-
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'employee_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('.empid').val(response.empid);
-      $('.employee_id').html(response.employee_id);
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);
-      $('#employee_name').html(response.firstname+' '+response.lastname);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_address').val(response.address);
-      $('#datepicker_edit').val(response.birthdate);
-      $('#edit_contact').val(response.contact_info);
-      $('#gender_val').val(response.gender).html(response.gender);
-      $('#position_val').val(response.position_id).html(response.description);
-      $('#schedule_val').val(response.schedule_id).html(response.time_in+' - '+response.time_out);
-    }
-  });
-}
-</script-->
+    </script>
 </body>
 </html>
