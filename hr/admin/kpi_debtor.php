@@ -87,7 +87,7 @@
               $headings = fgetcsv($file, 0, "#","#");
               $num_cols = count($headings);             
               while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {
-                if (count($column) != $num_cols) {
+                if (count($column) !== $num_cols) {
                   $column = array_pad($column, $num_cols, '-');
                   }  
                   $sqlInsert = "INSERT into debtor_kpi(sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)
