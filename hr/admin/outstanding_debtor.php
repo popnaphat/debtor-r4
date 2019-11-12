@@ -83,10 +83,10 @@
           <div class="col-md-6">
                     <form name="empIssue" id="empIssue" method="POST" class="text-center" enctype="multipart/form-data">
                         <div class="row form-group">
-                        <div class="col-md-3"><div align="center">
+                        <div class="col-lg-6"><div align="center">
                             <input type="file" required name="empIssuefile" class="form-control-file btn btn-dark" id="empIssuefile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                         </div></div>
-                        <div class="col-md-3"><div align="center">
+                        <div class="col-lg-6"><div align="center">
                             <input type="submit" class="btn btn-success" value="อัพโหลดข้อมูล">
                             </div></div>
                         </div>
@@ -95,8 +95,7 @@
           <div class="col-md-6">
             <form action="" method="post" name="frmCSVImport" id="frmCSVImport" enctype="multipart/form-data">
                   <div class="form-group"><div class="row">
-                  <div class="col-lg-6">
-                    <label for="file">File CSV input</label>
+                  <div class="col-lg-6">                    
                         <input type="file" class="custom-file-input" name="file" id="file" accept=".csv"></div>
                         <div class="col-lg-6">    
                         <button class="btn btn-primary" type="submit" id="submit" name="import">Upload</button>
