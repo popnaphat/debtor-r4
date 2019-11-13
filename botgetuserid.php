@@ -269,7 +269,7 @@
                $findpea2 = mysqli_query($conn, $findpea1);
                $findpea3 = mysqli_num_rows($findpea2);
                if($findpea3 == 0){
-                  $txtans = "ท่านไม่มีสิทธิ์เข้าถึงข้อมูลการไฟฟ้านี้";
+                  $txtans = "ท่านไม่มีสิทธิ์เข้าถึงข้อมูลการไฟฟ้านี้หรือกฟฟ.นี้ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน";
                }
                else{
                $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
@@ -285,7 +285,7 @@
                $findpea2 = mysqli_query($conn, $findpea1);
                $findpea3 = mysqli_num_rows($findpea2);
                if($findpea3 == 0){
-                  $txtans = "$pn ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน";
+                  $txtans = "กฟฟ.นี้ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน";
                }
                else{
                $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
