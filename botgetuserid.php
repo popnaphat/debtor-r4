@@ -115,8 +115,7 @@
             WHERE e.empID = '$r0' GROUP BY e.empID";
             $querydata = mysqli_query($conn, $data);
             $result = mysqli_fetch_array($querydata);
-            $empID = $result['empID'];
-            //$userId = $result['user_id'];
+            $empID = $result['empID'];            
             $name = $result['name'];
             $surname = $result['surname'];
             $email = $result['pea_email'];
@@ -385,27 +384,6 @@
                $txtans = "กำลังดำเนินการลงทะเบียน...";
                }
             }         
-            /*else if(substr($message,-10) == "@pea.co.th" AND $count_existing > 0){
-               $sql_regis = "UPDATE peaemp SET pea_email = '$message' WHERE user_id = '".$id."'";
-               mysqli_query($conn, $sql_regis);
-                  $messages = getBubbleMessages1($s5,$message);
-                  $url = 'https://api.line.me/v2/bot/message/reply';
-                  $data = [
-                        'replyToken' => $replyToken,
-                        'messages' => [$messages],
-                  ];
-                  $post = json_encode($data);
-                  $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $accessToken);
-                  $ch = curl_init($url);
-                  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                  curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                  $result = curl_exec($ch);
-                  curl_close($ch);
-                  return; 
-            }*/ 
             else if($nums == 0){
                $txtans = "";
             }
