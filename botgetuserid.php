@@ -284,11 +284,27 @@
                $findpea1 = "SELECT * FROM debtor WHERE sap_code = '$sc'";
                $findpea2 = mysqli_query($conn, $findpea1);
                $findpea3 = mysqli_num_rows($findpea2);
-               if($findpea3 == 0){
-                  $txtans = "กฟฟ.นี้ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน";
+               ///
+               $overdue1 = "SELECT * FROM debtor_kpi WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
+               $overdue2 = mysqli_query($conn, $overdue1);
+               $overdue3 = mysqli_fetch_array($overdue2);
+               $zz = $overdue3['dept_name'];
+               $zzz = $overdue3['sap_code'];
+               $od1 = "SELECT * FROM debtor_kpi WHERE sap_code = '$zzz'";
+               $od2 = mysqli_query($conn, $od1);
+               $od3 = mysqli_num_rows($od2);
+
+               if($findpea3 == 0 AND $od3 == 0){
+                  $txtans = "กฟฟ.นี้ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระ";
                }
-               else{
-               $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
+               else if($findpea3 <> 0 AND $od3 == 0){
+                  $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
+               }
+               else if($findpea3 == 0 AND $od3 <> 0){
+                  $txtans = "$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
+               }
+               else if($findpea3 <> 0 AND $od3 <> 0){
+                  $txtans = "1.$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc \n2.$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
                }
             }
          }
