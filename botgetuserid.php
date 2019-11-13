@@ -245,7 +245,7 @@
          }
          //////
          else if($nums4 > 0 AND strtolower(substr($message,0,2)) == "dt"){
-            $peaname = substr($message,2);
+            $peaname = trim(substr($message,2));
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
             WHERE e.empID = '$r0' GROUP BY e.empID";
