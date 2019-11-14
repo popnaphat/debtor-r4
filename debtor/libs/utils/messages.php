@@ -1,113 +1,242 @@
 <?php
 
-  function getBubbleMessages($id,$countemp, $today, $dept_name, $dept_code){
-    $count = 0;
+  function getBubbleMessages($id,$countemp, $today,$countemp2, $today2, $dept_name, $dept_code){
     $json = '{
       "type": "flex",
-      "altText": "แจ้งเตือนลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน",
+      "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
       "contents": {
-        "type": "bubble",
-        "hero": {
-          "type": "image",
-          "url": "https://i.investopedia.com/thumbs/debtor.png",
-          "size": "full",
-          "aspectRatio": "20:13",
-          "aspectMode": "cover"
-        },
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "ข้อมูลลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันของ'.$dept_name.'",
-              "size": "xl",
-              "weight": "bold",
-              "wrap": true
+        "type": "carousel",
+        "contents": [
+          {
+            "type": "bubble",
+            "styles": {
+              "footer": {
+                "separator": true
+              }
             },
-            {
+            "header": {
               "type": "box",
               "layout": "vertical",
-              "spacing": "sm",
-              "margin": "lg",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "เรื่องที่ 1",
+                  "weight": "bold",
+                  "color": "#1DB446",
+                  "size": "sm"
+                },
+                {
+                  "type": "text",
+                  "text": "ข้อมูลลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันของ'.$dept_name.'",
+                  "weight": "bold",
+                  "size": "md",
+                  "margin": "md",
+                  "wrap": true
+                }
+              ]
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
               "contents": [
                 {
                   "type": "box",
-                  "layout": "baseline",
+                  "layout": "vertical",
+                  "margin": "xxl",
                   "spacing": "sm",
                   "contents": [
                     {
-                      "type": "text",
-                      "text": "ข้อมูล ณ วันที่",
-                      "flex": 0,
-                      "size": "sm",
-                      "color": "#AAAAAA",
-                      "wrap": true
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "ข้อมูล ณ วันที่",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "flex": 0
+                        },
+                        {
+                          "type": "text",
+                          "text": "'.$today.'",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "align": "end"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "text": "'.$today.'",
-                      "flex": 0,
-                      "size": "sm",
-                      "color": "#666666",
-                      "wrap": true
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "จำนวน",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "flex": 0
+                        },
+                        {
+                          "type": "text",
+                          "text": "'.$countemp.' ราย",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "align": "end"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "spacer",
+                      "size": "xxl"
                     }
                   ]
                 },
                 {
                   "type": "box",
-                  "layout": "baseline",
+                  "layout": "vertical",
+                  "flex": 0,
                   "spacing": "sm",
                   "contents": [
                     {
-                      "type": "text",
-                      "text": "จำนวน",
-                      "flex": 0,
-                      "size": "sm",
-                      "color": "#AAAAAA",
-                      "wrap": true
+                      "type": "button",
+                      "action": {
+                        "type": "uri",
+                        "label": "คลิกดูรายละเอียด",
+                        "uri": "https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ='.$dept_code.'"
+                      },
+                      "height": "sm",
+                      "style": "primary",
+                      "color": "#B58E38"
                     },
                     {
-                      "type": "text",
-                      "text": "'.$countemp.' ราย",
-                      "flex": 0,
-                      "size": "sm",
-                      "color": "#666666",
-                      "wrap": true
+                      "type": "spacer",
+                      "size": "sm"
                     }
                   ]
                 }
-              ]
-            }
-          ]
-        },
-        "footer": {
-          "type": "box",
-          "layout": "vertical",
-          "flex": 0,
-          "spacing": "sm",
-          "contents": [
-            {
-              "type": "button",
-              "action": {
-                "type": "uri",
-                "label": "คลิกดูรายละเอียด",
-                "uri": "https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ='.$dept_code.'"
-              },
-              "height": "sm",
-              "style": "primary"
+              ],
+              "paddingAll": "20px",
+              "backgroundColor": "#7f3f98"
             },
-            {
-              "type": "spacer",
-              "size": "sm"
-            }
-          ]
-        },
-        "action": {
+          "action": {
           "type": "postback",
           "label": "action",
           "data": "'.$id.'debt'.$dept_code.'"
         }
+          },
+          {
+            "type": "bubble",
+            "styles": {
+              "footer": {
+                "separator": true
+              }
+            },
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "เรื่องที่ 2",
+                  "weight": "bold",
+                  "color": "#1DB446",
+                  "size": "sm"
+                },
+                {
+                  "type": "text",
+                  "text": "ข้อมูลลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนดของ'.$dept_name2.'",
+                  "weight": "bold",
+                  "size": "md",
+                  "margin": "md",
+                  "wrap": true
+                }
+              ]
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "margin": "xxl",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "ข้อมูล ณ วันที่",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "flex": 0
+                        },
+                        {
+                          "type": "text",
+                          "text": "'.$today2.'",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "align": "end"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "จำนวน",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "flex": 0
+                        },
+                        {
+                          "type": "text",
+                          "text": "'.$countemp2.' ราย",
+                          "size": "sm",
+                          "color": "#ffffff",
+                          "align": "end"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "spacer",
+                      "size": "xxl"
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "flex": 0,
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "button",
+                      "action": {
+                        "type": "uri",
+                        "label": "คลิกดูรายละเอียด",
+                        "uri": "https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ='.$dept_code.'"
+                      },
+                      "height": "sm",
+                      "style": "primary",
+                      "color": "#B58E38"
+                    },
+                    {
+                      "type": "spacer",
+                      "size": "sm"
+                    }
+                  ]
+                }
+              ],
+              "paddingAll": "20px",
+              "backgroundColor": "#7f3f98"
+            }
+          }
+        ]
       }
     }';
     $result = json_decode($json);

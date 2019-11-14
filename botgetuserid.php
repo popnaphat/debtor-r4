@@ -240,16 +240,29 @@
                
                $selectglr = "SELECT * FROM debtor where sap_code = '$sapcode' LIMIT 1";
                $glr = mysqli_query($conn,$selectglr);
-               $getlastrow = mysqli_fetch_array($glr);
-               $dateupload = $getlastrow['timeupload'];
+               $getlastrow = mysqli_fetch_array($glr);               
                $dept_name = $getlastrow['dept_name'];
+
+               $selectcp = "SELECT * FROM tbl_log_csv_debt1 where region = '$sapreg' ORDER BY id DESC LIMIT 1";
+               $cp = mysqli_query($conn,$selectcp);
+               $getlastrowcp = mysqli_fetch_array($cp);
+               $dateupload = $getlastrowcp['file_upload_timestamp'];
+               //////////////////////////////////
+               $selectcdb2 = "SELECT * FROM debtor where sap_code = '$sapcode'";
+               $cdb2 = mysqli_query($conn,$selectcdb2);
+               $countdeb2 = mysqli_num_rows($cdb2);
+
+               $selectcp2 = "SELECT * FROM tbl_log_csv_debt2 where region = '$sapreg' ORDER BY id DESC LIMIT 1";
+               $cp2 = mysqli_query($conn,$selectcp2);
+               $getlastrowcp2 = mysqli_fetch_array($cp2);
+               $dateupload2 = $getlastrowcp2['file_upload_timestamp'];
    
                if($countdeb == 0){
                   $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
                   $messages = [ 'type' => 'text', 'text' => $txtans];
                }
                else{
-               $messages = getBubbleMessages("xx",$countdeb, $dateupload, $dept_name, $sapcode);
+               $messages = getBubbleMessages("xx",$countdeb, $dateupload,$countdeb2, $dateupload2, $dept_name, $sapcode);
                }
    
                $data = [

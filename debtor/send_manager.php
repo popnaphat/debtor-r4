@@ -41,6 +41,9 @@ date_default_timezone_set("Asia/Bangkok");
   $crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
 	$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
   $ccc = $crecord1['file_upload_timestamp'];
+  $drecord2 = "SELECT * FROM tbl_log_csv_debt2 ORDER BY id DESC LIMIT 1";
+	$drecord1 = mysqli_fetch_array(mysqli_query($conn,$drecord2));
+  $ddd = $drecord1['file_upload_timestamp'];
   
       if($dayissues == date("Y-m-d")){
       echo "this script has been run for today.";
@@ -60,8 +63,14 @@ date_default_timezone_set("Asia/Bangkok");
         WHERE debtor.sap_code = '".$manager['sap_code']."' GROUP BY debtor.cus_number";
         $query3 = mysqli_query($conn,$sql3);
         $countemp = mysqli_num_rows($query3);
+
+        $sql4 = "SELECT * from debtor_kpi 
+        join pea_office on pea_office.sap_code = debtor_kpi.sap_code 
+        WHERE debtor_kpi.sap_code = '".$manager['sap_code']."' GROUP BY debtor_kpi.cus_number";
+        $query4 = mysqli_query($conn,$sql4);
+        $countemp4 = mysqli_num_rows($query4);
         
-      $messages = getBubbleMessages($log_id, $countemp, $ccc, $manager['dept_name'], $manager['sap_code']);
+      $messages = getBubbleMessages($log_id, $countemp, $ccc,$countemp4, $ddd, $manager['dept_name'], $manager['sap_code']);
       /*$messages = [
         "type"=> "text",
         "text"=> "Individual Alert :\n\nรายชื่อพนักงานที่ครบกำหนดปรับระดับครั้งแรกของ ".$manager['dept_name']." \n\nประจำวันที่ ".$today
