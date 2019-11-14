@@ -129,26 +129,40 @@
                }else if($sapreg == 'L'){
                   $regionname = "กฟต.3 ยะลา";
                }
+
             if($sapcode == 'Z00000'){
                $selectcdb = "SELECT * FROM debtor";
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
-               $selectglr = "SELECT * FROM debtor LIMIT 1";
+               $selectglr = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
                $glr = mysqli_query($conn,$selectglr);
                $getlastrow = mysqli_fetch_array($glr);
-               $dateupload = $getlastrow['timeupload'];
+               $dateupload = $getlastrow['file_upload_timestamp'];
    
                $selectcp = "SELECT * from debtor GROUP BY sap_code";
                $cp = mysqli_query($conn,$selectcp);
-               $countpea = mysqli_num_rows($cp); 
+               $countpea = mysqli_num_rows($cp);
+               ///////////////////////////////////////
+               $selectcdb2 = "SELECT * FROM debtor_kpi";
+               $cdb2 = mysqli_query($conn,$selectcdb2);
+               $countdeb2 = mysqli_num_rows($cdb2);
                
-               if($countdeb == 0){
+               $selectglr2 = "SELECT * FROM tbl_log_csv_debt2 ORDER BY id DESC LIMIT 1";
+               $glr2 = mysqli_query($conn,$selectglr2);
+               $getlastrow2 = mysqli_fetch_array($glr2);
+               $dateupload2 = $getlastrow2['file_upload_timestamp'];
+   
+               $selectcp2 = "SELECT * from debtor_kpi GROUP BY sap_code";
+               $cp2 = mysqli_query($conn,$selectcp2);
+               $countpea2 = mysqli_num_rows($cp2);
+               
+               if($countdeb == 0 AND $countdeb2 == 0){
                   $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
-                  $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+                  $messages = [ 'type' => 'text', 'text' => $txtans];
                }
                else{
-               $messages = getBubbleMessages3($countpea, $countdeb, $dateupload);
+               $messages = getBubbleMessages3($countpea, $countdeb, $dateupload,$countpea2, $countdeb2, $dateupload2);
                }
                $data = [
                      'replyToken' => $replyToken,
@@ -183,7 +197,7 @@
                
                if($countdeb == 0){
                   $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
-                  $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+                  $messages = [ 'type' => 'text', 'text' => $txtans];
                }
                else{
                $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $regionname, $sapreg);
@@ -219,7 +233,7 @@
    
                if($countdeb == 0){
                   $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
-                  $messages = $messages = [ 'type' => 'text', 'text' => $txtans];
+                  $messages = [ 'type' => 'text', 'text' => $txtans];
                }
                else{
                $messages = getBubbleMessages("xx",$countdeb, $dateupload, $dept_name, $sapcode);
