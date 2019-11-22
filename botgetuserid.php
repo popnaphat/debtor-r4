@@ -361,6 +361,40 @@
                   $txtans = "1.$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc \n2.$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
                }
             }
+            else if($sapnum <> '00000'){
+               $txtans = "ท่านมีสิทธิเข้าถึงข้อมูลเฉพาะการไฟฟ้าต้นสังกัดเท่านั้น";
+            }
+         }
+         else if($nums4 > 0 AND trim(strtolower($message)) == "debtorall"){
+            //$peaname = trim(substr($message,2));
+            $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
+            left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
+            WHERE e.empID = '$r0' GROUP BY e.empID";
+            $querydata = mysqli_query($conn, $data);
+            $result = mysqli_fetch_array($querydata);
+            $empID = $result['empID'];
+            //$userId = $result['user_id'];
+            $name = $result['name'];
+            $surname = $result['surname'];
+            $email = $result['pea_email'];
+            $sapcode = $result['sap_code'];
+               $sapnum = substr($sapcode,1);
+               $sapreg = substr($sapcode,0,1);
+            if($sapnum == '00000' AND $sapreg <> 'Z'){
+               $sql = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$sapreg' GROUP BY debtor.sap_code";
+               $query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
+               $a = 1;
+               $txtans = "ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน\n";
+					while($result=mysqli_fetch_array($query)){
+						$txtans .= $a.".".$result["dept_name"]." จำนวน ".$result["num"]." ราย >> https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=".$result["sap_code"]."\n";
+						$a =$a +1;
+					}
+					$a = 0;
+					mysqli_close($conn);
+            }
+            // else if($sapcode == 'Z00000'){
+               
+            // }
          }
          else{
             $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '".$message."'";
