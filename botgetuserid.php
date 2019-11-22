@@ -81,12 +81,10 @@
          else if($count_existing > 0 AND $s1 == "" AND $s4 <> "" AND $message == $s5) {
             $txtans = "กรุณายืนยันการลงทะเบียนทาง $s4";
          }
-         else if($nums4 > 0 AND strtolower($message) == "help"){
-            $txtans = "ฟังก์ชันที่มี ได้แก่\n1.พิมพ์ dt ตามด้วย ชื่อกฟฟ เช่น dtตรัง เพื่อดูข้อมูลลูกหนี้\n2.พิมพ์ myalert เพื่อดูข้อมูลการแจ้งเตือนที่จะได้รับ\n\nการลงทะเบียนบอททำได้ 2 วิธี\nวิธีที่ 1.พิมพ์ pea ตามด้วยรหัสพนักงาน เช่น pea505093\nวิธีที่ 2.พิมพ์รหัสพนักงานแล้วทำตามคำแนะนำของบอท";
+         else if(strtolower($message) == "help"){
+            $txtans = "การลงทะเบียนบอททำได้ 2 วิธี\nวิธีที่ 1.พิมพ์ pea ตามด้วยรหัสพนักงาน เช่น pea505093\nวิธีที่ 2.พิมพ์รหัสพนักงานแล้วทำตามคำแนะนำของบอท\n\nค้นหาข้อมูลรายการไฟฟ้า\nพิมพ์ dt ตามด้วย ชื่อกฟฟ เช่น dtตรัง เพื่อดูข้อมูลลูกหนี้";
          }
-         else if($nums4 == 0 AND strtolower($message) == "help"){
-            $txtans = "กรุณาลงทะเบียนก่อน";
-         }
+         
          
          // else if($nums4 > 0 AND strtolower($message) == "qwerty"){
          //    $messages = getBubbleMessages4("14", "4 ก.ย.62", "บ้านละลม", "J01303");
@@ -107,7 +105,7 @@
          //          curl_close($ch);
          //          return;
          // }
-         else if($nums4 > 0 AND strtolower($message) == "myalert"){
+         else if($nums4 > 0 AND trim(strtolower($message)) == "myalert"){
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
             WHERE e.empID = '$r0' GROUP BY e.empID";
