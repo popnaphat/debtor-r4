@@ -139,7 +139,7 @@
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
-               $selectglr = "SELECT * FROM debtor where sap_code = '$sapcode' LIMIT 1";
+               $selectglr = "SELECT pea_office.dept_name FROM debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$sapcode' LIMIT 1";
                $glr = mysqli_query($conn,$selectglr);
                $getlastrow = mysqli_fetch_array($glr);               
                $dept_name = $getlastrow['dept_name'];
@@ -149,7 +149,7 @@
                $getlastrowcp = mysqli_fetch_array($cp);
                $dateupload = $getlastrowcp['file_upload_timestamp'];
                //////////////////////////////////
-               $selectcdb2 = "SELECT * FROM debtor where sap_code = '$sapcode'";
+               $selectcdb2 = "SELECT * FROM debtor_kpi where sap_code = '$sapcode'";
                $cdb2 = mysqli_query($conn,$selectcdb2);
                $countdeb2 = mysqli_num_rows($cdb2);
 
