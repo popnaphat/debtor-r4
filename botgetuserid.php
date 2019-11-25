@@ -234,7 +234,7 @@
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
-               $selectglr = "SELECT * FROM debtor where sap_code = '$sapcode' LIMIT 1";
+               $selectglr = "SELECT pea_office.dept_name FROM debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$sapcode' LIMIT 1";
                $glr = mysqli_query($conn,$selectglr);
                $getlastrow = mysqli_fetch_array($glr);               
                $dept_name = $getlastrow['dept_name'];
@@ -253,7 +253,7 @@
                $getlastrowcp2 = mysqli_fetch_array($cp2);
                $dateupload2 = $getlastrowcp2['file_upload_timestamp'];
    
-               if($countdeb == 0){
+               if($countdeb == 0 AND $countdeb2 == 0){
                   $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
                   $messages = [ 'type' => 'text', 'text' => $txtans];
                }
