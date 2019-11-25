@@ -244,7 +244,7 @@
                $getlastrowcp = mysqli_fetch_array($cp);
                $dateupload = $getlastrowcp['file_upload_timestamp'];
                //////////////////////////////////
-               $selectcdb2 = "SELECT * FROM debtor where sap_code = '$sapcode'";
+               $selectcdb2 = "SELECT * FROM debtor_kpi where sap_code = '$sapcode'";
                $cdb2 = mysqli_query($conn,$selectcdb2);
                $countdeb2 = mysqli_num_rows($cdb2);
 
