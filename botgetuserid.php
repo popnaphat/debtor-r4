@@ -388,7 +388,7 @@
 				// 	$a = 0;
 				// 	mysqli_close($conn);
             // }
-            $txtans = "ค้นหาข้อมูลรายการไฟฟ้า\nพิมพ์ dt ตามด้วย ชื่อกฟฟ เช่น dtตรัง เพื่อดูข้อมูลลูกหนี้";
+            $txtans = "ค้นหาข้อมูลลูกหนี้แต่ละราย การไฟฟ้า\nพิมพ์ dt ตามด้วย ชื่อกฟฟ เช่น dtตรัง";
          }
          else{
             $select_id = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode WHERE e.empID = '".$message."'";
