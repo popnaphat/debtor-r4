@@ -20,7 +20,7 @@
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
 			$ccc = $crecord1['file_upload_timestamp'];
 		//$NUMBER2 = $_GET['REQ2'];
-		$sql = "SELECT count(DISTINCT cus_number) as num, debtor.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor.sap_code";
+		$sql = "SELECT count(DISTINCT cus_number) as num, pea_office.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor.sap_code";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 		//$mode1 = mysqli_num_rows($query);
 		/*while($ofname = mysqli_fetch_array($query)){ 
