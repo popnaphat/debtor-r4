@@ -21,7 +21,7 @@
 			$crecord2 = "SELECT * FROM tbl_log_csv_debt2 ORDER BY id DESC LIMIT 1";
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
 			$ccc = $crecord1['file_upload_timestamp'];
-		$sql = "SELECT * from debtor_kpi left join pea_office on pea_office.sap_code = debtor_kpi.sap_code where debtor_kpi.sap_code = '$NUMBER'";
+		$sql = "SELECT * from debtor_kpi where sap_code = '$NUMBER'";
 		//$sql_type = "SELECT * FROM tbl_complaint WHERE office_name LIKE '%".$NUMBER."%' AND number_of_day>=".$NUMBER2." AND complaint_status <> 'ปิด' GROUP BY complaint_type";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 		//$query_type = mysqli_query($conn,$sql_type);
