@@ -21,12 +21,16 @@
 			$crecord2 = "SELECT * FROM tbl_log_csv_debt2 ORDER BY id DESC LIMIT 1";
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
 			$ccc = $crecord1['file_upload_timestamp'];
+		
 		$sql = "SELECT * from debtor_kpi where sap_code = '$NUMBER'";
-		//$sql_type = "SELECT * FROM tbl_complaint WHERE office_name LIKE '%".$NUMBER."%' AND number_of_day>=".$NUMBER2." AND complaint_status <> 'ปิด' GROUP BY complaint_type";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
-		//$query_type = mysqli_query($conn,$sql_type);
-		$mode1 = mysqli_num_rows($query);
-		while($ofname = mysqli_fetch_array($query)){ 
+		$mode2 = mysqli_num_rows($query);
+		
+		$sql2 = "SELECT * from debtor_kpi k join pea_office o on o.sap_code = k.sap_code where k.sap_code = '$NUMBER' GROUP BY k.cus_number";
+		$query2 = mysqli_query($conn,$sql2) or die(mysqli_error($conn));
+		
+		$mode1 = mysqli_num_rows($query2);
+		while($ofname = mysqli_fetch_array($query2)){ 
 			$ofname1 = $ofname["dept_name"];
 		}
 	?>
@@ -36,7 +40,7 @@
 			</div>
 			<div data-role="content">
 			<?php 
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด (บิลค้างชำระก่อนเดือน $mmm) ของ $ofname1 จำนวน $mode1 ราย ข้อมูล ณ วันที่ $ccc</b><br/>";	
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด (บิลค้างชำระก่อนเดือน $mmm) ของ $ofname1 จำนวน $mode1 ราย $mode2 บิล ข้อมูล ณ วันที่ $ccc</b><br/>";	
 				mysqli_data_seek($query,0);
 			?>
 			</div>
