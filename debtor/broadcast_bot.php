@@ -8,14 +8,14 @@ date_default_timezone_set("Asia/Bangkok");
     // line access token
   $access_token = 'CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=';
 
-  $fetch_notify_office = "SELECT * FROM peamember WHERE memberid = '504756'";
+  $fetch_notify_office = "SELECT * FROM peamember WHERE memberid = '505122'";
   $notify_office = mysqli_query($conn, $fetch_notify_office) or die($fetch_notify_office);
   
       while($manager = $notify_office->fetch_assoc()){
 
       $data['to'] = $manager['memberuser_id'];
       $data['messages'][0]['type'] = "text";
-      $data['messages'][0]['text'] = "ขอความกรุณาผู้ใช้งานทำแบบสำรวจความพึงพอใจของผู้ใช้งาน LINE ALERT BOT ครั้งที่ 1 \nคลิก>>https://forms.gle/ZDCyN9r766onBy6L8";
+      $data['messages'][0]['text'] = "ขอความกรุณาผู้ใช้งานทำแบบสำรวจความพึงพอใจของผู้ใช้งาน LINE ALERT BOT ครั้งที่ 1 \nคลิก>> https://forms.gle/ZDCyN9r766onBy6L8";
       $data['messages'][1]['type'] = "sticker";
       $data['messages'][1]['packageId'] = "11539";
       $data['messages'][1]['stickerId'] = "52114115";
