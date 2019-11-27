@@ -23,7 +23,7 @@ date_default_timezone_set("Asia/Bangkok");
       $data = [
         'to' => $manager['memberuser_id'],
         'messages' => [
-                        ['type' => 'text','text' => '\uDBC0\uDC84 ขอความกรุณาผู้ใช้งานทำแบบสำรวจความพึงพอใจของผู้ใช้งาน LINE ALERT BOT ครั้งที่ 1 \nคลิก>> https://forms.gle/ZDCyN9r766onBy6L8'],
+                        ['type' => 'text','text' => '0x100087 ขอความกรุณาผู้ใช้งานทำแบบสำรวจความพึงพอใจของผู้ใช้งาน LINE ALERT BOT ครั้งที่ 1 \nคลิก>> https://forms.gle/ZDCyN9r766onBy6L8'],
                         ['type' => 'sticker','packageId' => '11539','stickerId' => '52114115']
                       ]
       ];
