@@ -15,11 +15,11 @@ date_default_timezone_set("Asia/Bangkok");
 
       $data['to'] = $manager['memberuser_id'];
       $data['messages'][0]['type'] = "text";
-      $data['messages'][0]['text'] = "(!)(!)ขอความกรุณาผู้ใช้งานทำแบบสำรวจความพึงพอใจของผู้ใช้งาน LINE ALERT BOT ครั้งที่ 1 \nคลิก(pencil)(pencil)>>https://forms.gle/ZDCyN9r766onBy6L8";
+      $data['messages'][0]['text'] = "\uDBC0\uDC35\uDBC0\uDC35 ขอความกรุณาผู้ใช้งานทำแบบสำรวจความพึงพอใจของผู้ใช้งาน LINE ALERT BOT ครั้งที่ 1 \nคลิก\uDBC0\uDC41\uDBC0\uDC41>>https://forms.gle/ZDCyN9r766onBy6L8";
       $data['messages'][1]['type'] = "sticker";
       $data['messages'][1]['packageId'] = "11539";
       $data['messages'][1]['stickerId'] = "52114115";
-      
+
       $url = 'https://api.line.me/v2/bot/message/push';
       $post = json_encode($data);
       $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
