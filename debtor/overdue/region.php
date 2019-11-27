@@ -59,7 +59,7 @@
 					while($result=mysqli_fetch_array($query)){
 						$sql2 = "SELECT * from debtor_kpi where sap_code = '".$result['sap_code']."'";
 						$query2 = mysqli_num_rows(mysqli_query($conn,$sql2));
-						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย ".$query2." บิล</a></li>";;
+						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย (".$query2." บิล)</a></li>";;
 						$a =$a +1;
 					}
 					$a = 0;
