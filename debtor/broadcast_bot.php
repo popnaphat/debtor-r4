@@ -40,6 +40,6 @@ date_default_timezone_set("Asia/Bangkok");
       curl_close($ch);
     }
     echo "this script run successful.";
-    return;
+
   
 ?>
