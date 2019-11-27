@@ -57,7 +57,9 @@
 							$querydu = mysqli_query($conn,$dateupload);
 							$fetchdu = mysqli_fetch_array($querydu);
 							$mmm = $fetchdu['bill_month'];
-							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย บิลค้างชำระก่อนเดือน ".$mmm."</a></li>";
+							$sql2 = "SELECT * FROM debtor_kpi WHERE LEFT(sap_code,1) LIKE '$reg'";
+							$query2 = mysqli_num_rows(mysqli_query($conn,$sql2));
+							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย บิลค้างชำระก่อนเดือน ".$mmm." (".$query2." บิล)</a></li>";
 							$a =$a +1;
 						}
 						$a = 0;
