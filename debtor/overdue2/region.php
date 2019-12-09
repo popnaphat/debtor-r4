@@ -1,8 +1,11 @@
+<?php 
+$curyear = date("Y")+543;
+?>
 <!DOCTYPE html> 
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo date("Y")+543; ?></title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></title>
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -11,6 +14,7 @@
 	<body> 
 	<?php
 		require('conn.php');
+		
 		$NUMBER = $_GET['REQ'];
 			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt3 where right(bill_month,4) = YEAR(CURRENT_DATE) and region = '$NUMBER' ORDER BY bill_month DESC LIMIT 1";
 			$querydu = mysqli_query($conn,$dateupload);
@@ -30,7 +34,7 @@
 	?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo date("Y")+543; ?></h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></h1>
 			</div>
 			<div data-role="content">
 			<?php 
@@ -48,7 +52,7 @@
 						$reg = "สำนักงานใหญ่";
 					}
 				//$fetch_number_complaint = "SELECT * FROM TBL_COMPLAINT";
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี ".date("Y")+543." แยกตามสังกัดของ $reg เพียงวันที่ $ccc</b><br/>";
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี $curyear แยกตามสังกัดของ $reg เพียงวันที่ $ccc</b><br/>";
 			?>
 			</div>
 			<div data-role="content">	

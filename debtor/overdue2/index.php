@@ -12,13 +12,14 @@
         $strMonthThai=$strMonthCut[$strMonth];
         return "$strDay $strMonthThai $strYear";
 	}
+	$curyear = date("Y")+543;
 ?>
 <!DOCTYPE html> 
 <html lang="th">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false">
 		<meta charset="utf-8" >
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo date("Y")+543; ?></title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></title>
 		<link rel="manifest" href="./images/manifest.json">
 		<meta name="theme-color" content="#710E82">
 
@@ -40,11 +41,11 @@
 		?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo date("Y")+543; ?></h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></h1>
 			</div>
 			<div data-role="content">
 			<?php   
-				echo "<b>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี แยกตามเขตการไฟฟ้า เพียงวันที่ $ccc</b><br/>";	
+				echo "<b>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี $curyear แยกตามเขตการไฟฟ้า เพียงวันที่ $ccc</b><br/>";	
 			?>
 			</div>
 			<div data-role="content">

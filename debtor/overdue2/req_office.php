@@ -1,8 +1,11 @@
+<?php 
+$curyear = date("Y")+543;
+?>
 <!DOCTYPE html> 
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo date("Y")+543; ?></title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></title>
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -36,11 +39,11 @@
 	?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo date("Y")+543; ?></h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></h1>
 			</div>
 			<div data-role="content">
 			<?php 
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี ".date("Y")+543." ของ $ofname1 จำนวน $mode1 ราย $mode2 บิล เพียงวันที่ $ccc</b><br/>";	
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี $curyear ของ $ofname1 จำนวน $mode1 ราย $mode2 บิล เพียงวันที่ $ccc</b><br/>";	
 				mysqli_data_seek($query,0);
 			?>
 			</div>
