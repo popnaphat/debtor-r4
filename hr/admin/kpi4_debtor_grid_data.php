@@ -20,12 +20,12 @@ $columns = array(
 // getting total number records without any search
 $sql = "SELECT * ";
 $sql.=" FROM debtor_kpi4";
-$query=mysqli_query($conn, $sql) or die("kpi2_debtor_grid_data.php: get debtor");
+$query=mysqli_query($conn, $sql) or die("kpi4_debtor_grid_data.php: get debtor");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 
-$sql = "SELECT sap_code,dept_name,line_code,acc_class,cus_name,bill_month,outstanding_debt,cus_tel";
+$sql = "SELECT sap_code,dept_name,transfer_month,acc_class,cus_name,bill_month,outstanding_debt,pea_command,status";
 $sql.=" FROM debtor_kpi4 WHERE 1=1";
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
 	$sql.=" AND ( sap_code LIKE '".$requestData['search']['value']."%' ";
