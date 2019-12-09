@@ -8,47 +8,45 @@ $columns = array(
 // datatable column index  => database column name
 	0 => 'sap_code', 
 	1 => 'dept_name',
-	2 => 'line_code',
-	3 => 'acc_class',
-	4 => 'cus_name',
-	5 => 'bill_month',
-	6 => 'outstanding_debt'
+	2 => 'cus_name',
+	3 => 'acc_class',	
+	4 => 'bill_month',
+	5 => 'outstanding_debt'
 );
 
 // getting total number records without any search
 $sql = "SELECT * ";
-$sql.=" FROM debtor_kpi3";
-$query=mysqli_query($conn, $sql) or die("kpi3_debtor_grid_data.php: get debtor");
+$sql.=" FROM debtor_kpi5";
+$query=mysqli_query($conn, $sql) or die("kpi5_debtor_grid_data.php: get debtor");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 
-$sql = "SELECT sap_code,dept_name,line_code,acc_class,cus_name,bill_month,outstanding_debt";
-$sql.=" FROM debtor_kpi3 WHERE 1=1";
+$sql = "SELECT sap_code,dept_name,acc_class,cus_name,bill_month,outstanding_debt";
+$sql.=" FROM debtor_kpi5 WHERE 1=1";
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
 	$sql.=" AND ( sap_code LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR dept_name LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR line_code LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR dept_name LIKE '".$requestData['search']['value']."%' ";	
 	$sql.=" OR cus_name LIKE '".$requestData['search']['value']."%' ";
+	$sql.=" OR acc_class LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR bill_month LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR outstanding_debt LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR acc_class LIKE '".$requestData['search']['value']."%' )";
+	$sql.=" OR outstanding_debt LIKE '".$requestData['search']['value']."%' )";
+	
 }
-$query=mysqli_query($conn, $sql) or die("kpi3_debtor_grid_data.php: get debtor");
+$query=mysqli_query($conn, $sql) or die("kpi5_debtor_grid_data.php: get debtor");
 $totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result. 
 $sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."  LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 /* $requestData['order'][0]['column'] contains colmun index, $requestData['order'][0]['dir'] contains order such as asc/desc  */	
-$query=mysqli_query($conn, $sql) or die("kpi3_debtor_grid_data.php: get debtor");
+$query=mysqli_query($conn, $sql) or die("kpi5_debtor_grid_data.php: get debtor");
 
 $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
 	$nestedData[] = $row["sap_code"];
-	$nestedData[] = $row["dept_name"];
-	$nestedData[] = $row["line_code"];
-	$nestedData[] = $row["acc_class"];
+	$nestedData[] = $row["dept_name"];	
 	$nestedData[] = $row["cus_name"];
+	$nestedData[] = $row["acc_class"];
 	$nestedData[] = $row["bill_month"];
 	$nestedData[] = $row["outstanding_debt"];
 	
