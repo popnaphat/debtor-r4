@@ -33,7 +33,8 @@
             <li><a href="outstanding_debtor.php"><i class="fa fa-ellipsis-h"></i><span>ลูกหนี้ค้างชำระเกินเงินประกัน</span></a></li>            
             <li><a href="kpi_debtor.php"><i class="fa fa-ellipsis-h"></i><span>ลูกหนี้เกินกำหนดชำระ</span></a></li>
             <li><a href="kpi2_debtor.php"><i class="fa fa-ellipsis-h"></i><span>ลูกหนี้รายย่อยก่อนปีปัจจุบัน</span></a></li> 
-            <li><a href="kpi3_debtor.php"><i class="fa fa-ellipsis-h"></i><span>ลูกหนี้รายย่อยปีปัจจุบัน</span></a></li>            
+            <li><a href="kpi3_debtor.php"><i class="fa fa-ellipsis-h"></i><span>ลูกหนี้รายย่อยปีปัจจุบัน</span></a></li>
+            <li><a href="kpi4_debtor.php"><i class="fa fa-ellipsis-h"></i><span>ลูกหนี้หลังโอนฯก่อนปีปัจจุบัน</span></a></li>            
             <!--li><a href="cashadvance.php"><i class="fa fa-circle-o"></i> Cash Advance</a></li>
             <li><a href="schedule.php"><i class="fa fa-circle-o"></i> Schedules</a></li-->
           </ul>
