@@ -68,7 +68,7 @@
           return "$strDay $strMonthThai $strYear";
       }
       function recordto_csvdebt1($conn,$reg){
-        $bm = "SELECT right(bill_month,7) as bm, left(sap_code,1) as region FROM debtor_kpi3 where right(bill_month,4) = YEAR(CURRENT_DATE) and left(sap_code,1) = '$reg' ORDER BY bm DESC LIMIT 1";
+        $bm = "SELECT right(bill_month,7) as bm, left(sap_code,1) as region FROM debtor_kpi3 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and left(sap_code,1) = '$reg' ORDER BY bm DESC LIMIT 1";
         $querybm = mysqli_query($conn,$bm);
         $fetchbm = mysqli_fetch_array($querybm);
         $mmm = substr($fetchbm['bm'],-7);
