@@ -16,7 +16,7 @@ $curyear = date("Y")+543;
 		require('conn.php');
 		
 		$NUMBER = $_GET['REQ'];
-			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt4 where right(bill_month,4) = YEAR(CURRENT_DATE)+543 and region = '$NUMBER' ORDER BY bill_month DESC LIMIT 1";
+			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt4 where right(bill_month,4) = '$curyear' and region = '$NUMBER' ORDER BY bill_month DESC LIMIT 1";
 			$querydu = mysqli_query($conn,$dateupload);
 			$fetchdu = mysqli_fetch_array($querydu);
 			$mmm = $fetchdu['bill_month'];
