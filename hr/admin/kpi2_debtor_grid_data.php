@@ -18,14 +18,14 @@ $columns = array(
 
 // getting total number records without any search
 $sql = "SELECT * ";
-$sql.=" FROM debtor_kpi";
-$query=mysqli_query($conn, $sql) or die("kpi_debtor_grid_data.php: get debtor");
+$sql.=" FROM debtor_kpi2";
+$query=mysqli_query($conn, $sql) or die("kpi2_debtor_grid_data.php: get debtor");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 
 $sql = "SELECT sap_code,dept_name,line_code,acc_class,cus_name,bill_month,outstanding_debt,cus_tel";
-$sql.=" FROM debtor_kpi WHERE 1=1";
+$sql.=" FROM debtor_kpi2 WHERE 1=1";
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
 	$sql.=" AND ( sap_code LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR dept_name LIKE '".$requestData['search']['value']."%' ";
@@ -40,7 +40,7 @@ $query=mysqli_query($conn, $sql) or die("kpi_debtor_grid_data.php: get debtor");
 $totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result. 
 $sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."  LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 /* $requestData['order'][0]['column'] contains colmun index, $requestData['order'][0]['dir'] contains order such as asc/desc  */	
-$query=mysqli_query($conn, $sql) or die("kpi_debtor_grid_data.php: get debtor");
+$query=mysqli_query($conn, $sql) or die("kpi2_debtor_grid_data.php: get debtor");
 
 $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
