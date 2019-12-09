@@ -110,6 +110,19 @@
 				}
 		}
     } );
+    $('#outdebtor-kpi3-grid').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+		url :"kpi3_debtor_grid_data.php", // json datasource
+		type: "post",  // method  , by default get
+		error: function(){  // error handling
+				$(".outdebtor-kpi3-grid-error").html("");
+				$("#outdebtor-kpi3-grid").append('<tbody class="outdebtor-kpi-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+				$("#outdebtor-kpi3-grid_processing").css("display","none");
+				}
+		}
+    } );
   })
 </script>
 <script>
