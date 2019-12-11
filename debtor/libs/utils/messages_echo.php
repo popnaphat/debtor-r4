@@ -262,5 +262,6 @@
         ']
       }
     }';
-    echo json_decode($json);
+    $show = json_decode($json);
+    echo json_encode($show);
 ?>
