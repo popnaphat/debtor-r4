@@ -1,6 +1,6 @@
  <?php
 
-  function getBubbleMessages3(){    
+  function getBubbleMessages3($conn){    
     $count = 1;
     $json = '{
       "type": "flex",

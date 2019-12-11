@@ -160,7 +160,7 @@
                else{
                $messages = getBubbleMessages3($countpea, $countdeb, $dateupload,$countpea2, $countdeb2, $dateupload2);
                }*/
-               $messages = getBubbleMessages3();
+               $messages = getBubbleMessages3($conn);
                
                $data = [
                      'replyToken' => $replyToken,
