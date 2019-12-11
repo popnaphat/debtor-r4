@@ -251,7 +251,7 @@ require('conn.php');
   $json .=          
         ']
       }
-    },';
+    }';
     $json2 = '{
       "type": "flex",
       "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
