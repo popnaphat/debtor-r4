@@ -127,7 +127,7 @@
                }
 
             if($sapcode == 'Z00000'){
-               /*$selectcdb = "SELECT * FROM debtor";
+               $selectcdb = "SELECT * FROM debtor";
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
@@ -159,8 +159,8 @@
                }
                else{
                $messages = getBubbleMessages3($countpea, $countdeb, $dateupload,$countpea2, $countdeb2, $dateupload2);
-               }*/
-               $messages = getBubbleMessages3();
+               }
+               //$messages = getBubbleMessages3();
                
                $data = [
                      'replyToken' => $replyToken,
