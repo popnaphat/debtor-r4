@@ -1,7 +1,7 @@
  <?php
 require('conn.php');
   
-  function abcdFIX(){
+  function abcdFIX($conn){
     $count = 1;  
     $json = '{
       "type": "flex",
@@ -256,7 +256,7 @@ require('conn.php');
     return $result;
   }
 
-    $ffff = abcdFIX();
+    $ffff = abcdFIX($conn);
     echo json_encode($ffff);
     /*function getBubbleMessages3($countpea,$countemp, $today,$countpea2,$countemp2, $today2){
       $count = 0;
