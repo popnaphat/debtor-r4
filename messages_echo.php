@@ -3,7 +3,7 @@ require('conn.php');
   
     
     $count = 1;
-    $json = '{
+    $json = '{{
       "type": "flex",
       "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
       "contents": {
@@ -252,7 +252,7 @@ require('conn.php');
         ']
       }
     }';
-    $json2 = '{
+    $json .= ',{
       "type": "flex",
       "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
       "contents": {
@@ -902,9 +902,9 @@ require('conn.php');
           }
         ]
       }
-    }';
+    }}';
     $show = json_decode($json);
-    $show2 = json_decode($json2);
+   // $show2 = json_decode($json2);
     echo json_encode($show,JSON_UNESCAPED_UNICODE).'<br>';
-    echo json_encode($show2,JSON_UNESCAPED_UNICODE).'<br>';
+    //echo json_encode($show2,JSON_UNESCAPED_UNICODE).'<br>';
 ?>
