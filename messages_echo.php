@@ -1,7 +1,8 @@
  <?php
 require('conn.php');
   
-  function abcdFIX($count){  
+  function abcdFIX(){
+    $count = 1;  
     $json = '{
       "type": "flex",
       "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
@@ -255,7 +256,7 @@ require('conn.php');
     return $result;
   }
 
-    $ffff = abcdFIX("1");
+    $ffff = abcdFIX();
     echo json_encode($ffff);
     /*function getBubbleMessages3($countpea,$countemp, $today,$countpea2,$countemp2, $today2){
       $count = 0;
