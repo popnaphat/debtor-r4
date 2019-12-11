@@ -231,7 +231,7 @@
               "paddingAll": "20px",
               "backgroundColor": "#7f3f98"
             }
-          }
+          },
         ]
       }
     }';
