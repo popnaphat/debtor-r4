@@ -263,5 +263,5 @@ require('conn.php');
       }
     }';
     $show = json_decode($json);
-    echo json_encode($show);
+    echo json_encode($show,JSON_UNESCAPED_UNICODE);
 ?>
