@@ -1,8 +1,7 @@
  <?php
 require('conn.php');
   
-  //function abcd(){  
-    /*$count = 1;
+  function abcdFIX($count){  
     $json = '{
       "type": "flex",
       "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
@@ -253,12 +252,12 @@ require('conn.php');
       }
     }';
     $result = json_decode($json);
-    //return $result;
-    echo json_encode($result);*/
-  //}
-    //$fff = abcd();
-    //echo json_encode($fff);
-    function getBubbleMessages3($countpea,$countemp, $today,$countpea2,$countemp2, $today2){
+    return $result;
+  }
+
+    $ffff = abcdFIX("1");
+    echo json_encode($ffff);
+    /*function getBubbleMessages3($countpea,$countemp, $today,$countpea2,$countemp2, $today2){
       $count = 0;
       $json = '{
         "type": "flex",
@@ -915,5 +914,5 @@ require('conn.php');
       return $result;
     }
     $gggg = getBubbleMessages3("ccc","ccc","ccc","ccc","ccc","ccc");
-    echo json_encode($gggg);
+    echo json_encode($gggg);*/
 ?>
