@@ -251,7 +251,7 @@ require('conn.php');
   $json .=          
         ']
       }
-    }';
+    },';
     $json2 = '{
       "type": "flex",
       "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
@@ -905,13 +905,6 @@ require('conn.php');
     }';
     $show = json_decode($json);
     $show2 = json_decode($json2);
-    //echo json_encode($show,JSON_UNESCAPED_UNICODE).'<br>';
-
-$serialized_data = serialize($show);
-$size = strlen($serialized_data);
-print($size * 8 / 1000);
-echo '<br><br><br>';
-$serialized_data2 = serialize($show2);
-$size2 = strlen($serialized_data2);
-print($size2 * 8 / 1000);
+    echo json_encode($show,JSON_UNESCAPED_UNICODE).'<br>';
+    echo json_encode($show2,JSON_UNESCAPED_UNICODE).'<br>';
 ?>
