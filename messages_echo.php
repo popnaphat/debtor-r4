@@ -256,5 +256,5 @@ require('conn.php');
     return $show;
   }
     $fff = abcd();
-    echo $fff;
+    echo json_encode($fff);
 ?>
