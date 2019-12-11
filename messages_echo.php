@@ -14,7 +14,7 @@ require('conn.php');
         $choose_query = mysqli_query($conn,$choose);
 
         while($eachhd = $choose_query->fetch_assoc()){
-        $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']."";
+        $selectcdb = "SELECT * FROM ".$eachhd['tblname_db'];
         $cdb = mysqli_query($conn,$selectcdb);
         $countdeb = mysqli_num_rows($cdb);
         
