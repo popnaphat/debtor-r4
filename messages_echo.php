@@ -30,11 +30,6 @@ require('conn.php');
     $json .=
           '{
             "type": "bubble",
-            "styles": {
-              "footer": {
-                "separator": true
-              }
-            },
             "header": {
               "type": "box",
               "layout": "vertical",
@@ -145,11 +140,6 @@ require('conn.php');
           $json .=
           '{
             "type": "bubble",
-            "styles": {
-              "footer": {
-                "separator": true
-              }
-            },
             "header": {
               "type": "box",
               "layout": "vertical",

@@ -29,12 +29,7 @@
     if($eachhd['headid'] < 6){    
     $json .=
           '{
-            "type": "bubble",
-            "styles": {
-              "footer": {
-                "separator": true
-              }
-            },
+            "type": "bubble",            
             "header": {
               "type": "box",
               "layout": "vertical",
@@ -144,12 +139,7 @@
         else{
           $json .=
           '{
-            "type": "bubble",
-            "styles": {
-              "footer": {
-                "separator": true
-              }
-            },
+            "type": "bubble",            
             "header": {
               "type": "box",
               "layout": "vertical",
