@@ -253,5 +253,8 @@ require('conn.php');
       }
     }';
     $show = json_decode($json);
-    echo json_encode($show,JSON_UNESCAPED_UNICODE);
+    echo json_encode($show,JSON_UNESCAPED_UNICODE).'<br>';
+    $serialized_data = serialize($show);
+$size = strlen($serialized_data);
+print($size * 8 / 1000);
 ?>
