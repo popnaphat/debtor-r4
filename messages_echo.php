@@ -1,5 +1,5 @@
  <?php
-
+require('conn.php');
   
     
     $count = 1;
