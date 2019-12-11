@@ -254,12 +254,17 @@
               "paddingAll": "20px",
               "backgroundColor": "#7f3f98"
             }
+<<<<<<< HEAD
           }';
         }
         $count++;
       }
   $json .=          
         ']
+=======
+          }
+        ]
+>>>>>>> 231d344dc440efe6e025aa84d5d75a8b8892bea7
       }
     }';
     $result = json_decode($json);
