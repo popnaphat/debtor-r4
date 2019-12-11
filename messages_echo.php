@@ -1,7 +1,7 @@
  <?php
 require('conn.php');
   
-  function abcd(){  
+  //function abcd(){  
     $count = 1;
     $json = '{
       "type": "flex",
@@ -252,9 +252,10 @@ require('conn.php');
         ']
       }
     }';
-    $show = json_decode($json);
-    return $show;
-  }
-    $fff = abcd();
-    echo json_encode($fff);
+    $result = json_decode($json);
+    //return $result;
+    echo json_encode($result);
+  //}
+    //$fff = abcd();
+    //echo json_encode($fff);
 ?>
