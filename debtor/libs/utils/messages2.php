@@ -239,7 +239,7 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },';
+                    },';}
                     $json .=
                     '{
                       "type": "spacer",
