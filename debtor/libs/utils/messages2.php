@@ -113,10 +113,8 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [';
-                  if($countdeb <> 0){
-                    $json .=
-                    '{
+                  "contents": [
+                    {
                       "type": "button",
                       "action": {
                         "type": "uri",
@@ -126,9 +124,8 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },';}
-                    $json .=
-                    '{
+                    },                    
+                    {
                       "type": "spacer",
                       "size": "sm"
                     }
@@ -226,10 +223,8 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [';
-                  if($countdeb <> 0){
-                    $json .=
-                    '{
+                  "contents": [
+                    {
                       "type": "button",
                       "action": {
                         "type": "uri",
@@ -239,9 +234,8 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },';}
-                    $json .=
-                    '{
+                    },
+                    {
                       "type": "spacer",
                       "size": "sm"
                     }
