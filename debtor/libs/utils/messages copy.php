@@ -1,30 +1,12 @@
 <?php
 
-  function getBubbleMessages($id, $conn, $dept_name, $sapcode){
-    $reg = substr($sapcode,0,1);
-    $count = 1;
+  function getBubbleMessages($id,$countemp, $today,$countemp2, $today2, $dept_name, $dept_code){
     $json = '{
       "type": "flex",
       "altText": "แจ้งเตือนข้อมูลลูกหนี้ค่าไฟฟ้า",
       "contents": {
         "type": "carousel",
-        "contents": [';
-
-        $choose = "SELECT * FROM flexmsghead";
-        $choose_query = mysqli_query($conn,$choose);
-        $flexnum = mysqli_num_rows($choose_query);
-
-        while($eachhd = $choose_query->fetch_assoc()){
-          $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$sapcode'";
-          $cdb = mysqli_query($conn,$selectcdb);
-          $countdeb = mysqli_num_rows($cdb);
-
-          $selectcp = "SELECT * FROM ".$eachhd['tblupdate_name']." WHERE region = '$reg' ORDER BY id DESC LIMIT 1";
-          $cp = mysqli_query($conn,$selectcp);
-          $getlastrowcp = mysqli_fetch_array($cp);
-          $dateupload = $getlastrowcp['file_upload_timestamp'];
-          if($eachhd['headid'] < $flexnum ){
-    $json .= '
+        "contents": [
           {
             "type": "bubble",
             "styles": {
@@ -38,14 +20,14 @@
               "contents": [
                 {
                   "type": "text",
-                  "text": "เรื่องที่ '.$count.'",
+                  "text": "เรื่องที่ 1",
                   "weight": "bold",
                   "color": "#1DB446",
                   "size": "sm"
                 },
                 {
                   "type": "text",
-                  "text": "'.$eachhd['tblname_th'].'ของ'.$dept_name.'",
+                  "text": "ข้อมูลลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันของ'.$dept_name.'",
                   "weight": "bold",
                   "size": "md",
                   "margin": "md",
@@ -76,7 +58,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$dateupload.'",
+                          "text": "'.$today.'",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
@@ -96,7 +78,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countdeb.' ราย",
+                          "text": "'.$countemp.' ราย",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
@@ -114,22 +96,19 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [';
-                  if($countdeb <> 0){
-                    $json .=
-                    '{
+                  "contents": [
+                    {
                       "type": "button",
                       "action": {
                         "type": "uri",
                         "label": "คลิกดูรายละเอียด",
-                        "uri": "'.$eachhd['center_url'].'/req_office.php?REQ='.$sapcode.'"
+                        "uri": "https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ='.$dept_code.'"
                       },
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },';}
-                    $json .=
-                    '{
+                    },
+                    {
                       "type": "spacer",
                       "size": "sm"
                     }
@@ -138,22 +117,13 @@
               ],
               "paddingAll": "20px",
               "backgroundColor": "#7f3f98"
-            }';
-            if($countdeb <> 0){
-              $json .=
-              ',
+            },
           "action": {
           "type": "postback",
           "label": "action",
-          "data": "'.$id.'debt'.$sapcode.'"
-        }';}
-        $json .=
-        '
-          },';
+          "data": "'.$id.'debt'.$dept_code.'"
         }
-        else if($eachhd['headid'] == $flexnum){
-          $json .=
-          '
+          },
           {
             "type": "bubble",
             "styles": {
@@ -167,14 +137,14 @@
               "contents": [
                 {
                   "type": "text",
-                  "text": "เรื่องที่ '.$count.'",
+                  "text": "เรื่องที่ 2",
                   "weight": "bold",
                   "color": "#1DB446",
                   "size": "sm"
                 },
                 {
                   "type": "text",
-                  "text": "'.$eachhd['tblname_th'].'ของ'.$dept_name.'",
+                  "text": "ข้อมูลลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนดของ'.$dept_name.'",
                   "weight": "bold",
                   "size": "md",
                   "margin": "md",
@@ -205,7 +175,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$dateupload.'",
+                          "text": "'.$today2.'",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
@@ -225,7 +195,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countdeb.' ราย",
+                          "text": "'.$countemp2.' ราย",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
@@ -243,22 +213,19 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [';
-                  if($countdeb <> 0){
-                    $json .=
-                    '{
+                  "contents": [
+                    {
                       "type": "button",
                       "action": {
                         "type": "uri",
                         "label": "คลิกดูรายละเอียด",
-                        "uri": "'.$eachhd['center_url'].'/req_office.php?REQ='.$sapcode.'"
+                        "uri": "https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ='.$dept_code.'"
                       },
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },';}
-                    $json .=
-                    '{
+                    },
+                    {
                       "type": "spacer",
                       "size": "sm"
                     }
@@ -267,23 +234,9 @@
               ],
               "paddingAll": "20px",
               "backgroundColor": "#7f3f98"
-            }';
-            if($countdeb <> 0){
-              $json .=
-              ',
-          "action": {
-          "type": "postback",
-          "label": "action",
-          "data": "'.$id.'debt'.$sapcode.'"
-        }';}
-        $json .=
-        '
-          },';
-        }
-        $count++;
-      }
-      $json .=          
-        ']
+            }
+          }
+        ]
       }
     }';
     $result = json_decode($json);

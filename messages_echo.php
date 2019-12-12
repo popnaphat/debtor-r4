@@ -1,7 +1,8 @@
  <?php
 require('conn.php');
   
-function getBubbleMessages2($conn, $region_name, $sapreg){
+function getBubbleMessages($id, $conn, $dept_name, $sapcode){
+  $reg = substr($sapcode,0,1);
   $count = 1;
   $json = '{
     "type": "flex",
@@ -15,23 +16,23 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
       $flexnum = mysqli_num_rows($choose_query);
 
       while($eachhd = $choose_query->fetch_assoc()){
-      $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where left(sap_code,1) = '$sapreg'";
-      $cdb = mysqli_query($conn,$selectcdb);
-      $countdeb = mysqli_num_rows($cdb);
-      
-      $selectglr = "SELECT * FROM ".$eachhd['tblupdate_name']." where region = '$sapreg' ORDER BY id DESC LIMIT 1";
-      $glr = mysqli_query($conn,$selectglr);
-      $getlastrow = mysqli_fetch_array($glr);
-      $dateupload = $getlastrow['file_upload_timestamp'];
-  
-      $selectcp = "SELECT * from ".$eachhd['tblname_db']." where left(sap_code,1) = '$sapreg' GROUP BY sap_code";
-      $cp = mysqli_query($conn,$selectcp);
-      $countpea = mysqli_num_rows($cp);
+        $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$sapcode'";
+        $cdb = mysqli_query($conn,$selectcdb);
+        $countdeb = mysqli_num_rows($cdb);
 
-  if($eachhd['headid'] < $flexnum ){    
-  $json .=
-        '{
+        $selectcp = "SELECT * FROM ".$eachhd['tblupdate_name']." WHERE region = '$reg' ORDER BY id DESC LIMIT 1";
+        $cp = mysqli_query($conn,$selectcp);
+        $getlastrowcp = mysqli_fetch_array($cp);
+        $dateupload = $getlastrowcp['file_upload_timestamp'];
+        if($eachhd['headid'] < $flexnum ){
+  $json .= '
+        {
           "type": "bubble",
+          "styles": {
+            "footer": {
+              "separator": true
+            }
+          },
           "header": {
             "type": "box",
             "layout": "vertical",
@@ -45,7 +46,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
               },
               {
                 "type": "text",
-                "text": "'.$eachhd['tblname_th'].'ของ'.$region_name.'",
+                "text": "'.$eachhd['tblname_th'].'ของ'.$dept_name.'",
                 "weight": "bold",
                 "size": "md",
                 "margin": "md",
@@ -96,7 +97,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
                       },
                       {
                         "type": "text",
-                        "text": "'.$countpea.' กฟฟ. ('.$countdeb.' ราย)",
+                        "text": "'.$countdeb.' ราย",
                         "size": "sm",
                         "color": "#ffffff",
                         "align": "end"
@@ -122,7 +123,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
                     "action": {
                       "type": "uri",
                       "label": "คลิกดูรายละเอียด",
-                      "uri": "'.$eachhd['center_url'].'/region.php?REQ='.$sapreg.'"
+                      "uri": "'.$eachhd['center_url'].'/req_office.php?REQ='.$sapcode.'"
                     },
                     "height": "sm",
                     "style": "primary",
@@ -138,13 +139,29 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
             ],
             "paddingAll": "20px",
             "backgroundColor": "#7f3f98"
-          }
+          }';
+          if($countdeb <> 0){
+            $json .=
+            ',
+        "action": {
+        "type": "postback",
+        "label": "action",
+        "data": "'.$id.'debt'.$sapcode.'"
+      }';}
+      $json .=
+      '
         },';
       }
       else if($eachhd['headid'] == $flexnum){
         $json .=
-        '{
+        '
+        {
           "type": "bubble",
+          "styles": {
+            "footer": {
+              "separator": true
+            }
+          },
           "header": {
             "type": "box",
             "layout": "vertical",
@@ -158,7 +175,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
               },
               {
                 "type": "text",
-                "text": "'.$eachhd['tblname_th'].'ของ'.$region_name.'",
+                "text": "'.$eachhd['tblname_th'].'ของ'.$dept_name.'",
                 "weight": "bold",
                 "size": "md",
                 "margin": "md",
@@ -209,7 +226,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
                       },
                       {
                         "type": "text",
-                        "text": "'.$countpea.' กฟฟ. ('.$countdeb.' ราย)",
+                        "text": "'.$countdeb.' ราย",
                         "size": "sm",
                         "color": "#ffffff",
                         "align": "end"
@@ -235,7 +252,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
                     "action": {
                       "type": "uri",
                       "label": "คลิกดูรายละเอียด",
-                      "uri": "'.$eachhd['center_url'].'/region.php?REQ='.$sapreg.'"
+                      "uri": "'.$eachhd['center_url'].'/req_office.php?REQ='.$sapcode.'"
                     },
                     "height": "sm",
                     "style": "primary",
@@ -251,18 +268,28 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
             ],
             "paddingAll": "20px",
             "backgroundColor": "#7f3f98"
-          }
-        }';
+          }';
+          if($countdeb <> 0){
+            $json .=
+            ',
+        "action": {
+        "type": "postback",
+        "label": "action",
+        "data": "'.$id.'debt'.$sapcode.'"
+      }';}
+      $json .=
+      '
+        },';
       }
       $count++;
     }
-$json .=          
+    $json .=          
       ']
     }
   }';
   $result = json_decode($json);
   return $result;
 }
-$ttt = getBubbleMessages2($conn,"กฟต.2","K");
+$ttt = getBubbleMessages("xx",$conn,"กฟต.2","J10101");
 echo json_encode($ttt);
 ?>
