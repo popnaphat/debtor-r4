@@ -180,7 +180,7 @@
                   return;
             }
             else if($sapnum == '00000' AND $sapreg <> 'Z'){
-               $selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
+               /*$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
@@ -212,7 +212,8 @@
                }
                else{
                $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $countpea2, $countdeb2, $dateupload2,$regionname, $sapreg);
-               }
+               }*/
+               $messages = getBubbleMessages2($conn,$regionname, $sapreg);
                $data = [
                      'replyToken' => $replyToken,
                      'messages' => [$messages]
