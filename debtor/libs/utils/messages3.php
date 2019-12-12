@@ -11,6 +11,7 @@
 
         $choose = "SELECT * FROM flexmsghead";
         $choose_query = mysqli_query($conn,$choose);
+        $flexnum = mysqli_num_rows($choose_query);
 
         while($eachhd = $choose_query->fetch_assoc()){
         $selectcdb = "SELECT * FROM ".$eachhd['tblname_db'];
@@ -25,7 +26,8 @@
         $selectcp = "SELECT * from ".$eachhd['tblname_db']." GROUP BY sap_code";
         $cp = mysqli_query($conn,$selectcp);
         $countpea = mysqli_num_rows($cp);
-    if($eachhd['headid'] < 6){    
+
+    if($eachhd['headid'] < $flexnum ){    
     $json .=
           '{
             "type": "bubble",
@@ -111,8 +113,10 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [
-                    {
+                  "contents": [';
+                  if($countdeb <> 0){
+                    $json .=
+                    '{
                       "type": "button",
                       "action": {
                         "type": "uri",
@@ -122,8 +126,9 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },
-                    {
+                    },';}
+                    $json .=
+                    '{
                       "type": "spacer",
                       "size": "sm"
                     }
@@ -135,7 +140,7 @@
             }
           },';
         }
-        else{
+        else if($eachhd['headid'] == $flexnum){
           $json .=
           '{
             "type": "bubble",
@@ -221,8 +226,10 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [
-                    {
+                  "contents": [';
+                  if($countdeb <> 0){
+                    $json .=
+                    '{
                       "type": "button",
                       "action": {
                         "type": "uri",
@@ -232,8 +239,9 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },
-                    {
+                    },';}
+                    $json .=
+                    '{
                       "type": "spacer",
                       "size": "sm"
                     }
