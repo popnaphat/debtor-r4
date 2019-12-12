@@ -180,39 +180,40 @@
                   return;
             }
             else if($sapnum == '00000' AND $sapreg <> 'Z'){
-               $selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
-               $cdb = mysqli_query($conn,$selectcdb);
-               $countdeb = mysqli_num_rows($cdb);
+               // $selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
+               // $cdb = mysqli_query($conn,$selectcdb);
+               // $countdeb = mysqli_num_rows($cdb);
                
-               $selectglr = "SELECT * FROM tbl_log_csv_debt1 where region = '$sapreg' ORDER BY id DESC LIMIT 1";
-               $glr = mysqli_query($conn,$selectglr);
-               $getlastrow = mysqli_fetch_array($glr);
-               $dateupload = $getlastrow['file_upload_timestamp'];
+               // $selectglr = "SELECT * FROM tbl_log_csv_debt1 where region = '$sapreg' ORDER BY id DESC LIMIT 1";
+               // $glr = mysqli_query($conn,$selectglr);
+               // $getlastrow = mysqli_fetch_array($glr);
+               // $dateupload = $getlastrow['file_upload_timestamp'];
    
-               $selectcp = "SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code";
-               $cp = mysqli_query($conn,$selectcp);
-               $countpea = mysqli_num_rows($cp);
-               ///////////////////////////////////////////////
-               $selectcdb2 = "SELECT * FROM debtor_kpi where left(sap_code,1) = '$sapreg'";
-               $cdb2 = mysqli_query($conn,$selectcdb2);
-               $countdeb2 = mysqli_num_rows($cdb2);
+               // $selectcp = "SELECT dept_name, sap_code from debtor where left(sap_code,1) = '$sapreg' GROUP BY sap_code";
+               // $cp = mysqli_query($conn,$selectcp);
+               // $countpea = mysqli_num_rows($cp);
+               // ///////////////////////////////////////////////
+               // $selectcdb2 = "SELECT * FROM debtor_kpi where left(sap_code,1) = '$sapreg'";
+               // $cdb2 = mysqli_query($conn,$selectcdb2);
+               // $countdeb2 = mysqli_num_rows($cdb2);
                
-               $selectglr2 = "SELECT * FROM tbl_log_csv_debt2 where region = '$sapreg' ORDER BY id DESC LIMIT 1";
-               $glr2 = mysqli_query($conn,$selectglr2);
-               $getlastrow2 = mysqli_fetch_array($glr2);
-               $dateupload2 = $getlastrow2['file_upload_timestamp'];
+               // $selectglr2 = "SELECT * FROM tbl_log_csv_debt2 where region = '$sapreg' ORDER BY id DESC LIMIT 1";
+               // $glr2 = mysqli_query($conn,$selectglr2);
+               // $getlastrow2 = mysqli_fetch_array($glr2);
+               // $dateupload2 = $getlastrow2['file_upload_timestamp'];
    
-               $selectcp2 = "SELECT dept_name, sap_code from debtor_kpi where left(sap_code,1) = '$sapreg' GROUP BY sap_code";
-               $cp2 = mysqli_query($conn,$selectcp2);
-               $countpea2 = mysqli_num_rows($cp2); 
+               // $selectcp2 = "SELECT dept_name, sap_code from debtor_kpi where left(sap_code,1) = '$sapreg' GROUP BY sap_code";
+               // $cp2 = mysqli_query($conn,$selectcp2);
+               // $countpea2 = mysqli_num_rows($cp2); 
                
-               if($countdeb == 0){
-                  $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
-                  $messages = [ 'type' => 'text', 'text' => $txtans];
-               }
-               else{
-               $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $countpea2, $countdeb2, $dateupload2,$regionname, $sapreg);
-               }
+               // if($countdeb == 0){
+               //    $txtans = "คุณไม่มีเรื่องแจ้งเตือนสำหรับวันนี้";
+               //    $messages = [ 'type' => 'text', 'text' => $txtans];
+               // }
+               // else{
+               // $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $countpea2, $countdeb2, $dateupload2,$regionname, $sapreg);
+               // }
+               $messages = getBubbleMessages2($conn,$regionname,$sapreg);
                $data = [
                      'replyToken' => $replyToken,
                      'messages' => [$messages]
