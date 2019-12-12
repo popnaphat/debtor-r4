@@ -211,7 +211,7 @@
                   $messages = [ 'type' => 'text', 'text' => $txtans];
                }
                else{
-               $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $countpea2, $countdeb2, $dateupload2, $regionname, $sapreg);
+               $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $countpea2, $countdeb2, $dateupload2,$regionname, $sapreg);
                }
                $data = [
                      'replyToken' => $replyToken,

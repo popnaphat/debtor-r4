@@ -31,7 +31,7 @@
 		$insert = "INSERT INTO peamember (memberid, memberuser_id, membername, membersurname, memberpea_email, datetime_regis) VALUES ('$empID', '$userId', '$name', '$surname', '$email', '$cDate')";
 		if($conn->query($sql) AND $conn->query($insert)){
 			if($sapcode == 'Z00000'){
-				$selectcdb = "SELECT * FROM debtor";
+			   /*$selectcdb = "SELECT * FROM debtor";
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
@@ -63,7 +63,9 @@
                }
                else{
                $messages = getBubbleMessages3($countpea, $countdeb, $dateupload,$countpea2, $countdeb2, $dateupload2);
-               }
+			   }*/
+			   $messages = getBubbleMessages3($conn);
+               
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 
 				$data = [
@@ -83,7 +85,7 @@
 					curl_close($ch);
 			}
 			else if($sapnum == '00000' AND $sapreg <> 'Z'){
-				$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
+			   /*$selectcdb = "SELECT * FROM debtor where left(sap_code,1) = '$sapreg'";
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
@@ -115,7 +117,8 @@
                }
                else{
                $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $countpea2, $countdeb2, $dateupload2, $regionname, $sapreg);
-               }
+			   }*/
+			   $messages = getBubbleMessages2($conn, $regionname, $sapreg);
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 				$data = [
 						'to' => $userId,
