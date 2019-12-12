@@ -279,7 +279,7 @@ function getBubbleMessages($id, $conn, $dept_name, $sapcode){
       }';}
       $json .=
       '
-        },';
+        }';
       }
       $count++;
     }
