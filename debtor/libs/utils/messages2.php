@@ -1,6 +1,6 @@
  <?php
 
-  function getBubbleMessages2($conn, $regionname, $sapreg){
+  function getBubbleMessages2($conn, $region_name, $sapreg){
     $count = 1;
     $json = '{
       "type": "flex",
@@ -44,7 +44,7 @@
                 },
                 {
                   "type": "text",
-                  "text": "'.$eachhd['tblname_th'].'ของ'.$regionname.'",
+                  "text": "'.$eachhd['tblname_th'].'ของ'.$region_name.'",
                   "weight": "bold",
                   "size": "md",
                   "margin": "md",
@@ -113,8 +113,10 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [
-                    {
+                  "contents": [';
+                  if($countdeb <> 0){
+                    $json .=
+                    '{
                       "type": "button",
                       "action": {
                         "type": "uri",
@@ -124,8 +126,9 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },                    
-                    {
+                    },';}
+                    $json .=
+                    '{
                       "type": "spacer",
                       "size": "sm"
                     }
@@ -154,7 +157,7 @@
                 },
                 {
                   "type": "text",
-                  "text": "'.$eachhd['tblname_th'].'ของ'.$regionname.'",
+                  "text": "'.$eachhd['tblname_th'].'ของ'.$region_name.'",
                   "weight": "bold",
                   "size": "md",
                   "margin": "md",
@@ -223,8 +226,10 @@
                   "layout": "vertical",
                   "flex": 0,
                   "spacing": "sm",
-                  "contents": [
-                    {
+                  "contents": [';
+                  if($countdeb <> 0){
+                    $json .=
+                    '{
                       "type": "button",
                       "action": {
                         "type": "uri",
@@ -234,8 +239,9 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },
-                    {
+                    },';}
+                    $json .=
+                    '{
                       "type": "spacer",
                       "size": "sm"
                     }
