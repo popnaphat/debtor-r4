@@ -14,16 +14,16 @@
         $flexnum = mysqli_num_rows($choose_query);
 
         while($eachhd = $choose_query->fetch_assoc()){
-        $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where left(sap_code,1) = ".$sapreg;
+        $selectcdb = "SELECT * FROM ".$eachhd['tblname_db'];
         $cdb = mysqli_query($conn,$selectcdb);
         $countdeb = mysqli_num_rows($cdb);
         
-        $selectglr = "SELECT * FROM ".$eachhd['tblupdate_name']." where region = ".$sapreg." ORDER BY id DESC LIMIT 1";
+        $selectglr = "SELECT * FROM ".$eachhd['tblupdate_name']." ORDER BY id DESC LIMIT 1";
         $glr = mysqli_query($conn,$selectglr);
         $getlastrow = mysqli_fetch_array($glr);
         $dateupload = $getlastrow['file_upload_timestamp'];
     
-        $selectcp = "SELECT * from ".$eachhd['tblname_db']." where left(sap_code,1) = ".$sapreg." GROUP BY sap_code";
+        $selectcp = "SELECT * from ".$eachhd['tblname_db']." GROUP BY sap_code";
         $cp = mysqli_query($conn,$selectcp);
         $countpea = mysqli_num_rows($cp);
 
