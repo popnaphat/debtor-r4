@@ -263,6 +263,6 @@ $json .=
   $result = json_decode($json);
   return $result;
 }
-$ttt = getBubbleMessages2($conn,"กฟต.1","J");
+$ttt = getBubbleMessages2($conn,"กฟต.2","K");
 echo json_encode($ttt);
 ?>
