@@ -18,7 +18,7 @@
         $cdb = mysqli_query($conn,$selectcdb);
         $countdeb = mysqli_num_rows($cdb);
         
-        $selectglr = "SELECT file_upload_timestamp FROM ".$eachhd['tblupdate_name']." where region = '$sapreg' ORDER BY id DESC LIMIT 1";
+        $selectglr = "SELECT * FROM ".$eachhd['tblupdate_name']." ORDER BY id DESC LIMIT 1";
         $glr = mysqli_query($conn,$selectglr);
         $getlastrow = mysqli_fetch_array($glr);
         $dateupload = $getlastrow['file_upload_timestamp'];
