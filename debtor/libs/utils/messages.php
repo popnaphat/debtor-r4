@@ -19,7 +19,7 @@
           $cdb = mysqli_query($conn,$selectcdb);
           $countdeb = mysqli_num_rows($cdb);
 
-          $selectcp = "SELECT * FROM ".$eachhd['tblupdate_name']." WHERE region = '$reg' ORDER BY id DESC LIMIT 1";
+          $selectcp = "SELECT * FROM ".$eachhd['tblupdate_name']." ORDER BY id DESC LIMIT 1";
           $cp = mysqli_query($conn,$selectcp);
           $getlastrowcp = mysqli_fetch_array($cp);
           $dateupload = $getlastrowcp['file_upload_timestamp'];
