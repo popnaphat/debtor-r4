@@ -122,7 +122,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
                     "action": {
                       "type": "uri",
                       "label": "คลิกดูรายละเอียด",
-                      "uri": "'.$eachhd['center_url'].'"
+                      "uri": "'.$eachhd['center_url'].'/region.php?REQ='.$sapreg.'"
                     },
                     "height": "sm",
                     "style": "primary",
@@ -235,7 +235,7 @@ function getBubbleMessages2($conn, $region_name, $sapreg){
                     "action": {
                       "type": "uri",
                       "label": "คลิกดูรายละเอียด",
-                      "uri": "'.$eachhd['center_url'].'"
+                      "uri": "'.$eachhd['center_url'].'/region.php?REQ='.$sapreg.'"
                     },
                     "height": "sm",
                     "style": "primary",
