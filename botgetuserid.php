@@ -213,8 +213,7 @@
                else{
                $messages = getBubbleMessages2($countpea, $countdeb, $dateupload, $countpea2, $countdeb2, $dateupload2,$regionname, $sapreg);
                }*/
-               //$messages = getBubbleMessages2($conn,$regionname, $sapreg);
-               $messages = getBubbleMessages3($conn);
+               $messages = getBubbleMessages2($conn,$regionname,$sapreg);
                $data = [
                      'replyToken' => $replyToken,
                      'messages' => [$messages]
