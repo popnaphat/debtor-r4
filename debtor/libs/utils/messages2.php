@@ -1,6 +1,6 @@
  <?php
 
-  function getBubbleMessages2($conn, $region_name, $sapreg){
+  function getBubbleMessages2($conn, $regionname, $sapreg){
     $count = 1;
     $json = '{
       "type": "flex",
@@ -44,7 +44,7 @@
                 },
                 {
                   "type": "text",
-                  "text": "'.$eachhd['tblname_th'].'ของ'.$region_name.'",
+                  "text": "'.$eachhd['tblname_th'].'ของ'.$regionname.'",
                   "weight": "bold",
                   "size": "md",
                   "margin": "md",
@@ -154,7 +154,7 @@
                 },
                 {
                   "type": "text",
-                  "text": "'.$eachhd['tblname_th'].'ของ'.$region_name.'",
+                  "text": "'.$eachhd['tblname_th'].'ของ'.$regionname.'",
                   "weight": "bold",
                   "size": "md",
                   "margin": "md",
