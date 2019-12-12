@@ -114,7 +114,7 @@
                   "flex": 0,
                   "spacing": "sm",
                   "contents": [';
-                  //if($countdeb <> 0){
+                  if($countdeb <> 0){
                     $json .=
                     '{
                       "type": "button",
@@ -126,7 +126,7 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },';//}
+                    },';}
                     $json .=
                     '{
                       "type": "spacer",
@@ -227,7 +227,7 @@
                   "flex": 0,
                   "spacing": "sm",
                   "contents": [';
-                  //if($countdeb <> 0){
+                  if($countdeb <> 0){
                     $json .=
                     '{
                       "type": "button",
@@ -239,7 +239,7 @@
                       "height": "sm",
                       "style": "primary",
                       "color": "#B58E38"
-                    },';//}
+                    },';
                     $json .=
                     '{
                       "type": "spacer",
