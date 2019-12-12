@@ -138,7 +138,7 @@
 			}
 			else if($sapnum <> '00000'){
 				
-				$selectcdb = "SELECT * FROM debtor where sap_code = '$sapcode'";
+				/*$selectcdb = "SELECT * FROM debtor where sap_code = '$sapcode'";
                $cdb = mysqli_query($conn,$selectcdb);
                $countdeb = mysqli_num_rows($cdb);
                
@@ -167,8 +167,12 @@
                }
                else{
                $messages = getBubbleMessages("xx",$countdeb, $dateupload,$countdeb2, $dateupload2, $dept_name, $sapcode);
-               }
-
+			   }*/
+			   $selectglr = "SELECT pea_office.dept_name FROM debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$sapcode' LIMIT 1";
+               $glr = mysqli_query($conn,$selectglr);
+               $getlastrow = mysqli_fetch_array($glr);               
+               $dept_name = $getlastrow['dept_name'];
+			   $messages = getBubbleMessages("xx", $conn, $dept_name, $sapcode);
 				$access_token = "CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=";
 				$data = [
 						'to' => $userId,
