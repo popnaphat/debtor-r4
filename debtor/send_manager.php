@@ -38,7 +38,7 @@ SELECT sap_code FROM debtor_kpi3
 UNION
 SELECT sap_code FROM debtor_kpi4 
 UNION
-SELECT sap_code FROM debtor_kpi5 ) sp ON o.sap_code = sp.sap_code WHERE m.memberid = '483787' GROUP BY m.memberid
+SELECT sap_code FROM debtor_kpi5 ) sp ON o.sap_code = sp.sap_code GROUP BY m.memberid
 ";
   $notify_office = mysqli_query($conn, $fetch_notify_office) or die($fetch_notify_office);
   if(mysqli_num_rows($notify_office) == 0){
