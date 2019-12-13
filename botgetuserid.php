@@ -335,7 +335,7 @@
                if(mysqli_num_rows($overdue2) > 0){
                while($eachhd = $choose_query->fetch_assoc()){
 
-                  $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$zzz' GROUP BY sap_code";
+                  $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$zzz' ";
                   $cdb = mysqli_query($conn,$selectcdb);
                   $countdeb = mysqli_num_rows($cdb);
 
@@ -404,7 +404,7 @@
                if(mysqli_num_rows($overdue2) > 0){
                while($eachhd = $choose_query->fetch_assoc()){
 
-                  $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$zzz' GROUP BY sap_code";
+                  $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$zzz' ";
                   $cdb = mysqli_query($conn,$selectcdb);
                   $countdeb = mysqli_num_rows($cdb);
 
