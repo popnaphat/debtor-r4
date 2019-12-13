@@ -326,7 +326,7 @@
                $choose_query = mysqli_query($conn,$choose);
                $number = 1;
                ///get search result
-               $overdue1 = "SELECT * FROM pea_office WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
+               $overdue1 = "SELECT * FROM pea_office WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') AND sap_code NOT LIKE concat('%','00000','%') limit 1";
                $overdue2 = mysqli_query($conn, $overdue1);
                $overdue3 = mysqli_fetch_array($overdue2);
                $zz = $overdue3['dept_name'];
@@ -394,7 +394,7 @@
                $choose_query = mysqli_query($conn,$choose);
                $number = 1;
                ///get search result
-               $overdue1 = "SELECT * FROM pea_office WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
+               $overdue1 = "SELECT * FROM pea_office WHERE dept_name LIKE concat('%','$peaname','%') AND sap_code NOT LIKE concat('%','00000','%') limit 1";
                $overdue2 = mysqli_query($conn, $overdue1);
                $overdue3 = mysqli_fetch_array($overdue2);
                $zz = $overdue3['dept_name'];
@@ -407,10 +407,11 @@
                   $cdb = mysqli_query($conn,$selectcdb);
                   $countdeb = mysqli_num_rows($cdb);
 
-                     $txtans .= "$number.".$eachhd['tblname_th']."ของ$zz มี $countdeb ราย \n";
+                     $txtans .= "$number.".$eachhd['tblname_th']."ของ$zz มี $countdeb ราย ";
                   if($countdeb > 0){
-                     $txtans .= "คลิก>>".$eachhd['center_url']."/req_office.php?REQ=$zzz \n";
+                     $txtans .= "คลิก>>".$eachhd['center_url']."/req_office.php?REQ=$zzz ";
                   }
+                     $txtans .= "\n";
                   $number++;
                }
             }
