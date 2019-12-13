@@ -339,10 +339,11 @@
                   $cdb = mysqli_query($conn,$selectcdb);
                   $countdeb = mysqli_num_rows($cdb);
 
-                     $txtans .= "$number.".$eachhd['tblname_th']."ของ$zz มี $countdeb ราย\n";
+                     $txtans .= "$number.".$eachhd['tblname_th']."ของ$zz มี $countdeb ราย ";
                   if($countdeb > 0){
-                     $txtans .= "คลิก>>".$eachhd['center_url']."/req_office.php?REQ=$zzz \n";
+                     $txtans .= "คลิก>>".$eachhd['center_url']."/req_office.php?REQ=$zzz ";
                   }
+                  $txtans .= "\n";
                   $number++;
                }
             }
