@@ -288,6 +288,7 @@
          //////
          else if($nums4 > 0 AND strtolower(substr($message,0,2)) == "dt"){
             $peaname = trim(substr($message,2));
+            ///permission check
             $data = "SELECT * FROM peaemp e left join peaemail m on e.empID = m.empcode
             left JOIN pea_office o ON LEFT(e.dept_change_code,11) = LEFT(o.unit_code,11)
             WHERE e.empID = '$r0' GROUP BY e.empID";
@@ -301,68 +302,116 @@
             $sapcode = $result['sap_code'];
                $sapnum = substr($sapcode,1);
                $sapreg = substr($sapcode,0,1);
+
             if($sapnum == '00000' AND $sapreg <> 'Z'){
-               $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
-               $lastpea2 = mysqli_query($conn, $lastpea1);
-               $lastpea3 = mysqli_fetch_array($lastpea2);
-               $pn = $lastpea3['dept_name'];
-               $sc = $lastpea3['sap_code'];
-               $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND sap_code = '$sc'";
-               $findpea2 = mysqli_query($conn, $findpea1);
-               $findpea3 = mysqli_num_rows($findpea2);
-               ////
-               $overdue1 = "SELECT * FROM debtor_kpi WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
+               // $lastpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
+               // $lastpea2 = mysqli_query($conn, $lastpea1);
+               // $lastpea3 = mysqli_fetch_array($lastpea2);
+               // $pn = $lastpea3['dept_name'];
+               // $sc = $lastpea3['sap_code'];
+               // $findpea1 = "SELECT * FROM debtor WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND sap_code = '$sc'";
+               // $findpea2 = mysqli_query($conn, $findpea1);
+               // $findpea3 = mysqli_num_rows($findpea2);
+               // ////
+               // $overdue1 = "SELECT * FROM debtor_kpi WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
+               // $overdue2 = mysqli_query($conn, $overdue1);
+               // $overdue3 = mysqli_fetch_array($overdue2);
+               // $zz = $overdue3['dept_name'];
+               // $zzz = $overdue3['sap_code'];
+               // $od1 = "SELECT * FROM debtor_kpi WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND sap_code = '$zzz'";
+               // $od2 = mysqli_query($conn, $od1);
+               // $od3 = mysqli_num_rows($od2);
+               /////
+               $choose = "SELECT * FROM flexmsghead";
+               $choose_query = mysqli_query($conn,$choose);
+               $number = 1;
+               ///get search result
+               $overdue1 = "SELECT * FROM pea_office WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND dept_name LIKE concat('%','$peaname','%') limit 1";
                $overdue2 = mysqli_query($conn, $overdue1);
                $overdue3 = mysqli_fetch_array($overdue2);
                $zz = $overdue3['dept_name'];
                $zzz = $overdue3['sap_code'];
-               $od1 = "SELECT * FROM debtor_kpi WHERE left(sap_code,1) LIKE concat('%','$sapreg','%') AND sap_code = '$zzz'";
-               $od2 = mysqli_query($conn, $od1);
-               $od3 = mysqli_num_rows($od2);
+               $txtans = "";
+               if(mysqli_num_rows($overdue2) > 0){
+               while($eachhd = $choose_query->fetch_assoc()){
 
-               if($findpea3 == 0 AND $od3 == 0){
-                  $txtans = "กฟฟ.นี้ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระ";
-               }
-               else if($findpea3 <> 0 AND $od3 == 0){
-                  $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
-               }
-               else if($findpea3 == 0 AND $od3 <> 0){
-                  $txtans = "$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
-               }
-               else if($findpea3 <> 0 AND $od3 <> 0){
-                  $txtans = "1.$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc \n2.$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
+                  $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$zzz' GROUP BY sap_code";
+                  $cdb = mysqli_query($conn,$selectcdb);
+                  $countdeb = mysqli_num_rows($cdb);
+
+                     $txtans .= "$number.'".$eachhd['tblname_th']."'ของ'$zz'มี $countdeb ราย "
+                  if($countdeb > 0){
+                     $txtans .= "คลิก>>'".$eachhd['center_url']."'/req_office.php?REQ=$zzz \n";
+                  }
+                  $number++;
                }
             }
-            else if($sapcode == 'Z00000'){
-               $lastpea1 = "SELECT * FROM debtor WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
-               $lastpea2 = mysqli_query($conn, $lastpea1);
-               $lastpea3 = mysqli_fetch_array($lastpea2);
-               $pn = $lastpea3['dept_name'];
-               $sc = $lastpea3['sap_code'];
-               $findpea1 = "SELECT * FROM debtor WHERE sap_code = '$sc'";
-               $findpea2 = mysqli_query($conn, $findpea1);
-               $findpea3 = mysqli_num_rows($findpea2);
-               ///
-               $overdue1 = "SELECT * FROM debtor_kpi WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
+               else{
+                  $txtans = "ไม่มี กฟฟ.นี้อยู่ในความดูแลของกฟข.ที่ท่านสังกัด";
+               }
+               // else if($findpea3 <> 0 AND $od3 == 0){
+               //    $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
+               // }
+               // else if($findpea3 == 0 AND $od3 <> 0){
+               //    $txtans = "$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
+               // }
+               // else if($findpea3 <> 0 AND $od3 <> 0){
+               //    $txtans = "1.$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc \n2.$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
+               // }
+            }
+            else if($sapcode == 'Z00000'){               
+               // $lastpea1 = "SELECT * FROM debtor WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
+               // $lastpea2 = mysqli_query($conn, $lastpea1);
+               // $lastpea3 = mysqli_fetch_array($lastpea2);
+               // $pn = $lastpea3['dept_name'];
+               // $sc = $lastpea3['sap_code'];
+               // $findpea1 = "SELECT * FROM debtor WHERE sap_code = '$sc'";
+               // $findpea2 = mysqli_query($conn, $findpea1);
+               // $findpea3 = mysqli_num_rows($findpea2);
+               // ///
+               // $overdue1 = "SELECT * FROM debtor_kpi WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
+               // $overdue2 = mysqli_query($conn, $overdue1);
+               // $overdue3 = mysqli_fetch_array($overdue2);
+               // $zz = $overdue3['dept_name'];
+               // $zzz = $overdue3['sap_code'];
+               // $od1 = "SELECT * FROM debtor_kpi WHERE sap_code = '$zzz'";
+               // $od2 = mysqli_query($conn, $od1);
+               // $od3 = mysqli_num_rows($od2);
+
+               // if($findpea3 == 0 AND $od3 == 0){
+               //    $txtans = "กฟฟ.นี้ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระ";
+               // }
+               // else if($findpea3 <> 0 AND $od3 == 0){
+               //    $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
+               // }
+               // else if($findpea3 == 0 AND $od3 <> 0){
+               //    $txtans = "$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
+               // }
+               // else if($findpea3 <> 0 AND $od3 <> 0){
+               //    $txtans = "1.$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc \n2.$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
+               // }
+               $choose = "SELECT * FROM flexmsghead";
+               $choose_query = mysqli_query($conn,$choose);
+               $number = 1;
+               ///get search result
+               $overdue1 = "SELECT * FROM pea_office WHERE dept_name LIKE concat('%','$peaname','%') limit 1";
                $overdue2 = mysqli_query($conn, $overdue1);
                $overdue3 = mysqli_fetch_array($overdue2);
                $zz = $overdue3['dept_name'];
                $zzz = $overdue3['sap_code'];
-               $od1 = "SELECT * FROM debtor_kpi WHERE sap_code = '$zzz'";
-               $od2 = mysqli_query($conn, $od1);
-               $od3 = mysqli_num_rows($od2);
+               $txtans = "";
+               
+               while($eachhd = $choose_query->fetch_assoc()){
 
-               if($findpea3 == 0 AND $od3 == 0){
-                  $txtans = "กฟฟ.นี้ไม่มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระ";
-               }
-               else if($findpea3 <> 0 AND $od3 == 0){
-                  $txtans = "$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc";
-               }
-               else if($findpea3 == 0 AND $od3 <> 0){
-                  $txtans = "$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
-               }
-               else if($findpea3 <> 0 AND $od3 <> 0){
-                  $txtans = "1.$pn มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน $findpea3 ราย คลิก>>https://southpea.herokuapp.com/debtor/majorDebt/req_office.php?REQ=$sc \n2.$zz มีลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินกำหนด $od3 ราย คลิก>>https://southpea.herokuapp.com/debtor/overdue/req_office.php?REQ=$zzz";
+                  $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$zzz' GROUP BY sap_code";
+                  $cdb = mysqli_query($conn,$selectcdb);
+                  $countdeb = mysqli_num_rows($cdb);
+
+                     $txtans .= "$number.'".$eachhd['tblname_th']."'ของ'$zz'มี $countdeb ราย "
+                  if($countdeb > 0){
+                     $txtans .= "คลิก>>'".$eachhd['center_url']."'/req_office.php?REQ=$zzz \n";
+                  }
+                  $number++;
                }
             }
             else if($sapnum <> '00000'){
