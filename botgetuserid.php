@@ -401,7 +401,7 @@
                $zz = $overdue3['dept_name'];
                $zzz = $overdue3['sap_code'];
                $txtans = "";
-               
+               if(mysqli_num_rows($overdue2) > 0){
                while($eachhd = $choose_query->fetch_assoc()){
 
                   $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$zzz' GROUP BY sap_code";
@@ -415,6 +415,10 @@
                      $txtans .= "\n";
                   $number++;
                }
+            }
+            else{
+               $txtans = "ไม่มีชื่อ กฟฟ.นี้";
+            }
             }
             else if($sapnum <> '00000'){
                $txtans = "ท่านมีสิทธิเข้าถึงข้อมูลเฉพาะการไฟฟ้าต้นสังกัดเท่านั้น";
