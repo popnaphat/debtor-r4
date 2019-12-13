@@ -116,6 +116,7 @@
             $surname = $result['surname'];
             $email = $result['pea_email'];
             $sapcode = $result['sap_code'];
+            $dept_name =$result['dept_name'];
                $sapnum = substr($sapcode,1);
                $sapreg = substr($sapcode,0,1);
                if($sapreg == 'J'){
@@ -234,10 +235,10 @@
             }
             else if($sapnum <> '00000'){
                            
-               $selectglr = "SELECT pea_office.dept_name FROM debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$sapcode' LIMIT 1";
-               $glr = mysqli_query($conn,$selectglr);
-               $getlastrow = mysqli_fetch_array($glr);               
-               $dept_name = $getlastrow['dept_name'];
+               // $selectglr = "SELECT pea_office.dept_name FROM debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$sapcode' LIMIT 1";
+               // $glr = mysqli_query($conn,$selectglr);
+               // $getlastrow = mysqli_fetch_array($glr);               
+               // $dept_name = $getlastrow['dept_name'];
 
                /*$selectcdb = "SELECT * FROM debtor where sap_code = '$sapcode'";
                $cdb = mysqli_query($conn,$selectcdb);
