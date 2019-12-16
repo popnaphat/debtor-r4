@@ -82,13 +82,13 @@
       if (isset($_POST["import"])) {
           $filenn = $_FILES["file"];
           $fileName = trim($_FILES["file"]["tmp_name"]);
-	  /*mysqli_query($conn,"LOAD DATA LOCAL INFILE '".$fileName."' 
+	  mysqli_query($conn,"LOAD DATA LOCAL INFILE '".$fileName."' 
           INTO TABLE debtor_kpi2 FIELDS TERMINATED BY '#' 
           OPTIONALLY ENCLOSED BY '#' 
-          LINES TERMINATED BY '\n'
+          LINES TERMINATED BY '\r\n'
 	  IGNORE 1 LINES
-          (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)");*/
-          if ($_FILES["file"]["size"] > 0) {              
+          (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)");
+          /*if ($_FILES["file"]["size"] > 0) {              
               $file = fopen($fileName, "r");                         
               while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {              
                   $sqlInsert = "INSERT into debtor_kpi2(sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)
@@ -98,7 +98,7 @@
               }
               recordto_csvdebt1($conn,$reg);
               echo "<meta http-equiv='refresh' content='0'>";	  
-          }
+          }*/
       }
       if (isset($_POST["clear"])) {    
         $sqlDelete = "DELETE FROM debtor_kpi2";
