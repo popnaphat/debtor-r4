@@ -82,7 +82,12 @@
       if (isset($_POST["import"])) {
           $filenn = $_FILES["file"];
           $fileName = $_FILES["file"]["tmp_name"];
-          if ($_FILES["file"]["size"] > 0) {              
+          mysqli_query($conn,"LOAD DATA LOCAL INFILE '".$fileName."' 
+          INTO TABLE table_tracking FIELDS TERMINATED BY '#' 
+          OPTIONALLY ENCLOSED BY '#' 
+          LINES TERMINATED BY '\n'
+          (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt)");
+          /*if ($_FILES["file"]["size"] > 0) {              
               $file = fopen($fileName, "r");                         
               while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {              
                   $sqlInsert = "INSERT into debtor_kpi3(sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt)
@@ -92,7 +97,7 @@
               }
               recordto_csvdebt1($conn,$reg);
               echo "<meta http-equiv='refresh' content='0'>";
-          }
+          }*/
       }
       if (isset($_POST["clear"])) {    
         $sqlDelete = "DELETE FROM debtor_kpi3";
