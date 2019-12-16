@@ -81,11 +81,12 @@
     }
       if (isset($_POST["import"])) {
           $filenn = $_FILES["file"];
-          $fileName = $_FILES["file"]["tmp_name"];
+          $fileName = trim($_FILES["file"]["tmp_name"]);
 	  mysqli_query($conn,"LOAD DATA LOCAL INFILE '".$fileName."' 
           INTO TABLE debtor_kpi2 FIELDS TERMINATED BY '#' 
           OPTIONALLY ENCLOSED BY '#' 
           LINES TERMINATED BY '\n'
+	  IGNORE 1 LINES
           (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)");
           /*if ($_FILES["file"]["size"] > 0) {              
               $file = fopen($fileName, "r");                         
