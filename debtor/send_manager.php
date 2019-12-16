@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Bangkok");
   require('./libs/utils/date_utils.php');
   require('./libs/utils/messages.php');
 
-  set_time_limit ( 60 );
+  set_time_limit ( 120 );
     // line access token
   $access_token = 'CGBgbM7ECUjswllXeJ6MIegVud5ulkBjM0ZU+z0GIWkXUIPAm1JC9uUAsycDJHbIuHKcHrEr8GmeS1/2eVV4E/NBiutlQHAPLJXbz58Voa9uHdK3R8/E1qN0Ox0STooKId3oiFvpRAYT3my/ZkjA8QdB04t89/1O/w1cDnyilFU=';
 
