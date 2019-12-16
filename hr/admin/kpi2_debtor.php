@@ -96,7 +96,7 @@
           INTO TABLE debtor_kpi2 FIELDS TERMINATED BY '#' 
           OPTIONALLY ENCLOSED BY '#' 
           LINES TERMINATED BY '\n'
-          (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt)");
+          (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)");
           }
       }
       if (isset($_POST["clear"])) {    
