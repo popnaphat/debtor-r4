@@ -81,9 +81,9 @@
     }
       if (isset($_POST["import"])) {
           $filenn = $_FILES["file"];
-          $fileName = $_FILES["file"]["tmp_name"];
+          $fileName = $_FILES["file"]["tmp_name"];          
           if ($_FILES["file"]["size"] > 0) {              
-              $file = fopen($fileName, "r");                         
+              /*$file = fopen($fileName, "r");                         
               while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {              
                   $sqlInsert = "INSERT into debtor_kpi2(sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)
                          values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "')";
@@ -91,7 +91,12 @@
                   $reg = substr($column[0],0,1);                  
               }
               recordto_csvdebt1($conn,$reg);
-              echo "<meta http-equiv='refresh' content='0'>";
+              echo "<meta http-equiv='refresh' content='0'>";*/
+	  mysqli_query($conn,"LOAD DATA LOCAL INFILE '".$fileName."' 
+          INTO TABLE table_tracking FIELDS TERMINATED BY '#' 
+          OPTIONALLY ENCLOSED BY '#' 
+          LINES TERMINATED BY '\n'
+          (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt)");
           }
       }
       if (isset($_POST["clear"])) {    
