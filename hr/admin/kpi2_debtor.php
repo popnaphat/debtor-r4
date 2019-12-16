@@ -93,7 +93,7 @@
               recordto_csvdebt1($conn,$reg);
               echo "<meta http-equiv='refresh' content='0'>";*/
 	  mysqli_query($conn,"LOAD DATA LOCAL INFILE '".$fileName."' 
-          INTO TABLE table_tracking FIELDS TERMINATED BY '#' 
+          INTO TABLE debtor_kpi2 FIELDS TERMINATED BY '#' 
           OPTIONALLY ENCLOSED BY '#' 
           LINES TERMINATED BY '\n'
           (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt)");
