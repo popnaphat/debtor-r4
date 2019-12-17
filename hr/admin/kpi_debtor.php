@@ -81,7 +81,7 @@
     }
       if (isset($_POST["import"])) {
           $filenn = $_FILES["file"];
-          $fileName = $_FILES["file"]["tmp_name"];
+          $fileName = trim($_FILES["file"]["tmp_name"]);
           if ($_FILES["file"]["size"] > 0) {              
               $file = fopen($fileName, "r"); 
               $sqlInsert = "INSERT into debtor_kpi(sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)
