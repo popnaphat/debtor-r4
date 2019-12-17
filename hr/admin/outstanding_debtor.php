@@ -76,7 +76,7 @@
         $id = "SELECT * FROM tbl_log_csv_debt1";
         $countid = mysqli_num_rows(mysqli_query($conn,$id)) + 1; 
         $current_timestamp = DateThai(date("Y-m-d"));
-        $insert_log_file = "INSERT INTO tbl_log_csv_debt1(id,file_upload_timestamp,bill_month,region) VALUES('$countid','$current_timestamp','$mmm','$nnn')";
+        $insert_log_file = "INSERT INTO tbl_log_csv_debt1(file_upload_timestamp,bill_month,region) VALUES('$current_timestamp','$mmm','$nnn')";
         mysqli_query($conn, $insert_log_file);// or trigger_error($conn->error."[$insert_log_file]")
     }
       if (isset($_POST["import"])) {
