@@ -82,22 +82,16 @@
       if (isset($_POST["import"])) {
           $filenn = $_FILES["file"];
           $fileName = trim($_FILES["file"]["tmp_name"]);
-	  /*mysqli_query($conn,"LOAD DATA LOCAL INFILE '".$fileName."' 
-          INTO TABLE debtor_kpi2 FIELDS TERMINATED BY '#' 
-          OPTIONALLY ENCLOSED BY '#' 
-          LINES TERMINATED BY '\r\n'
-	  IGNORE 1 LINES
-          (sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)");*/
+
           if ($_FILES["file"]["size"] > 0) {              
-              $file = fopen($fileName, "r");
-		  $sqlInsert = "INSERT into debtor_kpi2(sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)
-                         values ";
+              $file = fopen($fileName, "r");		  
               while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {              
-                  $sqlInsert .= "('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "'),";
-                  //mysqli_query($conn, $sqlInsert);
+                $sqlInsert = "INSERT into debtor_kpi2(sap_code,dept_name,line_code,acc_class,cus_number,cus_name,bill_month,doc_type,outstanding_debt,cus_tel)
+                values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "'),";
+                  mysqli_query($conn, $sqlInsert);
                   $reg = substr($column[0],0,1);                  
               }
-	      mysqli_query($conn, substr($sqlInsert,0,-1));  
+	      
               recordto_csvdebt1($conn,$reg);
               echo "<meta http-equiv='refresh' content='0'>";	  
           }
