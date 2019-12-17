@@ -88,9 +88,10 @@
                          values ";                        
               while (($column = fgetcsv($file, 0, "#","#")) !== FALSE) {              
                 $sqlInsert .= " ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "'), ";
-                  mysqli_query($conn, $sqlInsert);
+                  //mysqli_query($conn, $sqlInsert);
                   $reg = substr($column[0],0,1);                  
               }
+              mysqli_query($conn, substr($sqlInsert,0,-1));
               recordto_csvdebt1($conn,$reg);
               echo "<meta http-equiv='refresh' content='0'>";
           }
