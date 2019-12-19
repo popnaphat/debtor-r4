@@ -96,7 +96,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countdeb.' ราย",
+                          "text": "'.$countdeb.' บิล",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
@@ -225,7 +225,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countdeb.' ราย",
+                          "text": "'.$countdeb.' บิล",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"

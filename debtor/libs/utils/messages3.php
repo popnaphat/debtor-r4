@@ -95,7 +95,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countpea.' กฟฟ. ('.$countdeb.' ราย)",
+                          "text": "'.$countpea.' กฟฟ. ('.$countdeb.' บิล)",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
@@ -208,7 +208,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countpea.' กฟฟ. ('.$countdeb.' ราย)",
+                          "text": "'.$countpea.' กฟฟ. ('.$countdeb.' บิล)",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
