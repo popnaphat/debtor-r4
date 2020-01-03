@@ -19,7 +19,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false">
 		<meta charset="utf-8" >
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชน-รายย่อยหลังโอนหักเงินประกันการใช้ไฟ ก่อนปี <?php echo $curyear; ?></title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชน-รายย่อยหลังโอนหักเงินประกันการใช้ไฟ</title>
 		<link rel="manifest" href="./images/manifest.json">
 		<meta name="theme-color" content="#710E82">
 
@@ -41,11 +41,11 @@
 		?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชน-รายย่อยหลังโอนหักเงินประกันการใช้ไฟ ก่อนปี <?php echo $curyear; ?></h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชน-รายย่อยหลังโอนหักเงินประกันการใช้ไฟ</h1>
 			</div>
 			<div data-role="content">
 			<?php   
-				echo "<b>ลูกหนี้ค่าไฟฟ้าเอกชน-รายย่อยหลังโอนหักเงินประกันการใช้ไฟ ก่อนปี $curyear แยกตามเขตการไฟฟ้า ลูกหนี้ฯคงเหลือ ณ วันที่ $ccc</b><br/>";	
+				echo "<b>ลูกหนี้ค่าไฟฟ้าเอกชน-รายย่อยหลังโอนหักเงินประกันการใช้ไฟ แยกตามเขตการไฟฟ้า ลูกหนี้ฯคงเหลือ ณ วันที่ $ccc</b><br/>";	
 			?>
 			</div>
 			<div data-role="content">
@@ -54,13 +54,13 @@
 						$a = 1;
 						while($result=mysqli_fetch_array($query)){
 							$reg = $result['region2'];
-							$dateupload = "SELECT bill_month FROM tbl_log_csv_debt5 where right(bill_month,4) = YEAR(CURRENT_DATE) and region = '$reg' ORDER BY bill_month DESC LIMIT 1";
+							$dateupload = "SELECT bill_month FROM tbl_log_csv_debt5 where region = '$reg' AND right(bill_month,4) = (SELECT MAX(RIGHT(bill_month,4)) FROM tbl_log_csv_debt5 where region = '$reg') ORDER BY left(bill_month,2) DESC LIMIT 1";
 							$querydu = mysqli_query($conn,$dateupload);
 							$fetchdu = mysqli_fetch_array($querydu);
 							$mmm = $fetchdu['bill_month'];
 							$sql2 = "SELECT * FROM debtor_kpi4 WHERE LEFT(sap_code,1) LIKE '$reg'";
 							$query2 = mysqli_num_rows(mysqli_query($conn,$sql2));
-							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย (".$query2." บิล)</a></li>";
+							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย (".$query2." บิล) ก่อนปี ".$mmm."</a></li>";
 							$a =$a +1;
 						}
 						$a = 0;
