@@ -54,7 +54,7 @@
 						$a = 1;
 						while($result=mysqli_fetch_array($query)){
 							$reg = $result['region2'];
-							$dateupload = "SELECT bill_month FROM tbl_log_csv_debt4 where right(bill_month,4) = '$curyear' and region = '$reg' ORDER BY bill_month DESC LIMIT 1";
+							$dateupload = "SELECT bill_month FROM tbl_log_csv_debt4 where region = '$reg' AND right(bill_month,4) = (SELECT MAX(RIGHT(bill_month,4)) FROM tbl_log_csv_debt4 where region = '$reg') ORDER BY left(bill_month,2) DESC LIMIT 1";
 							$querydu = mysqli_query($conn,$dateupload);
 							$fetchdu = mysqli_fetch_array($querydu);
 							$mmm = $fetchdu['bill_month'];
