@@ -5,7 +5,7 @@ $curyear = date("Y")+543;
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระ</title>
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -16,7 +16,7 @@ $curyear = date("Y")+543;
 		require('conn.php');
 		
 		$NUMBER = $_GET['REQ'];
-			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt3 where right(bill_month,4) = YEAR(CURRENT_DATE) and region = '$NUMBER' ORDER BY bill_month DESC LIMIT 1";
+			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt3 where region = '$NUMBER' AND right(bill_month,4) = (SELECT MAX(RIGHT(bill_month,4)) FROM tbl_log_csv_debt3 where region = '$NUMBER') ORDER BY left(bill_month,2) DESC LIMIT 1";
 			$querydu = mysqli_query($conn,$dateupload);
 			$fetchdu = mysqli_fetch_array($querydu);
 			$mmm = $fetchdu['bill_month'];
@@ -34,7 +34,7 @@ $curyear = date("Y")+543;
 	?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี <?php echo $curyear; ?></h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระ</h1>
 			</div>
 			<div data-role="content">
 			<?php 
@@ -52,7 +52,7 @@ $curyear = date("Y")+543;
 						$reg = "สำนักงานใหญ่";
 					}
 				//$fetch_number_complaint = "SELECT * FROM TBL_COMPLAINT";
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระก่อนปี $curyear แยกตามสังกัดของ $reg เพียงวันที่ $ccc</b><br/>";
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยค้างชำระ แยกตามสังกัดของ $reg เพียงวันที่ $ccc</b><br/>";
 			?>
 			</div>
 			<div data-role="content">	
@@ -63,7 +63,7 @@ $curyear = date("Y")+543;
 					while($result=mysqli_fetch_array($query)){
 						$sql2 = "SELECT * from debtor_kpi2 where sap_code = '".$result['sap_code']."'";
 						$query2 = mysqli_num_rows(mysqli_query($conn,$sql2));
-						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย (".$query2." บิล)</a></li>";;
+						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย (".$query2." บิล) ก่อนปี ".$mmm."</a></li>";;
 						$a =$a +1;
 					}
 					$a = 0;
