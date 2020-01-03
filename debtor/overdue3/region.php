@@ -5,7 +5,7 @@ $curyear = date("Y")+543;
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง ปี <?php echo $curyear; ?></title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง</title>
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -34,7 +34,7 @@ $curyear = date("Y")+543;
 	?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง ปี <?php echo $curyear; ?></h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง</h1>
 			</div>
 			<div data-role="content">
 			<?php 
@@ -52,7 +52,7 @@ $curyear = date("Y")+543;
 						$reg = "สำนักงานใหญ่";
 					}
 				//$fetch_number_complaint = "SELECT * FROM TBL_COMPLAINT";
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง ปี $curyear (บิลเดือนล่าสุด $mmm) แยกตามสังกัดของ $reg เพียงวันที่ $ccc</b><br/>";
+				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง (บิลเดือนล่าสุด $mmm) แยกตามสังกัดของ $reg เพียงวันที่ $ccc</b><br/>";
 			?>
 			</div>
 			<div data-role="content">	

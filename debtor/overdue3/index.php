@@ -19,7 +19,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false">
 		<meta charset="utf-8" >
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง ปี <?php echo $curyear; ?></title>
+		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง </title>
 		<link rel="manifest" href="./images/manifest.json">
 		<meta name="theme-color" content="#710E82">
 
@@ -41,11 +41,11 @@
 		?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง ปี <?php echo $curyear; ?></h1>
+				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง </h1>
 			</div>
 			<div data-role="content">
 			<?php   
-				echo "<b>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง ปี $curyear แยกตามเขตการไฟฟ้า เพียงวันที่ $ccc</b><br/>";	
+				echo "<b>ลูกหนี้ค่าไฟฟ้าเอกชนรายย่อยที่มีบิลค้างชำระเกิน 2 เดือนหรือไม่ต่อเนื่อง แยกตามเขตการไฟฟ้า เพียงวันที่ $ccc</b><br/>";	
 			?>
 			</div>
 			<div data-role="content">
