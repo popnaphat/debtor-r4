@@ -40,10 +40,10 @@ $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
-	$nestedData[] = $row["empID"];
-	$nestedData[] = $row["pre_name"].''.$row["name"].' '.$row["surname"];
-	$nestedData[] = $row["position"];
-	$nestedData[] = $row["dept_short"];
+	$nestedData['empid'] = $row["empID"];
+	$nestedData['name'] = $row["pre_name"].''.$row["name"].' '.$row["surname"];
+	$nestedData['position'] = $row["position"];
+	$nestedData['dept'] = $row["dept_short"];
 	
 	$data[] = $nestedData;
 }
