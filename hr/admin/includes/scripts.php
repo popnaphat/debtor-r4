@@ -69,19 +69,7 @@
 				$("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
 				$("#employee-grid_processing").css("display","none");
 				}
-		},
-        "columns": [
-            {
-              "data": "empid"
-            },
-            {
-              "data": "name"
-            },
-            {
-              "data": "position"
-            }
-		]
-	 
+		}	 
     } );
     $('#outdebtor-grid').DataTable( {
         "processing": true,
