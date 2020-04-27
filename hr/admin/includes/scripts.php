@@ -187,10 +187,7 @@
                 "className": "dt-body-center",
                 "targets": [ 1 ]
             }
-        ],
-          "order": [
-            [3, 'desc']
-          ]
+        ]
         });        
   })
 </script>
