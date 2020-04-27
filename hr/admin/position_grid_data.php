@@ -28,14 +28,14 @@ $totalFiltered = $totalData;  // when there is no search parameter then total nu
 $sql = "SELECT * FROM tbl_log_notify ln LEFT JOIN peaemp pm ON ln.manager_id = pm.empID JOIN pea_office po ON LEFT(pm.dept_change_code,11) = LEFT(po.unit_code,11) GROUP BY ln.id";
 
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
-	$sql.=" AND ( manager_id LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR notify_timestamp LIKE '".$requestData['search']['value']."%' ";	
-	$sql.=" OR time_view LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR dept_view LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR name LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR dept_name LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR position LIKE '".$requestData['search']['value']."%' ";
-	$sql.=" OR surname LIKE '".$requestData['search']['value']."%' )";
+	$sql.=" AND ( manager_id LIKE '%".$requestData['search']['value']."%' ";
+	$sql.=" OR notify_timestamp LIKE '%".$requestData['search']['value']."%' ";	
+	$sql.=" OR time_view LIKE '%".$requestData['search']['value']."%' ";
+	$sql.=" OR dept_view LIKE '%".$requestData['search']['value']."%' ";
+	$sql.=" OR name LIKE '%".$requestData['search']['value']."%' ";
+	$sql.=" OR dept_name LIKE '%".$requestData['search']['value']."%' ";
+	$sql.=" OR position LIKE '%".$requestData['search']['value']."%' ";
+	$sql.=" OR surname LIKE '%".$requestData['search']['value']."%' )";
 	
 }
 $query=mysqli_query($conn, $sql);
