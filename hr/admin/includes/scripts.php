@@ -49,7 +49,7 @@
   $(function () {
     $('#example1').DataTable({
       responsive: true
-    })
+    });
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,
@@ -57,7 +57,7 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
-    })
+    });
     $('#employee-grid').DataTable( {
         "processing": true,
         "serverSide": true,
@@ -69,7 +69,7 @@
 				$("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
 				$("#employee-grid_processing").css("display","none");
 				}
-		}
+		}	 
     } );
     $('#outdebtor-grid').DataTable( {
         "processing": true,
@@ -149,6 +149,46 @@
 				}
 		}
     } );
+    $('#logtable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          // "paging": true,
+          // "lengthChange": true,
+          // "searching": true,
+          // "ordering": true,
+          // "info": true,
+           responsive : true,
+           scrollX : true,
+          'autoWidth' : false,
+          "retrieve": true,
+          "ajax": {
+            url: "./position_grid_data.php", // json datasource
+            type: "post" // method  , by default get            
+          },
+          "columns": [
+            {
+              "data": "ns"
+            },
+            {
+              "data": "ps"
+            },
+            {
+              "data": "dn"
+            },
+            {
+              "data": "nt"
+            },
+            {
+              "data": "tv"
+            }
+          ],
+          "columnDefs": [            
+            {
+                "className": "dt-body-center",
+                "targets": [ 1 ]
+            }
+        ]
+        });        
   })
 </script>
 <script>
