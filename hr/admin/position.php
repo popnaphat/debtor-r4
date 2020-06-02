@@ -46,14 +46,34 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-body">
-              <table id="logtable" class="table table-bordered table-hover">
+            <table id="example1" class="table table-bordered table-hover">
+              
                 <thead>
+                  <th class="hidden">รหัสพนักงาน</th>
                   <th>ชื่อ - สกุล</th>
                   <th>ตำแหน่ง</th>
                   <th>สังกัด</th>
                   <th>วัน เวลาที่ส่งข้อความ</th>
                   <th>วัน เวลาที่อ่านข้อความ</th>
                 </thead>
+                <tbody>
+                  <?php
+                    $sql = "SELECT * FROM tbl_log_notify ln LEFT JOIN peaemp pm ON ln.manager_id = pm.empID JOIN pea_office po ON LEFT(pm.dept_change_code,11) = LEFT(po.unit_code,11) GROUP BY ln.id";
+                    $query = $conn->query($sql);
+                    while($row = $query->fetch_assoc()){
+                      echo "
+                        <tr>                      
+                          <td class='hidden'>".$row['empID']."</td>
+                          <td>".$row['pre_name'].''.$row['name'].' '.$row['surname']."</td>
+                          <td>".$row['position']."</td>
+                          <td>".$row['dept_name']."</td>
+                          <td>".$row['notify_timestamp']."</td>
+                          <td>".$row['time_view']."</td>
+                        </tr>
+                      ";
+                    }
+                  ?>
+                </tbody>
               </table>
             </div>
           </div>
