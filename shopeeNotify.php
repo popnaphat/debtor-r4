@@ -1,9 +1,9 @@
 <?php
     define("LINE_API","https://notify-api.line.me/api/notify");
     //$token = "ECKxt9T9iZ2YOjjS0ZHbDvZOQ1U9jqmL5HWcyUypNYs";
-	$token = "640dzk9zGNy1OKmDbjAirntsQkuNnjoSMuEhoczdUxH";
+	$token = "8YykuGbLmEpjHtPza5gOmOfr2JqG2xSvTs8bPYIoRmt";
     //$str = "\n\nUser IP Address - ". $_SERVER['REMOTE_ADDR']." Online now!";
-	$str = 'https://games.shopee.co.th/universal-link/farm/share.html?skey=8ae6d87971d9dd9b85aa62e22a0f540a&schannel=copyLink';
+	$str = 'click>>> https://games.shopee.co.th/universal-link/farm/share.html?skey=8ae6d87971d9dd9b85aa62e22a0f540a&schannel=copyLink';
 	$chOne = curl_init(); 
 	curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify"); 
 	curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0); 
