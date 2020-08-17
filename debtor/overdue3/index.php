@@ -36,7 +36,7 @@
 			$crecord2 = "SELECT * FROM tbl_log_csv_debt4 ORDER BY id DESC LIMIT 1";
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
 			$ccc = $crecord1['file_upload_timestamp'];
-			$sql = "SELECT region,region2,count(DISTINCT cus_number) as num from debtor_kpi3 join pea_office on pea_office.sap_code = debtor_kpi3.sap_code GROUP BY region";
+			$sql = "SELECT LEFT(sap_code,1) as region2 , count(DISTINCT cus_number) as num FROM debtor_kpi3 GROUP BY LEFT(sap_code,1)";
 			$query = mysqli_query($conn,$sql);
 		?>
 		<div data-role="page" id="page">
@@ -60,7 +60,8 @@
 							$mmm = $fetchdu['bill_month'];
 							$sql2 = "SELECT * FROM debtor_kpi3 WHERE LEFT(sap_code,1) LIKE '$reg'";
 							$query2 = mysqli_num_rows(mysqli_query($conn,$sql2));
-							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$result["region"]."  จำนวน  ".$result["num"]." ราย (บิลเดือนล่าสุด ".$mmm." จำนวน ".$query2." บิล)</a></li>";
+							$sql3 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT region FROM pea_office WHERE LEFT(sap_code,1) = '".$result['region2']."' LIMIT 1"));
+							echo "<li><a href ='region.php?REQ=".$result["region2"]."'>".$a.".".$sql3["region"]."  จำนวน  ".$result["num"]." ราย (บิลเดือนล่าสุด ".$mmm." จำนวน ".$query2." บิล)</a></li>";
 							$a =$a +1;
 						}
 						$a = 0;
