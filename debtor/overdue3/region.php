@@ -24,7 +24,8 @@ $curyear = date("Y")+543;
 			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
 			$ccc = $crecord1['file_upload_timestamp'];
 		//$NUMBER2 = $_GET['REQ2'];
-		$sql = "SELECT count(DISTINCT cus_number) as num, pea_office.dept_name, debtor_kpi3.sap_code from debtor_kpi3 join pea_office on pea_office.sap_code = debtor_kpi3.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor_kpi3.sap_code";
+		//$sql = "SELECT count(DISTINCT cus_number) as num, pea_office.dept_name, debtor_kpi3.sap_code from debtor_kpi3 join pea_office on pea_office.sap_code = debtor_kpi3.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor_kpi3.sap_code";
+		$sql = "SELECT sap_code , count(DISTINCT cus_number) as num FROM debtor_kpi3 WHERE LEFT(sap_code,1) LIKE '$NUMBER' GROUP BY sap_code";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 		//$mode1 = mysqli_num_rows($query);
 		/*while($ofname = mysqli_fetch_array($query)){ 
@@ -63,7 +64,8 @@ $curyear = date("Y")+543;
 					while($result=mysqli_fetch_array($query)){
 						$sql2 = "SELECT * from debtor_kpi3 where sap_code = '".$result['sap_code']."'";
 						$query2 = mysqli_num_rows(mysqli_query($conn,$sql2));
-						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย (".$query2." บิล)</a></li>";;
+						$sql3 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT dept_name FROM pea_office WHERE sap_code = '".$result['sap_code']."' LIMIT 1"));
+						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$sql3["dept_name"]."  จำนวน  ".$result["num"]." ราย (".$query2." บิล)</a></li>";;
 						$a =$a +1;
 					}
 					$a = 0;
