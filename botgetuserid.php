@@ -149,7 +149,8 @@
                         "type": "action",
                         "action": {
                           "type": "location",
-                          "label": "Location"
+                          "label": "Location",
+			  "data": "curLocation"
                         }
                       },
                       {
