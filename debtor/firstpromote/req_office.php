@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</title>
+		<title>ข้อมูลพนักงานที่ครบหลักเกณฑ์การแต่งตั้งพนักงานแรกบรรจุ</title>
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -11,20 +11,27 @@
 	<body> 
 	<?php
 		require('conn.php');
+		function DateThai($strDate){
+			$strYear = date("Y",strtotime($strDate))+543;
+			$strMonth= date("n",strtotime($strDate));
+			$strDay= date("j",strtotime($strDate));
+			//$strHour= date("H",strtotime($strDate));
+			//$strMinute= date("i",strtotime($strDate));
+			//$strSeconds= date("s",strtotime($strDate));
+			$strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+			$strMonthThai=$strMonthCut[$strMonth];
+			return "$strDay $strMonthThai $strYear";
+		}
 		$NUMBER = $_GET['REQ'];
 		$reg = substr($NUMBER,0,1);
-		//$NUMBER2 = $_GET['REQ2'];
-		$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where region = '$reg' AND right(bill_month,4) = (SELECT MAX(RIGHT(bill_month,4)) FROM tbl_log_csv_debt1 where region = '$reg') ORDER BY left(bill_month,2) DESC LIMIT 1";
-			$querydu = mysqli_query($conn,$dateupload);
-			$fetchdu = mysqli_fetch_array($querydu);
-			$mmm = $fetchdu['bill_month'];
-			$crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
-			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
-			$ccc = $crecord1['file_upload_timestamp'];
-		$sql = "SELECT * from debtor join pea_office on pea_office.sap_code = debtor.sap_code where debtor.sap_code = '$NUMBER' GROUP BY debtor.cus_number";
-		//$sql_type = "SELECT * FROM tbl_complaint WHERE office_name LIKE '%".$NUMBER."%' AND number_of_day>=".$NUMBER2." AND complaint_status <> 'ปิด' GROUP BY complaint_type";
+		$crecord1 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT file_upload_timestamp FROM tbl_log_file ORDER BY file_upload_timestamp DESC LIMIT 1"));
+		$ccc = DateThai($crecord1['file_upload_timestamp']);
+		$sql = "SELECT *, TIMESTAMPDIFF( YEAR, appointdate, now() ) as _year
+		, TIMESTAMPDIFF( MONTH, appointdate, now() ) % 12 as _month
+		, FLOOR( TIMESTAMPDIFF( DAY, appointdate, now() ) % 30.4375 ) as _day FROM emplist el LEFT JOIN pea_office po ON po.unit_code = el.DEPT_CHANGE_CODE WHERE po.sap_code = '$NUMBER' ";
+		
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
-		//$query_type = mysqli_query($conn,$sql_type);
+		
 		$mode1 = mysqli_num_rows($query);
 		while($ofname = mysqli_fetch_array($query)){ 
 			$ofname1 = $ofname["dept_name"];
@@ -32,14 +39,14 @@
 	?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</h1>
+				<h1>ข้อมูลพนักงานที่ครบหลักเกณฑ์การแต่งตั้งพนักงานแรกบรรจุ</h1>
 			</div>
 			<div data-role="content">
 			<?php 
 			// if($reg == "L"){
 			// 	$mmm = "06/2562";
 			// }
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันรวมค่าไฟฟ้าเดือน $mmm ของ $ofname1 จำนวน $mode1 ราย ข้อมูล ณ วันที่ $ccc</b><br/>";	
+				echo "<b>รายงานข้อมูลพนักงานที่ครบหลักเกณฑ์การแต่งตั้งพนักงานแรกบรรจุของ $ofname1 จำนวน $mode1 คน ข้อมูล ณ วันที่ $ccc</b><br/>";	
 				mysqli_data_seek($query,0);
 			?>
 			</div>
@@ -53,7 +60,7 @@
 						//if($result["complaint_type"] == $result_type["complaint_type"]){
 							echo '<div data-role="content">'; 
 							//echo '<ul data-role="listview">';
-							echo "<b>".$aa.".</b>".$result["cus_name"].", <b>หมายเลขผู้ใช้ไฟ:</b>".$result["cus_number"].", <b>บิลเดือน:</b>".$result["bill_month"].", <b>หนี้ค้าง:</b>".$result["outstanding_debt"]."บาท, <b>เงินประกัน:</b>".$result["bail"]." บาท, <b>ส่วนที่เกิน:</b>".$result["diff"]." บาท<br>";
+							echo "<b>".$aa.".</b>".$result["emp_prename"]."".$result["emp_name"]."  ".$result["emp_surname"].", <b>รหัสพนักงาน:</b>".$result["empID"].", <b>ตำแหน่ง:</b>".$result["emp_position"].", <b>วันบรรจุ:</b>".$result["appointdate"].", <b>เป็นระยะเวลา:</b>".$result['_year']." ปี ".$result['_month']." เดือน ".$result['_day']." วัน, <b>สังกัด:</b>".$result["DEPT_SHORT"]."<br>";
 							
 							//echo "<li><a>".$aa.".".$result["cus_name"].", หมายเลขผู้ใช้ไฟ:".$result["cus_number"].", บิลเดือน:".$result["bill_month"].", หนี้ค้าง:".$result["outstanding_debt"]."บาท, เงินประกัน:".$result["bail"]." บาท, ส่วนที่เกิน:".$result["diff"]." บาท</a></li>";
 							//echo '</ul>';
