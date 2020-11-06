@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" data-ajax="false" charset="utf-8">
-		<title>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</title>
+		<title>ข้อมูลพนักงานที่ครบหลักเกณฑ์การแต่งตั้งพนักงานแรกบรรจุ</title>
 		<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
 		<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -11,26 +11,26 @@
 	<body> 
 	<?php
 		require('conn.php');
+		function DateThai($strDate){
+			$strYear = date("Y",strtotime($strDate))+543;
+			$strMonth= date("n",strtotime($strDate));
+			$strDay= date("j",strtotime($strDate));
+			//$strHour= date("H",strtotime($strDate));
+			//$strMinute= date("i",strtotime($strDate));
+			//$strSeconds= date("s",strtotime($strDate));
+			$strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+			$strMonthThai=$strMonthCut[$strMonth];
+			return "$strDay $strMonthThai $strYear";
+		}
 		$NUMBER = $_GET['REQ'];
-			$dateupload = "SELECT bill_month FROM tbl_log_csv_debt1 where region = '$NUMBER' AND right(bill_month,4) = (SELECT MAX(RIGHT(bill_month,4)) FROM tbl_log_csv_debt1 where region = '$NUMBER') ORDER BY left(bill_month,2) DESC LIMIT 1";
-			$querydu = mysqli_query($conn,$dateupload);
-			$fetchdu = mysqli_fetch_array($querydu);
-			$mmm = $fetchdu['bill_month'];
-			$crecord2 = "SELECT * FROM tbl_log_csv_debt1 ORDER BY id DESC LIMIT 1";
-			$crecord1 = mysqli_fetch_array(mysqli_query($conn,$crecord2));
-			$ccc = $crecord1['file_upload_timestamp'];
-		//$NUMBER2 = $_GET['REQ2'];
-		$sql = "SELECT count(DISTINCT cus_number) as num, pea_office.dept_name, debtor.sap_code from debtor join pea_office on pea_office.sap_code = debtor.sap_code where region2 LIKE '$NUMBER' GROUP BY debtor.sap_code";
+		$crecord1 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT file_upload_timestamp FROM tbl_log_file ORDER BY file_upload_timestamp DESC LIMIT 1"));
+		$ccc = DateThai($crecord1['file_upload_timestamp']);
+		$sql = "SELECT count(DISTINCT el.empID) as num, po.dept_name, po.sap_code FROM emplist el LEFT JOIN pea_office po ON po.unit_code = el.DEPT_CHANGE_CODE WHERE region2 = '$NUMBER' GROUP BY po.sap_code";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
-		//$mode1 = mysqli_num_rows($query);
-		/*while($ofname = mysqli_fetch_array($query)){ 
-			$ofname1 = $ofname["dept_name"];
-		}*/
-
 	?>
 		<div data-role="page" id="page">
 			<div data-role="header" data-theme="b">
-				<h1>ลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกัน</h1>
+				<h1>ข้อมูลพนักงานที่ครบหลักเกณฑ์การแต่งตั้งพนักงานแรกบรรจุ</h1>
 			</div>
 			<div data-role="content">
 			<?php 
@@ -48,7 +48,7 @@
 						$reg = "สำนักงานใหญ่";
 					}
 				//$fetch_number_complaint = "SELECT * FROM TBL_COMPLAINT";
-				echo "<b>รายงานลูกหนี้ค่าไฟฟ้าเอกชนรายใหญ่ค้างชำระเกินเงินประกันรวมค่าไฟฟ้าเดือน $mmm แยกตามสังกัดของ $reg ข้อมูล ณ วันที่ $ccc</b><br/>";
+				echo "<b>ข้อมูลพนักงานที่ครบหลักเกณฑ์การแต่งตั้งพนักงานแรกบรรจุ แยกตามสังกัดของ $reg ข้อมูล ณ วันที่ $ccc</b><br/>";
 			?>
 			</div>
 			<div data-role="content">	
@@ -57,7 +57,7 @@
 					mysqli_data_seek($query,0);
 					$a = 1;
 					while($result=mysqli_fetch_array($query)){
-						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." ราย</a></li>";;
+						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." คน</a></li>";;
 						$a =$a +1;
 					}
 					$a = 0;
