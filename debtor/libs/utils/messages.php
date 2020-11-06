@@ -15,6 +15,12 @@
         $flexnum = mysqli_num_rows($choose_query);
 
         while($eachhd = $choose_query->fetch_assoc()){
+          if($eachhd['headid'] == 7){
+            $fgd = 'คน';
+          }
+          else{
+            $fgd = 'บิล';
+          }
           $selectcdb = "SELECT * FROM ".$eachhd['tblname_db']." where sap_code = '$sapcode'";
           $cdb = mysqli_query($conn,$selectcdb);
           $countdeb = mysqli_num_rows($cdb);
@@ -96,7 +102,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countdeb.' บิล",
+                          "text": "'.$countdeb.' '.$fgd.'",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
@@ -225,7 +231,7 @@
                         },
                         {
                           "type": "text",
-                          "text": "'.$countdeb.' บิล",
+                          "text": "'.$countdeb.' '.$fgd.'",
                           "size": "sm",
                           "color": "#ffffff",
                           "align": "end"
