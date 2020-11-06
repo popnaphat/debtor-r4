@@ -23,12 +23,12 @@
 			return "$strDay $strMonthThai $strYear";
 		}
 		$NUMBER = $_GET['REQ'];
-		$reg = substr($NUMBER,0,1);
+		//$reg = substr($NUMBER,0,1);
 		$crecord1 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT file_upload_timestamp FROM tbl_log_file ORDER BY file_upload_timestamp DESC LIMIT 1"));
 		$ccc = DateThai($crecord1['file_upload_timestamp']);
 		$sql = "SELECT *, TIMESTAMPDIFF( YEAR, appointdate, now() ) as _year
 		, TIMESTAMPDIFF( MONTH, appointdate, now() ) % 12 as _month
-		, FLOOR( TIMESTAMPDIFF( DAY, appointdate, now() ) % 30.4375 ) as _day FROM emplist el LEFT JOIN pea_office po ON po.unit_code = el.DEPT_CHANGE_CODE WHERE po.sap_code = '$NUMBER' ";
+		, FLOOR( TIMESTAMPDIFF( DAY, appointdate, now() ) % 30.4375 ) as _day FROM emplist el LEFT JOIN pea_office po ON po.unit_code = el.DEPT_CHANGE_CODE WHERE el.DEPT_CHANGE_CODE LIKE '$NUMBER%' ";
 		
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 		

@@ -25,7 +25,7 @@
 		$NUMBER = $_GET['REQ'];
 		$crecord1 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT file_upload_timestamp FROM tbl_log_file ORDER BY file_upload_timestamp DESC LIMIT 1"));
 		$ccc = DateThai($crecord1['file_upload_timestamp']);
-		$sql = "SELECT count(DISTINCT el.empID) as num, po.dept_name, po.sap_code FROM emplist el LEFT JOIN pea_office po ON po.unit_code = el.DEPT_CHANGE_CODE WHERE region2 = '$NUMBER' GROUP BY po.sap_code";
+		$sql = "SELECT count(DISTINCT el.empID) as num, po.dept_name, po.sap_code, LEFT(el.DEPT_CHANGE_CODE,12) as dcc FROM emplist el LEFT JOIN pea_office po ON po.unit_code = el.DEPT_CHANGE_CODE WHERE region2 = '$NUMBER' GROUP BY LEFT(el.DEPT_CHANGE_CODE,12)";
 		$query = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 	?>
 		<div data-role="page" id="page">
@@ -57,7 +57,7 @@
 					mysqli_data_seek($query,0);
 					$a = 1;
 					while($result=mysqli_fetch_array($query)){
-						echo "<li><a href ='req_office.php?REQ=".$result["sap_code"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." คน</a></li>";;
+						echo "<li><a href ='req_office.php?REQ=".$result["dcc"]."'>".$a.".".$result["dept_name"]."  จำนวน  ".$result["num"]." คน</a></li>";;
 						$a =$a +1;
 					}
 					$a = 0;
