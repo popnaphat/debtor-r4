@@ -3,7 +3,7 @@
 			$from = new SendGrid\Email(null, "rg4@pea.co.th");
             $content = new SendGrid\Content("text/html", "https://southpea.herokuapp.com/hr/activation.php?code=");
             $subject = "To sir please confirm LINE bot";
-            $to = new SendGrid\Email(null, "naphat.ana@pea.co.th");
+            $to = new SendGrid\Email(null, "naphat.ana@gmail.com");
             $mail = new SendGrid\Mail($from, $subject, $to, $content);
             $apiKey = getenv('SENDGRID_API_KEY');
             $sg = new \SendGrid($apiKey);
