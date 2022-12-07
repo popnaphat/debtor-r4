@@ -1,3 +1,3 @@
 <?php
-echo "Web service run normally";
+echo "สวัสดีชาวโลก";
 ?>
