@@ -20,7 +20,7 @@
 				$_SESSION['user_type'] = $row['user_type'];
 			}
 			else{
-				$_SESSION['error'] = 'Incorrect password '."'$row['password']'";
+				$_SESSION['error'] = 'Incorrect password '.$row['password'];
 			}
 		}
 		
