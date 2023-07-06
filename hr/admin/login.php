@@ -14,13 +14,13 @@
 		}
 		else{
 			$row = $query->fetch_assoc();
-			if(password_verify($password, password_hash($row['password'], PASSWORD_DEFAULT))){
+			if(password_verify($password, $row['password'])){
 				$_SESSION['admin'] = $row['id'];
 				$_SESSION['last_time'] = time();
 				$_SESSION['user_type'] = $row['user_type'];
 			}
 			else{
-				$_SESSION['error'] = 'Incorrect password '.password_hash($row['password'], PASSWORD_DEFAULT);
+				$_SESSION['error'] = 'Incorrect password ';
 			}
 		}
 		
